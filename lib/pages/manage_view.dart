@@ -33,33 +33,55 @@ class ManageViewState extends State<ManageView> {
                   new Container(
                     color: Colors.redAccent,
                     padding: const EdgeInsets.all(10.0),
-                    child: new Text("Manage Emotions", style:
-                              new TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                              ),
+                    child: new Text("Manage Emotions",
+                      style: new TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
 
                   ///Title Info Bar
                   new Container(
-                    color: Colors.redAccent,
+                    decoration: new BoxDecoration(
+                      color: Colors.redAccent,
+                      border: new Border.all(color: Colors.black),
+                    ),
                     child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
 
                         ///Emotion Column Title
                         new Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-
-
+                          children: <Widget>[
+                            new Container(
+                              color: Colors.redAccent,
+                              padding: const EdgeInsets.all(10.0),
+                              child: new Text("Emotion",
+                                style: new TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0
+                                ),
+                              ),
+                            )
+                          ],
                         ),
 
                         ///Tracking Column Title
                         new Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-
-
-                        )
+                          children: <Widget>[
+                            new Container(
+                              color: Colors.redAccent,
+                              padding: const EdgeInsets.all(10.0),
+                              child: new Text("Tracking",
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
 
                       ],
                     ),

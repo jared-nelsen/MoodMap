@@ -1,3 +1,18 @@
 Mood Map Development Log
 ------------------------
 
+Set up documentation engine dartdoc.
+
+    To run dartdoc just type dartdoc in the root of the project.
+
+Found a really good resource for some basic ui tool building here:
+
+      https://github.com/fablue/building-a-social-network-with-flutter
+
+Built the default application view which I call the application shell.
+It consists of a bottom navigation bar with the three views on it.
+
+First I am going to start with the manage view because it will also lay the
+foundation for the rating view. I hope to reuse the container of the list
+view and just populate it with different list elements for each different
+page.

@@ -30,14 +30,18 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
   @override
   Widget build(BuildContext context) {
 
+    ///The top level container for the emotion entry
     return new Container(
       color: Colors.yellow,
       child: new Row(
         children: <Widget>[
           new Expanded(
+
+            ///The spanning column in the row
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+
                 ///The name of the emotion
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,6 +49,7 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
                     new Text(_emotionName),
                   ],
                 ),
+
                 ///The switch to track the emotion or not
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,6 +57,7 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
                     new Switch(value: _tracking, onChanged: switchChanged),
                   ],
                 ),
+
                 ///The button to remove the emotion
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,6 +68,7 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
                     )
                   ],
                 )
+
               ],
             ),
           )

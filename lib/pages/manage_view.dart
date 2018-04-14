@@ -16,11 +16,17 @@ class ManageViewState extends State<ManageView> {
 
   @override
   Widget build(BuildContext context) {
+
+    ///Top level container for the manage emotion view
     return new Container(
       color: Colors.green,
+
+      ///The row in the container containing the elements in the view
       child: new Row(
         children: <Widget>[
           new Expanded(
+
+              ///The page title
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -34,18 +40,49 @@ class ManageViewState extends State<ManageView> {
                               ),
                     ),
                   ),
+
+                  ///Title Info Bar
+                  new Container(
+                    color: Colors.redAccent,
+                    child: new Row(
+                      children: <Widget>[
+
+                        ///Emotion Column Title
+                        new Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+
+
+                        ),
+
+                        ///Tracking Column Title
+                        new Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+
+
+                        )
+
+                      ],
+                    ),
+                  ),
+
+
                   //new ListView.builder(itemBuilder: null),
+
+                  ///The add emotion button
                   new FloatingActionButton(
                     onPressed: null,
                     child: new Icon(Icons.add),
                     elevation: 15.0,
                   )
+
+
                 ],
               )
           )
         ],
       ),
     );
+
   }
 
   void removeEmotion(ManageEmotionListItem item) {

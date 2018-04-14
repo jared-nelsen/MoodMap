@@ -36,17 +36,29 @@ class ApplicationShellState extends State<ApplicationShell> {
   @override
   Widget build(BuildContext context) {
 
+    //The top level scaffold of the app
     return new Scaffold(
       appBar: _bar,
+
+      ///The body of the app
       body: new PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: <Widget>[
+
+          ///The Emotion Manager
           new ManageView(),
+
+          ///The Emotion Tracker
           new Container(color: Colors.blue),
+
+          ///The Emotion Rater
           new Container(color: Colors.grey)
+
         ],
       ),
+
+      ///The navigation bar between the views
       bottomNavigationBar: new BottomNavigationBar(
           onTap: navigationTapped,
           currentIndex: _pageIndex,

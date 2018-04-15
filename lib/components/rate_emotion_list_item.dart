@@ -46,7 +46,7 @@ class RateEmotionListItemState extends State<RateEmotionListItem> {
                         items: _ratings.map((int rating){
                           return new DropdownMenuItem(value: rating);
                         }).toList(),)
-                    
+
                   ],
                 ),
 

@@ -44,3 +44,5 @@ box but where do I put the button that brings it up on the rating page?
 
 Looks like the flutter library has a charts api but if it doesnt work then I can
 use 3rd party apis like the ones in the resources gitub I found
+
+Finished the implementation of the dropdowns for the rating mechanism.

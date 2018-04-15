@@ -12,6 +12,8 @@ class RateEmotionListItemState extends State<RateEmotionListItem> {
 
   String _emotionName = "Test";
 
+  List<int> _ratings = new List();
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,14 +37,18 @@ class RateEmotionListItemState extends State<RateEmotionListItem> {
                   ],
                 ),
 
-                ///The switch to track the emotion or not
+                ///The Rating mechanism
                 new Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
 
+                    new DropdownButton(
+                        items: _ratings.map((int rating){
+                          return new DropdownMenuItem(value: rating);
+                        }).toList(),)
+                    
                   ],
                 ),
-
 
               ],
             ),
@@ -55,6 +61,7 @@ class RateEmotionListItemState extends State<RateEmotionListItem> {
 
   @override
   void initState() {
+    _ratings.addAll([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     super.initState();
   }
 

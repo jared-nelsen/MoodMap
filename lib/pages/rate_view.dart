@@ -28,16 +28,6 @@ class RateViewState extends State<RateView> {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  new Container(
-                    color: Colors.redAccent,
-                    padding: const EdgeInsets.all(10.0),
-                    child: new Text("Rate Emotions",
-                      style: new TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
 
                   ///Title Info Bar
                   new Container(

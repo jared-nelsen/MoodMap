@@ -30,16 +30,8 @@ class ManageViewState extends State<ManageView> {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  new Container(
-                    color: Colors.redAccent,
-                    padding: const EdgeInsets.all(10.0),
-                    child: new Text("Manage Emotions",
-                      style: new TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
+
+                  //MAnage tab bar goes here
 
                   ///Title Info Bar
                   new Container(

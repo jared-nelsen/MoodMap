@@ -46,3 +46,10 @@ Looks like the flutter library has a charts api but if it doesnt work then I can
 use 3rd party apis like the ones in the resources gitub I found
 
 Finished the implementation of the dropdowns for the rating mechanism.
+            
+            -May want to switch to a slider for the mechanism later on
+
+Instead of putting the prompting and notifications in the rating screen I think
+it is better placed in the manage screen because that is what we are doing is
+managing notifications.
+

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'manage_view.dart';
+
+import 'rate_view.dart';
 
 class ApplicationShell extends StatefulWidget {
 
@@ -53,7 +56,7 @@ class ApplicationShellState extends State<ApplicationShell> {
           new Container(color: Colors.blue),
 
           ///The Emotion Rater
-          new Container(color: Colors.grey)
+          new RateView(),
 
         ],
       ),

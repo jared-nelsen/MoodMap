@@ -16,3 +16,31 @@ First I am going to start with the manage view because it will also lay the
 foundation for the rating view. I hope to reuse the container of the list
 view and just populate it with different list elements for each different
 page.
+
+It seems that I will start building another stateful widget for each of the pages
+and place them in the three areas of the scaffold in app_shell.dart.
+
+It looks as if the PageView Widget takes containers as children. These containers
+extend Widget. Thus I can continue implementing Stateful widgets as my children to
+this page.
+
+Starting to build the manage view dart file...
+
+Found that the way to build a cross app bar is to use the Row widget and
+expand a column within it.
+
+         
+It seems that I've done all that I can with the view of the manage Emotions view
+without going into widget loading or databases so I will leave it off for now.
+
+Now Im moving on to the Rating view. Luckily, it seems that much of the rating
+view is the same as the manage view so I can take the bones out and move them
+over.
+
+Well that was easy.
+
+Now it is time to think about notifications/prompting. I want to do it in a dialog
+box but where do I put the button that brings it up on the rating page?
+
+Looks like the flutter library has a charts api but if it doesnt work then I can
+use 3rd party apis like the ones in the resources gitub I found

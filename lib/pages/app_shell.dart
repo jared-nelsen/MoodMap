@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'manage_view.dart';
+import 'manage_view_shell.dart';
 
 import 'rate_view.dart';
 
@@ -94,6 +94,3 @@ class ApplicationShellState extends State<ApplicationShell> {
 
 
 }
-
-//All I have to do is set the title with a switch statement at this widget level when we change the page now that app bar is a
-//field.

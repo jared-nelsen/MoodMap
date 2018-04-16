@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../pages/manage_view.dart';
+import '../pages/manage_view_shell.dart';
 
 class ManageEmotionListItem extends StatefulWidget {
 
@@ -12,9 +12,9 @@ class ManageEmotionListItem extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new ManageEmotionListItemState(this);
 
-  void removeButtonPressed() {
-    _viewStateReference.removeEmotion(this);
-  }
+//  void removeButtonPressed() {
+//    _viewStateReference.removeEmotion(this);
+//  }
 
 }
 
@@ -58,16 +58,16 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
                   ],
                 ),
 
-                ///The button to remove the emotion
-                new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    new FlatButton(
-                      onPressed: _itemReference.removeButtonPressed,
-                      child: new Icon(Icons.remove),
-                    )
-                  ],
-                )
+//                ///The button to remove the emotion
+//                new Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: <Widget>[
+//                    new FlatButton(
+//                      onPressed: _itemReference.removeButtonPressed,
+//                      child: new Icon(Icons.remove),
+//                    )
+//                  ],
+//                )
 
               ],
             ),

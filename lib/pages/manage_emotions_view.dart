@@ -1,15 +1,16 @@
+
 import 'package:flutter/material.dart';
 
 import 'package:mood_map/components/manage_emotion_list_item.dart';
 
-class ManageView extends StatefulWidget {
+class ManageEmotionsView extends StatefulWidget {
 
   @override
-  State<StatefulWidget> createState() => new ManageViewState();
+  State<StatefulWidget> createState() => new ManageEmotionsViewState();
 
 }
 
-class ManageViewState extends State<ManageView> {
+class ManageEmotionsViewState extends State<ManageEmotionsView> {
 
   ///The list of emotion widgets that are controllable in the list view
   List<ManageEmotionListItem> _emotionWidgets = new List();
@@ -26,12 +27,9 @@ class ManageViewState extends State<ManageView> {
         children: <Widget>[
           new Expanded(
 
-              ///The page title
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-
-                  //MAnage tab bar goes here
 
                   ///Title Info Bar
                   new Container(
@@ -51,8 +49,8 @@ class ManageViewState extends State<ManageView> {
                               padding: const EdgeInsets.all(10.0),
                               child: new Text("Emotion",
                                 style: new TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0
+                                    color: Colors.white,
+                                    fontSize: 18.0
                                 ),
                               ),
                             )
@@ -97,10 +95,6 @@ class ManageViewState extends State<ManageView> {
       ),
     );
 
-  }
-
-  void removeEmotion(ManageEmotionListItem item) {
-    _emotionWidgets.remove(item);
   }
 
   @override

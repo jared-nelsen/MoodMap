@@ -53,3 +53,9 @@ Instead of putting the prompting and notifications in the rating screen I think
 it is better placed in the manage screen because that is what we are doing is
 managing notifications.
 
+         I've decided to use a tab bar to switch between adding and removing
+         emotions and managing notifications
+
+Finished the architecture for the management tab.
+
+Now it is time to build the Reminders mangament tab

@@ -37,7 +37,10 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
         controller: _tabController,
         children: <Widget>[
 
+          //The emotion management view screen
           new ManageEmotionsView(),
+
+          //The reminder management view screen
           new ManageRemindersView()
 
         ],

@@ -58,4 +58,12 @@ managing notifications.
 
 Finished the architecture for the management tab.
 
-Now it is time to build the Reminders mangament tab
+Now it is time to build the Reminders mangament tab.
+
+The reminders tab will have a nested scaffold that is reactive to the selections
+in the dropdown.
+
+   Never
+   Daily -> At view
+   Hourly -> Starting / ending at view
+   Every 30 minutes -> Starting / ending at views.

@@ -67,3 +67,7 @@ in the dropdown.
    Daily -> At view
    Hourly -> Starting / ending at view
    Every 30 minutes -> Starting / ending at views.
+
+
+You are waiting on an answer for the color of the dropdown so you began to implement
+the fourth view, the Journaling view.

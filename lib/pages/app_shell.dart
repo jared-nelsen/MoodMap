@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'manage_view_shell.dart';
-
 import 'rate_view.dart';
+import 'journal_view_shell.dart';
 
 class ApplicationShell extends StatefulWidget {
 
@@ -22,8 +22,6 @@ class ApplicationShellState extends State<ApplicationShell> {
   ///2: Rate
   int _pageIndex = 0;
 
-  AppBar _bar = new AppBar(title: new Text("Mood Map"),);
-
   @override
   void initState() {
     super.initState();
@@ -41,7 +39,7 @@ class ApplicationShellState extends State<ApplicationShell> {
 
     //The top level scaffold of the app
     return new Scaffold(
-      appBar: _bar,
+      appBar: new AppBar(title: new Text("Mood Map")),
 
       ///The body of the app
       body: new PageView(
@@ -58,6 +56,9 @@ class ApplicationShellState extends State<ApplicationShell> {
           ///The Emotion Rater
           new RateView(),
 
+          ///The Journaling View
+          new JournalView()
+
         ],
       ),
 
@@ -69,6 +70,7 @@ class ApplicationShellState extends State<ApplicationShell> {
             new BottomNavigationBarItem(icon: new Icon(Icons.apps), title: new Text("Manage")),
             new BottomNavigationBarItem(icon: new Icon(Icons.multiline_chart), title: new Text("Track")),
             new BottomNavigationBarItem(icon: new Icon(Icons.check_box), title: new Text("Rate")),
+            new BottomNavigationBarItem(icon: new Icon(Icons.border_color), title: new Text("Journal")),
           ]
       ),
     );

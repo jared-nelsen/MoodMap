@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "392223137872",
+    "firebase_url": "https://mood-map-b5ca1.firebaseio.com",
+    "project_id": "mood-map-b5ca1",
+    "storage_bucket": "mood-map-b5ca1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392223137872:android:d46285e947487be1",
+        "android_client_info": {
+          "package_name": "com.example.moodmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392223137872-8req0fm84t05q0gqjh5hr6i8pbm00p5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moodmap",
+            "certificate_hash": "d881d8556b4824e27c3f5f4b04f369cff75047f6"
+          }
+        },
+        {
+          "client_id": "392223137872-j4trfbd4dfa65e53o6ml6bdn38hpdnph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-8o5e2g2pHLafQTxRnWEw5Be6owL5COQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392223137872-j4trfbd4dfa65e53o6ml6bdn38hpdnph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

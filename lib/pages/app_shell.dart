@@ -64,6 +64,8 @@ class ApplicationShellState extends State<ApplicationShell> {
 
       ///The navigation bar between the views
       bottomNavigationBar: new BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          fixedColor: Colors.blue,
           onTap: navigationTapped,
           currentIndex: _pageIndex,
           items: [

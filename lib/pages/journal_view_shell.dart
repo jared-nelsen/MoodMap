@@ -62,7 +62,7 @@ class JournalViewState extends State<JournalView> {
                             new Container(
                               color: Colors.redAccent,
                               padding: const EdgeInsets.all(10.0),
-                              child: new Text("Rate",
+                              child: new Text("View",
                                 style: new TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0
@@ -81,7 +81,7 @@ class JournalViewState extends State<JournalView> {
                   ///Confirm Rating Button
                   new FloatingActionButton(
                     onPressed: null,
-                    child: new Icon(Icons.check),
+                    child: new Icon(Icons.add),
                     elevation: 15.0,
                   )
 

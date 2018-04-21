@@ -71,3 +71,7 @@ in the dropdown.
 
 You are waiting on an answer for the color of the dropdown so you began to implement
 the fourth view, the Journaling view.
+
+
+You fixed the color of the bottom bar by setting the type and fixed color attributes
+

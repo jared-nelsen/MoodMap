@@ -1,16 +1,22 @@
 
+import 'dart:async';
+
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 import 'package:flutter/material.dart';
 
 import 'pages/app_shell.dart';
 
+final googleSignIn = new GoogleSignIn();
+final analytics = new FirebaseAnalytics();
 
 void main(){
   runApp(new MaterialApp(
     home: new ApplicationShell(),
     theme: new ThemeData(
-      brightness: Brightness.light,
-      primaryColor: Colors.green,
-      accentColor: Colors.blueAccent
+      primaryColor: Colors.blue,
+      accentColor: Colors.green,
     ),
   ));
 }

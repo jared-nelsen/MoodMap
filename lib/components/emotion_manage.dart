@@ -3,48 +3,48 @@ import 'package:flutter/material.dart';
 
 import '../pages/manage_view_shell.dart';
 
-class ManageEmotionListItem extends StatefulWidget {
+//class ManageEmotionListItem extends StatefulWidget {
+//
+//  ManageViewState _viewStateReference;
+//
+//  ManageEmotionListItem(ManageViewState viewStateReference);
+//
+//  @override
+//  State<StatefulWidget> createState() => new ManageEmotionListItemState(this);
+//
+////  void removeButtonPressed() {
+////    _viewStateReference.removeEmotion(this);
+////  }
+//
+//}
 
-  ManageViewState _viewStateReference;
-
-  ManageEmotionListItem(ManageViewState viewStateReference);
-
-  @override
-  State<StatefulWidget> createState() => new ManageEmotionListItemState(this);
-
-//  void removeButtonPressed() {
-//    _viewStateReference.removeEmotion(this);
-//  }
-
-}
-
-class ManageEmotionListItemState extends State<ManageEmotionListItem> {
+class ManageEmotionListItem extends StatelessWidget {
 
   ManageEmotionListItem _itemReference;
 
   String _emotionName = "Test";
   bool _tracking = false;
 
-  ManageEmotionListItemState(ManageEmotionListItem _itemReference);
+  ManageEmotionListItem(this._emotionName, this._tracking);
 
   @override
   Widget build(BuildContext context) {
 
     ///The top level container for the emotion entry
-    return new Container(
-      color: Colors.yellow,
+    return new Flexible (
+
       child: new Row(
         children: <Widget>[
           new Expanded(
 
             ///The spanning column in the row
             child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              //crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
 
                 ///The name of the emotion
                 new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     new Text(_emotionName),
                   ],
@@ -52,7 +52,7 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
 
                 ///The switch to track the emotion or not
                 new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     new Switch(value: _tracking, onChanged: switchChanged),
                   ],
@@ -86,14 +86,14 @@ class ManageEmotionListItemState extends State<ManageEmotionListItem> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+//  @override
+//  void initState() {
+//    super.initState();
+//  }
+//
+//  @override
+//  void dispose() {
+//    super.dispose();
+//  }
 
 }

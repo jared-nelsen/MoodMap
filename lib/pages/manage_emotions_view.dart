@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/components/manage_emotion_list_item.dart';
+import '../components/emotion_manage.dart';
 
 class ManageEmotionsView extends StatefulWidget {
 
@@ -78,11 +78,28 @@ class ManageEmotionsViewState extends State<ManageEmotionsView> {
                   ),
 
 
-                  //new ListView.builder(itemBuilder: null),
+                  new Expanded(
+                      child:
+                      new ListView(
+
+                        children:
+                        _emotionWidgets.map((ManageEmotionListItem item) {
+                          return new Row(
+                            children: <Widget>[
+                              item
+                            ],
+                          );
+                        }).toList(),
+
+                      ),
+                  ),
+
+
 
                   ///The add emotion button
                   new FloatingActionButton(
-                    onPressed: null,
+                    backgroundColor: Colors.blue,
+                    onPressed: _addEmotion,
                     child: new Icon(Icons.add),
                     elevation: 15.0,
                   )
@@ -95,6 +112,12 @@ class ManageEmotionsViewState extends State<ManageEmotionsView> {
       ),
     );
 
+  }
+  
+  void _addEmotion() {
+    setState(() {
+      _emotionWidgets.add(new ManageEmotionListItem("Test", false));
+    });
   }
 
   @override

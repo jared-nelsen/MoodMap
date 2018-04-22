@@ -75,3 +75,11 @@ the fourth view, the Journaling view.
 
 You fixed the color of the bottom bar by setting the type and fixed color attributes
 
+You got an item to display in the manage emotion view. You converted the item into a
+stateless widget and changed the viewmode to Flexible. You should go ahead and 
+change the other components to be stateless widgets.
+       
+       One thing you saw was the ability to swipe to the side to show a delete icon
+       for a list item. You should consider this as a vieable option for emotion deltetion.
+
+       

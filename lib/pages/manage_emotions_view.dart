@@ -78,17 +78,12 @@ class ManageEmotionsViewState extends State<ManageEmotionsView> {
                   ),
 
 
-                  new Expanded(
+                  new Expanded (
                       child:
                       new ListView(
-
                         children:
                         _emotionWidgets.map((ManageEmotionListItem item) {
-                          return new Row(
-                            children: <Widget>[
-                              item
-                            ],
-                          );
+                          return item;
                         }).toList(),
 
                       ),

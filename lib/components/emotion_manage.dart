@@ -1,26 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../pages/manage_view_shell.dart';
-
-//class ManageEmotionListItem extends StatefulWidget {
-//
-//  ManageViewState _viewStateReference;
-//
-//  ManageEmotionListItem(ManageViewState viewStateReference);
-//
-//  @override
-//  State<StatefulWidget> createState() => new ManageEmotionListItemState(this);
-//
-////  void removeButtonPressed() {
-////    _viewStateReference.removeEmotion(this);
-////  }
-//
-//}
 
 class ManageEmotionListItem extends StatelessWidget {
-
-  ManageEmotionListItem _itemReference;
 
   String _emotionName = "Test";
   bool _tracking = false;
@@ -30,51 +12,112 @@ class ManageEmotionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    ///The top level container for the emotion entry
-    return new Flexible (
+//    return new ListTile(
+//      leading: new Text(_emotionName),
+//    );
 
-      child: new Row(
-        children: <Widget>[
-          new Expanded(
+    return new Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        new Flexible (
+            child: new Container(
+              color: Colors.yellow,
+              child: new Row (
+                children: <Widget>[
 
-            ///The spanning column in the row
-            child: new Column(
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
+                  ///The name of the emotion
+                  new Column(
+                    children: <Widget>[
+                      new Text(_emotionName),
+                    ],
+                  ),
 
-                ///The name of the emotion
-                new Column(
-                  //crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    new Text(_emotionName),
-                  ],
-                ),
+                  ///The switch to track the emotion or not
+                  new Column(
+                    children: <Widget>[
+                      new Switch(value: _tracking, onChanged: switchChanged),
+                    ],
+                  ),
 
-                ///The switch to track the emotion or not
-                new Column(
-                  //crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    new Switch(value: _tracking, onChanged: switchChanged),
-                  ],
-                ),
-
-//                ///The button to remove the emotion
-//                new Column(
-//                  crossAxisAlignment: CrossAxisAlignment.stretch,
-//                  children: <Widget>[
-//                    new FlatButton(
-//                      onPressed: _itemReference.removeButtonPressed,
-//                      child: new Icon(Icons.remove),
-//                    )
-//                  ],
-//                )
-
-              ],
-            ),
-          )
-        ],
-      ),
+                ],
+              ),
+            )
+        )
+      ],
     );
+
+//    ///The top level container for the emotion entry
+//    return new Padding (
+//      padding: EdgeInsets.all(10.0),
+//      child: new Column(
+//        crossAxisAlignment: CrossAxisAlignment.stretch,
+//        children: <Widget>[
+//
+//          new Container(
+//            color: Colors.yellow,
+//            child: new Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//              children: <Widget>[
+//
+//                  ///The name of the emotion
+//                  new Column(
+//                    crossAxisAlignment: CrossAxisAlignment.stretch,
+//                    children: <Widget>[
+//                      new Text(_emotionName),
+//                    ],
+//                  ),
+//
+//                  ///The switch to track the emotion or not
+//                  new Column(
+//                    crossAxisAlignment: CrossAxisAlignment.stretch,
+//                    children: <Widget>[
+//                      new Switch(value: _tracking, onChanged: switchChanged),
+//                    ],
+//                  ),
+//
+//              ],
+//            ),
+//
+//          )
+//        ],
+//      )
+//
+//    );
+
+//
+//      child: new Row(
+//        children: <Widget>[
+//          new Container(
+//
+//              child: new Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                children: <Widget>[
+//
+//                  ///The name of the emotion
+//                  new Column(
+//                    crossAxisAlignment: CrossAxisAlignment.stretch,
+//                    children: <Widget>[
+//                      new Text(_emotionName),
+//                    ],
+//                  ),
+//
+//                  ///The switch to track the emotion or not
+//                  new Column(
+//                    crossAxisAlignment: CrossAxisAlignment.stretch,
+//                    children: <Widget>[
+//                      new Switch(value: _tracking, onChanged: switchChanged),
+//                    ],
+//                  ),
+//
+//                ],
+//              ),
+//            ),
+//
+//        ],
+//      ),
+//    )
+
+
 
   }
 
@@ -85,15 +128,5 @@ class ManageEmotionListItem extends StatelessWidget {
       _tracking = true;
     }
   }
-
-//  @override
-//  void initState() {
-//    super.initState();
-//  }
-//
-//  @override
-//  void dispose() {
-//    super.dispose();
-//  }
 
 }

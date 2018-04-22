@@ -45,6 +45,7 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
 
         ],
       ),
+
     );
 
   }

@@ -83,3 +83,9 @@ change the other components to be stateless widgets.
        for a list item. You should consider this as a vieable option for emotion deltetion.
 
        
+Left off trying to implement the List Title Bar abstraction. Left a post on SO.
+
+Even if I cant get the ListTitleBar to work, I should implement the list view as
+a scaffold on each page and add the floating action button that way. In this way,
+I could use the body to hold the title bar and the listview, and have the action
+button float over it all.

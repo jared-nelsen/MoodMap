@@ -12,17 +12,14 @@ class ManageEmotionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-//    return new ListTile(
-//      leading: new Text(_emotionName),
-//    );
-
     return new Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+
       children: <Widget>[
         new Flexible (
             child: new Container(
               color: Colors.yellow,
               child: new Row (
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
 
                   ///The name of the emotion
@@ -45,79 +42,6 @@ class ManageEmotionListItem extends StatelessWidget {
         )
       ],
     );
-
-//    ///The top level container for the emotion entry
-//    return new Padding (
-//      padding: EdgeInsets.all(10.0),
-//      child: new Column(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-//        children: <Widget>[
-//
-//          new Container(
-//            color: Colors.yellow,
-//            child: new Row(
-//              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//              children: <Widget>[
-//
-//                  ///The name of the emotion
-//                  new Column(
-//                    crossAxisAlignment: CrossAxisAlignment.stretch,
-//                    children: <Widget>[
-//                      new Text(_emotionName),
-//                    ],
-//                  ),
-//
-//                  ///The switch to track the emotion or not
-//                  new Column(
-//                    crossAxisAlignment: CrossAxisAlignment.stretch,
-//                    children: <Widget>[
-//                      new Switch(value: _tracking, onChanged: switchChanged),
-//                    ],
-//                  ),
-//
-//              ],
-//            ),
-//
-//          )
-//        ],
-//      )
-//
-//    );
-
-//
-//      child: new Row(
-//        children: <Widget>[
-//          new Container(
-//
-//              child: new Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                children: <Widget>[
-//
-//                  ///The name of the emotion
-//                  new Column(
-//                    crossAxisAlignment: CrossAxisAlignment.stretch,
-//                    children: <Widget>[
-//                      new Text(_emotionName),
-//                    ],
-//                  ),
-//
-//                  ///The switch to track the emotion or not
-//                  new Column(
-//                    crossAxisAlignment: CrossAxisAlignment.stretch,
-//                    children: <Widget>[
-//                      new Switch(value: _tracking, onChanged: switchChanged),
-//                    ],
-//                  ),
-//
-//                ],
-//              ),
-//            ),
-//
-//        ],
-//      ),
-//    )
-
-
 
   }
 

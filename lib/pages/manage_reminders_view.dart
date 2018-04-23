@@ -52,8 +52,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
               new Container(
                 padding: const EdgeInsets.all(10.0),
                 child: new Text(
-                  //"Mood Map can remind you to rate\nyour emotions on a regular basis",
-                  "This app can remind you to do stuff\non a regular basis",
+                  "Mood Map can remind you to rate\nyour emotions on a regular basis",
                     style: new TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,

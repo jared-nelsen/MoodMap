@@ -18,7 +18,7 @@ class ManageEmotionsViewState extends State<ManageEmotionsView> {
 
   @override
   Widget build(BuildContext context) {
-    
+
     return new Scaffold(
       body:
 

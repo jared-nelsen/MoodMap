@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'manage_view_shell.dart';
 import 'rate_view.dart';
 import 'journal_view_shell.dart';
+import 'track_view.dart';
 
 class ApplicationShell extends StatefulWidget {
 
@@ -51,7 +52,7 @@ class ApplicationShellState extends State<ApplicationShell> {
           new ManageView(),
 
           ///The Emotion Tracker
-          new Container(color: Colors.blue),
+          new TrackView(),
 
           ///The Emotion Rater
           new RateView(),

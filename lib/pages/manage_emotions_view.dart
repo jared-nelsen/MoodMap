@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import '../components/emotion_manage.dart';
-import '../components/list_title_bar.dart';
 
 class ManageEmotionsView extends StatefulWidget {
 

@@ -89,3 +89,6 @@ Even if I cant get the ListTitleBar to work, I should implement the list view as
 a scaffold on each page and add the floating action button that way. In this way,
 I could use the body to hold the title bar and the listview, and have the action
 button float over it all.
+
+
+Implemented the chart example for analysis. You can remove it at your leisure.

@@ -14,7 +14,7 @@ class TrackViewState extends State<TrackView> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: null,
+
     );
   }
 

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'entry_components/sizable_titled_entry_box.dart';
+
 
 class MakeEntryView extends StatefulWidget {
 
@@ -22,9 +24,20 @@ class MakeEntryState extends State<MakeEntryView> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+
+      body: new ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+
+          new JournalEntryBox("dasfsd", "sl;dmjfsd", new Size(100.0, 100.0))
+
+        ],
+      ),
+
       persistentFooterButtons: <Widget>[
         new FlatButton(onPressed: _journalEntryFunction, child: new Text("Back"))
       ],
+
     );
   }
 

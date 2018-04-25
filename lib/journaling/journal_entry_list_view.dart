@@ -24,7 +24,8 @@ class JournalEntryListViewState extends State<JournalEntryListView> {
     return new Scaffold(
       body: new ListView(),
       floatingActionButton: new FloatingActionButton(
-          onPressed: _makeEntryFunction
+          onPressed: _makeEntryFunction,
+          child: new Icon(Icons.add),
       ),
     );
   }

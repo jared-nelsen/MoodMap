@@ -17,6 +17,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
   PageController _pageController;
 
   String _pageTitle = "Journal Entries";
+
   @override
   Widget build(BuildContext context) {
 
@@ -43,6 +44,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
   }
 
   void _animateToPage(int page) {
+    setPageName(page);
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),

@@ -92,3 +92,11 @@ button float over it all.
 
 
 Implemented the chart example for analysis. You can remove it at your leisure.
+
+
+Implemented a Title bar.
+
+Now I would like to step away from the Rating stuff because it will overhaul a large
+portion of the app and take time to attack that which I know Will make it into the
+app like the Journaling Screen.
+

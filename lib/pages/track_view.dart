@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 
+
 class TrackView extends StatefulWidget {
 
   @override
@@ -14,7 +15,7 @@ class TrackViewState extends State<TrackView> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-
+      child: new Container(),
     );
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'manage_view_shell.dart';
 import 'rate_view.dart';
-import 'journal_view_shell.dart';
+import 'package:mood_map/journaling/journal_view_shell.dart';
 import 'track_view.dart';
 
 class ApplicationShell extends StatefulWidget {
@@ -23,17 +23,6 @@ class ApplicationShellState extends State<ApplicationShell> {
   ///2: Rate
   int _pageIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = new PageController();
-  }
-
-  @override
-  void dispose(){
-    super.dispose();
-    _pageController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,5 +86,16 @@ class ApplicationShellState extends State<ApplicationShell> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _pageController.dispose();
+  }
 
 }

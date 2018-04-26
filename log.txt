@@ -100,3 +100,14 @@ Now I would like to step away from the Rating stuff because it will overhaul a l
 portion of the app and take time to attack that which I know Will make it into the
 app like the Journaling Screen.
 
+Got a really good start on implementing the Text entry box for the Journaling feature.
+Two things that I noticed are that when you are typing the text in you can not see
+it behind the keyboard and it also seems that you can swipe left and right throught
+the pages while you are typing. I should look for a freeze functionality. Dont look
+too hard at these just yet though.
+
+You should look at implementing the Textbox class around the text field as it looks
+like it will do wrapping for you.
+
+
+Asked a question on stack overflow about how to implement a standard text box.

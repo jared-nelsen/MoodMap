@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/rating/rate_categories.dart';
+import 'package:mood_map/rating/rate_specifics.dart';
+import 'package:mood_map/rating/rate_emotions.dart';
+
 class RateView extends StatefulWidget {
 
   @override
@@ -9,99 +13,59 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  ///The list of emotion widgets that are controllable in the list view
-  //List<ManageEmotionListItem> _emotionWidgets = new List();
+  PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
 
-    ///Top level container for the manage emotion view
-    return new Container(
-      color: Colors.green,
+    return new Scaffold(
 
-      ///The row in the container containing the elements in the view
-      child: new Row(
+      body: new PageView(
+
+        controller: _pageController,
+
         children: <Widget>[
-          new Expanded(
 
-            ///The page title
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
+          new RateCategoriesView(animateToSpecifics),
+          new RateSpecificsView(animateToCategories, animateToEmotions),
+          new RateEmotionsView(animateToCategories, animateToSpecifics)
 
-                  ///Title Info Bar
-                  new Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.redAccent,
-                      border: new Border.all(color: Colors.black),
-                    ),
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-
-                        ///Emotion Column Title
-                        new Column(
-                          children: <Widget>[
-                            new Container(
-                              color: Colors.redAccent,
-                              padding: const EdgeInsets.all(10.0),
-                              child: new Text("Emotion",
-                                style: new TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-
-                        ///Rating Column Title
-                        new Column(
-                          children: <Widget>[
-                            new Container(
-                              color: Colors.redAccent,
-                              padding: const EdgeInsets.all(10.0),
-                              child: new Text("Rate",
-                                style: new TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-
-
-                  //new ListView.builder(itemBuilder: null),
-
-                  ///Confirm Rating Button
-                  new FloatingActionButton(
-                    onPressed: null,
-                    child: new Icon(Icons.check),
-                    elevation: 15.0,
-                  )
-
-
-                ],
-              )
-          )
         ],
       ),
-    );
 
+    );
+  }
+
+  void _animateToPage(int page) {
+    _pageController.animateToPage(
+        page,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease
+    );
+  }
+
+  void animateToCategories() {
+    _animateToPage(0);
+  }
+
+  void animateToSpecifics() {
+    _animateToPage(1);
+  }
+
+  void animateToEmotions() {
+    _animateToPage(2);
   }
 
   @override
   void initState() {
     super.initState();
+    _pageController = new PageController();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _pageController.dispose();
   }
 
 }

@@ -44,10 +44,13 @@ class EntryBoxState extends State<JournalEntryBox> {
             padding: const EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
 
             child: new TextField(
-
               autocorrect: true,
+              autofocus: true,
               decoration: new InputDecoration(
                 hintText: _hint,
+                border: OutlineInputBorder(
+
+                )
               ),
             ),
 

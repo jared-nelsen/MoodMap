@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/rating/rate_categories.dart';
-import 'package:mood_map/rating/rate_specifics.dart';
-import 'package:mood_map/rating/rate_emotions.dart';
+import 'package:mood_map/rating/categories_rate.dart';
+import 'package:mood_map/rating/specifics_rate.dart';
+import 'package:mood_map/rating/emotions_rate.dart';
 
 class RateView extends StatefulWidget {
 
@@ -14,10 +14,9 @@ class RateView extends StatefulWidget {
 class RateViewState extends State<RateView> {
 
   PageController _pageController;
-
   @override
   Widget build(BuildContext context) {
-
+    
     return new Scaffold(
 
       body: new PageView(
@@ -49,7 +48,7 @@ class RateViewState extends State<RateView> {
     _animateToPage(0);
   }
 
-  void animateToSpecifics() {
+  void animateToSpecifics(String specific) {
     _animateToPage(1);
   }
 

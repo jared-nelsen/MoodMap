@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/components/navigable_list_item.dart';
+
 class RateCategoriesView extends StatefulWidget {
 
   Function _navigateToSpecifics;
@@ -16,6 +18,8 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
   Function _navigateToSpecifics;
 
+  List<NavigableListItem> _emotions = new List();
+
   RateCategoriesViewState(this._navigateToSpecifics);
 
   @override
@@ -27,10 +31,14 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
         appBar: new AppBar(title: new Text("Rate My Emotions With..."),),
 
-        body: null,
+        body: new ListView(
+          children: _emotions.map((NavigableListItem emotion) {
+            return emotion;
+          }).toList()
+        ),
 
         floatingActionButton: new FloatingActionButton(
-          onPressed: null,
+          onPressed: addEmotion,
           child: new Icon(Icons.add),
         ),
 
@@ -38,6 +46,12 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
     );
 
+  }
+
+  void addEmotion() {
+    setState(() {
+      _emotions.add(new NavigableListItem("Anger", _navigateToSpecifics));
+    });
   }
 
   @override

@@ -18,7 +18,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   Function _navigateToCategories;
   Function _navigateToSpecifics;
 
-  String _specifics;
+  String _emotion;
 
   RateEmotionsViewState(this._navigateToCategories, this._navigateToSpecifics);
 
@@ -26,21 +26,27 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   Widget build(BuildContext context) {
 
     return new Container(
+
       child: new Scaffold(
-        appBar: new AppBar(title: new Text(_specifics),),
+
+        appBar: new AppBar(title: new Text(_emotion),),
+
         body: null,
+
         floatingActionButton: new FloatingActionButton(
           onPressed: null,
           child: new Icon(Icons.add),
         ),
+
+
       ),
     );
 
   }
 
-  void setSpecifics(String specifics) {
+  void setEmotion(String emotion) {
     setState(() {
-      _specifics = specifics;
+      _emotion = emotion;
     });
   }
 

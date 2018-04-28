@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/components/navigable_list_item.dart';
+
 class RateSpecificsView extends StatefulWidget {
+
+  static RateSpecificsViewState of(BuildContext context) => context.ancestorStateOfType(const TypeMatcher<RateSpecificsViewState>());
 
   Function _navigateToCategories;
   Function _navigateToEmotions;
@@ -18,7 +22,9 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
   Function _navigateToCategories;
   Function _navigateToEmotions;
 
-  String _category;
+  List<NavigableListItem> _specifics = new List();
+
+  String _specific;
 
   RateSpecificsViewState(this._navigateToCategories, this._navigateToEmotions);
 
@@ -26,19 +32,38 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
   Widget build(BuildContext context) {
     return new Container(
       child: new Scaffold(
-        appBar: new AppBar(title: new Text(_category),),
-        body: null,
+
+        appBar: new AppBar(title: new Text(_specific),),
+
+        body: new ListView(
+            children: _specifics.map((NavigableListItem specific) {
+              return specific;
+            }).toList()
+        ),
+
+
         floatingActionButton: new FloatingActionButton(
-          onPressed: null,
+          onPressed: addSpecific,
           child: new Icon(Icons.add),
         ),
+
+        persistentFooterButtons: <Widget>[
+          new FlatButton(onPressed: _navigateToCategories, child: new Text("Back"))
+        ],
+
       ),
     );
   }
 
-  void setCategory(String category) {
+  void addSpecific() {
     setState(() {
-      this._category = category;
+      _specifics.add(new NavigableListItem("Sarah", _navigateToEmotions));
+    });
+  }
+
+  void setSpecific(String specific) {
+    setState(() {
+      this._specific = specific;
     });
   }
 

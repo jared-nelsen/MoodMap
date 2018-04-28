@@ -34,6 +34,7 @@ class ApplicationShellState extends State<ApplicationShell> {
       ///The body of the app
       body: new PageView(
         controller: _pageController,
+        physics: new NeverScrollableScrollPhysics(),
         onPageChanged: onPageChanged,
         children: <Widget>[
 

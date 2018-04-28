@@ -28,6 +28,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
       body: new PageView(
 
         controller: _pageController,
+        physics: new NeverScrollableScrollPhysics(),
 
         children: <Widget>[
 

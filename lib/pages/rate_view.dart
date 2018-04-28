@@ -23,6 +23,7 @@ class RateViewState extends State<RateView> {
       body: new PageView(
 
         controller: _pageController,
+        physics: new NeverScrollableScrollPhysics(),
 
         children: <Widget>[
 

@@ -111,3 +111,8 @@ like it will do wrapping for you.
 
 
 Asked a question on stack overflow about how to implement a standard text box.
+
+Finished skeleton of Rating view.
+
+Next I should work on building a List tile that suits my needs for the navigable
+list items.

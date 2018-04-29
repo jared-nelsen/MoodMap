@@ -5,8 +5,6 @@ import 'package:mood_map/components/navigable_list_item.dart';
 
 class RateSpecificsView extends StatefulWidget {
 
-  static RateSpecificsViewState of(BuildContext context) => context.ancestorStateOfType(const TypeMatcher<RateSpecificsViewState>());
-
   Function _navigateToCategories;
   Function _navigateToEmotions;
 
@@ -24,8 +22,6 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
 
   List<NavigableListItem> _specifics = new List();
 
-  String _specific;
-
   RateSpecificsViewState(this._navigateToCategories, this._navigateToEmotions);
 
   @override
@@ -33,7 +29,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
     return new Container(
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text(_specific),),
+        appBar: new AppBar(title: new Text("More specifically"),),
 
         body: new ListView(
             children: _specifics.map((NavigableListItem specific) {
@@ -58,12 +54,6 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
   void addSpecific() {
     setState(() {
       _specifics.add(new NavigableListItem("Sarah", _navigateToEmotions));
-    });
-  }
-
-  void setSpecific(String specific) {
-    setState(() {
-      this._specific = specific;
     });
   }
 

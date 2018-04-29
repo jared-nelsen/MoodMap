@@ -48,7 +48,7 @@ class RateViewState extends State<RateView> {
     _animateToPage(0);
   }
 
-  void animateToSpecifics(String specific) {
+  void animateToSpecifics() {
     _animateToPage(1);
   }
 

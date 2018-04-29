@@ -18,8 +18,6 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   Function _navigateToCategories;
   Function _navigateToSpecifics;
 
-  String _emotion;
-
   RateEmotionsViewState(this._navigateToCategories, this._navigateToSpecifics);
 
   @override
@@ -29,25 +27,26 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text(_emotion),),
+        appBar: new AppBar(title: new Text("Rate my emotions"),),
 
-        body: null,
+        body: new ListView(
+          
+        ),
 
         floatingActionButton: new FloatingActionButton(
           onPressed: null,
           child: new Icon(Icons.add),
         ),
 
-
+        persistentFooterButtons: <Widget>[
+            new FlatButton(onPressed: null, child: new Text("Save")),
+            new FlatButton(onPressed: null, child: new Text("Save and Journal")),
+            new FlatButton(onPressed: _navigateToSpecifics, child: new Text("Back"))
+        ],
+        
       ),
     );
 
-  }
-
-  void setEmotion(String emotion) {
-    setState(() {
-      _emotion = emotion;
-    });
   }
 
   @override

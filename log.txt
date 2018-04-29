@@ -116,3 +116,7 @@ Finished skeleton of Rating view.
 
 Next I should work on building a List tile that suits my needs for the navigable
 list items.
+
+
+Finished out rating screens although I had to keep the titles generic as there was
+no way to change them dyanmically that I could see.

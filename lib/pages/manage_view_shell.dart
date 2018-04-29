@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'manage_reminders_view.dart';
-import 'manage_emotions_view.dart';
-
 class ManageView extends StatefulWidget {
 
   @override
@@ -18,35 +15,7 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
   @override
   Widget build(BuildContext context) {
 
-    ///The Management Scaffold
-    return new Scaffold(
-      backgroundColor: Colors.green,
-
-      ///The Management Tabs
-      appBar: new TabBar(
-        controller: _tabController,
-        tabs: <Widget>[
-          new Tab(text: "Emotions",),
-          new Tab(text: "Reminders",)
-        ],
-
-      ),
-
-      ///The Management Tab viewports
-      body: new TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-
-          //The emotion management view screen
-          new ManageEmotionsView(),
-
-          //The reminder management view screen
-          new ManageRemindersView()
-
-        ],
-      ),
-
-    );
+    return new Container();
 
   }
 

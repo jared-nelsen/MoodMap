@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-
+import 'package:mood_map/common/emotion_pallet.dart';
 
 class TrackView extends StatefulWidget {
 
@@ -15,7 +15,7 @@ class TrackViewState extends State<TrackView> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: new Container(),
+      child: new EmotionPallet(),
     );
   }
 

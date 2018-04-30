@@ -6,7 +6,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:flutter/material.dart';
 
-import 'pages/app_shell.dart';
+import 'views/app_shell.dart';
 
 final googleSignIn = new GoogleSignIn();
 final analytics = new FirebaseAnalytics();

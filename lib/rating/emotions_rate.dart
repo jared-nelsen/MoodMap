@@ -31,17 +31,21 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text("Rate my emotions"),),
+        appBar: new AppBar(
+          title: new Text("My emotions"),
+          actions: <Widget>[
+            new Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
+              child: new RaisedButton(
+                  onPressed: null,
+                  child: new Text("Add From Pallete")),)
+          ],
+        ),
 
         body: new ListView(
           children: _emotions.map((RatableListItem item) {
             return item;
           }).toList()
-        ),
-
-        floatingActionButton: new FloatingActionButton(
-          onPressed: addEmotion,
-          child: new Icon(Icons.add),
         ),
 
         persistentFooterButtons: <Widget>[

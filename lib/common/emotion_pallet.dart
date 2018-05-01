@@ -18,23 +18,26 @@ class EmotionPalletState extends State<EmotionPallet> {
 
     return new Scaffold(
 
+      appBar: new AppBar(title: new Text("Emotion Pallet"),),
+
       body: new ListView(
         children: _emotions
       ),
 
-      floatingActionButton: new FloatingActionButton(
-        onPressed: addEmotion,
-        child: new Icon(Icons.add),),
+      persistentFooterButtons: <Widget>[
+        new FlatButton(onPressed: null, child: new Text("Add all")),
+        new FlatButton(onPressed: null, child: new Text("Back"))
+      ],
 
     );
   }
 
-  void addEmotion() {
+  void addEmotion(String emotionName) {
     final index = _emotions.length;
     final newList = new List<EmotionListItem>.from(_emotions)
       ..add(new EmotionListItem(
-          title: "ADDED TITLE",
-          selected: false,
+          title: emotionName,
+          selected: true,
           onChange: (checked) => _listItemChange(index, checked),));
 
     setState(() {
@@ -59,13 +62,15 @@ class EmotionPalletState extends State<EmotionPallet> {
 
   }
 
-  List<String> getSelectedTitles() {
+  List<String> getSelectedEmotions() {
     return _emotions.where((item) => item.isSelected()).map((item) => item.getTitle());
   }
 
   @override
   void initState() {
     super.initState();
+    addEmotion("First");
+    addEmotion("Second");
   }
 
   @override

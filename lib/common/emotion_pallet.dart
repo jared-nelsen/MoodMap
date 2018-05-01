@@ -19,9 +19,7 @@ class EmotionPalletState extends State<EmotionPallet> {
     return new Scaffold(
 
       body: new ListView(
-        children: _emotions.map((EmotionListItem item) {
-          return item;
-        }).toList(),
+        children: _emotions
       ),
 
       floatingActionButton: new FloatingActionButton(
@@ -32,21 +30,37 @@ class EmotionPalletState extends State<EmotionPallet> {
   }
 
   void addEmotion() {
+    final index = _emotions.length;
+    final newList = new List<EmotionListItem>.from(_emotions)
+      ..add(new EmotionListItem(
+          title: "ADDED TITLE",
+          selected: false,
+          onChange: (checked) => _listItemChange(index, checked),));
+
     setState(() {
-      _emotions.add(new EmotionListItem("Emotion"));
+      _emotions = newList;
     });
   }
 
+  void _listItemChange(int listIndex, bool checked) {
+
+    final newList = new List<EmotionListItem>.from(_emotions);
+    EmotionListItem currentItem = _emotions[listIndex];
+
+    newList[listIndex] = new EmotionListItem(
+      title: currentItem.getTitle(),
+      selected: checked,
+      onChange: currentItem.onChanged(),
+    );
+
+    setState(() {
+      _emotions = newList;
+    });
+
+  }
+
   List<String> getSelectedTitles() {
-    List<String> selected = new List();
-    
-    for(EmotionListItem e in _emotions) {
-      if(e.isSelected()) {
-        selected.add(e.getTitle());
-      }
-    }
-    
-    return selected;
+    return _emotions.where((item) => item.isSelected()).map((item) => item.getTitle());
   }
 
   @override

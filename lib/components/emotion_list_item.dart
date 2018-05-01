@@ -1,57 +1,37 @@
 
 import 'package:flutter/material.dart';
 
-class EmotionListItem extends StatefulWidget {
+class EmotionListItem extends StatelessWidget {
 
-  String _title = "";
-  bool _isSelected = false;
+  final String title;
+  final bool selected;
+  final ValueChanged<bool> onChange;
 
-  EmotionListItem(this._title);
-
-  @override
-  State<StatefulWidget> createState() => new EmotionListItemState(_title);
-}
-
-class EmotionListItemState extends State<EmotionListItem> {
-
-  String _title = "";
-  bool _isSelected = false;
-
-  EmotionListItemState(this._title);
+  EmotionListItem({this.title, this.selected, this.onChange});
 
   @override
   Widget build(BuildContext context) {
 
     return new CheckboxListTile(
 
-      title: new Text(_title),
-      value: _isSelected,
-      onChanged: (bool value) {
-        setState(() {
-          _isSelected = value;
-        });
-      },
+      title: new Text(title),
+      value: selected,
+      onChanged: onChange
 
     );
 
   }
 
   String getTitle() {
-    return _title;
+    return title;
   }
 
   bool isSelected() {
-    return _isSelected;
+    return selected;
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+  ValueChanged<bool> onChanged() {
+    return onChange;
   }
 
 }

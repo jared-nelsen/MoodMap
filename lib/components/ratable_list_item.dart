@@ -10,6 +10,10 @@ class RatableListItem extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new RatableListItemState(this._title);
 
+  String getTitle() {
+    return _title;
+  }
+
 }
 
 class RatableListItemState extends State<RatableListItem> {

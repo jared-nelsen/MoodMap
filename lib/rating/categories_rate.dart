@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 import 'package:mood_map/components/navigable_list_item.dart';
 
@@ -20,6 +21,8 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
   List<NavigableListItem> _emotions = new List();
 
+  String toAdd = "";
+
   RateCategoriesViewState(this._navigateToSpecifics);
 
   @override
@@ -38,7 +41,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
         ),
 
         floatingActionButton: new FloatingActionButton(
-          onPressed: addEmotion,
+          onPressed: _addCategory,
           child: new Icon(Icons.add),
         ),
 
@@ -48,10 +51,28 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
   }
 
-  void addEmotion() {
-    setState(() {
-      _emotions.add(new NavigableListItem("Anger", _navigateToSpecifics));
-    });
+  Future<Null> _addCategory() async {
+    await showDialog(
+      context: context,
+      child: new SimpleDialog(
+        title: new Text("Add a category"),
+        children: <Widget>[
+          new TextField(
+            autofocus: true,
+            maxLength: 20,
+            maxLengthEnforced: true,
+            onChanged: (String text) {toAdd = text;},
+          ),
+          new RaisedButton(
+              child: new Text("Add"),
+              onPressed: () {
+                setState(() {
+                  _emotions.add(new NavigableListItem(toAdd, _navigateToSpecifics));
+                  Navigator.pop(context, null);
+                });})
+        ],
+      )
+    );
   }
 
   @override

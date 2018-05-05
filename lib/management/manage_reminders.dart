@@ -11,6 +11,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
   bool _remindingEmotions;
   var _times = ["Daily", "Hourly", "Every 30 Minutes", "Every 15 Minutes"];
+  String _timeValue = "Daily";
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,10 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
   }
 
   Widget _buildEmotionSettings() {
+
     return new Column(
       children: <Widget>[
+
         new Row (
           children: <Widget>[
             new Expanded(
@@ -40,27 +43,47 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
             ],)
           ],
         ),
+
         new Divider(
           color: Colors.black,
           height: 5.0,
           indent: 0.0,
         ),
+
         new Row(
           children: <Widget>[
+
             new Expanded(
-                child: new Padding(
-                  padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
-                  child: new Text("Remind Me", style: new TextStyle(fontSize: 18.0),),)),
-            new DropdownButton(
-                items: _times.map((String time) {
-                  return new DropdownMenuItem(child: new Text(time));
-                }).toList(),
-                onChanged: null)
+              child: new Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+                child: new Text("Remind Me", style: new TextStyle(fontSize: 18.0),),),
+            ),
+
+            new Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+              child: new DropdownButton<String>(
+
+                  value: _timeValue,
+
+                  items: _times.map((String time) {
+                    return new DropdownMenuItem<String>(value: time, child: new Text(time));
+                  }).toList(),
+
+                  onChanged: (String time) {
+                    setState(() {
+                      _timeValue = time;
+                    });
+                  }
+
+              ),
+            )
+
           ],
         ),
         new Row()
       ],
     );
+
   }
 
   Widget _buildSleepSettings() {

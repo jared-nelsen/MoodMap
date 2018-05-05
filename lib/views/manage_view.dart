@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/management/manage_reminders.dart';
+
 class ManageView extends StatefulWidget {
 
   @override
@@ -15,14 +17,26 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
   @override
   Widget build(BuildContext context) {
 
-    return new Container();
+    return new Scaffold(
+      appBar: new TabBar(
+        labelColor: Colors.black,
+        controller: _tabController,
+          tabs: [
+            new Tab(text: "Reminders",)
+          ]),
+      body: new TabBarView(
+        controller: _tabController,
+          children: [
+            new ManageRemindersView()
+          ]),
+    );
 
   }
 
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 2, vsync: this);
+    _tabController = new TabController(length: 1, vsync: this);
   }
 
   @override

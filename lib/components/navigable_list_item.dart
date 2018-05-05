@@ -23,7 +23,7 @@ class NavigableListItemState extends State<NavigableListItem> {
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      leading: new Text(_title),
+      title: new Text(_title, style: new TextStyle(fontSize: 16.0),),
       trailing: new FlatButton(
           onPressed: _navigationFunction,
           child: new Icon(Icons.arrow_forward)),

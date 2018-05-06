@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mood_map/management/manage_reminders.dart';
+import 'package:mood_map/management/manage_medication.dart';
 
 class ManageView extends StatefulWidget {
 
@@ -18,17 +19,27 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
 
     return new Scaffold(
+
       appBar: new TabBar(
+
         labelColor: Colors.black,
+
         controller: _tabController,
           tabs: [
-            new Tab(text: "Rate Reminders",)
+            new Tab(text: "Rate Reminders",),
+            new Tab(text: "Manage Medications")
           ]),
+
       body: new TabBarView(
         controller: _tabController,
+
           children: [
-            new ManageRemindersView()
+
+            new ManageRemindersView(),
+            new ManageMedicationView()
+
           ]),
+
     );
 
   }
@@ -36,7 +47,7 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 1, vsync: this);
+    _tabController = new TabController(length: 2, vsync: this);
   }
 
   @override

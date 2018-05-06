@@ -125,4 +125,3 @@ Finished Emotion pallet.
 
 Working on add item popup for Rating workflow. Have a prototype.
 
-How do I get the text out of the text field to send back to the list.

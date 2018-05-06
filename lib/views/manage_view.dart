@@ -22,7 +22,7 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
         labelColor: Colors.black,
         controller: _tabController,
           tabs: [
-            new Tab(text: "Reminders",)
+            new Tab(text: "Rate Reminders",)
           ]),
       body: new TabBarView(
         controller: _tabController,

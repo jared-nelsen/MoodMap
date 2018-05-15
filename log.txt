@@ -125,3 +125,7 @@ Finished Emotion pallet.
 
 Working on add item popup for Rating workflow. Have a prototype.
 
+Erroring out for some reason on adding Medication button
+
+
+For some reason pressing the calendar button wont work. 

@@ -19,6 +19,9 @@
 
 1. Long press to remove items in Rate view
 2. Grey out notification Settings with On/Off Switch
+3. Change Rating Mechanism in Emotion rating list items
+4. List tile Dividers
+5. Resize all text and textboxes in application
 
 # On The Table
 

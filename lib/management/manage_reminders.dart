@@ -27,24 +27,42 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
     return new Scaffold(
 
       body: new SingleChildScrollView (
+
         padding: const EdgeInsets.all(10.0),
+
         child: new Column(
           children: <Widget>[
+            _buildTitleBar(),
+            _divider(),
             _buildEmotionSettings(),
             _divider(),
             _buildSleepSettings(),
             _divider(),
-           _buildExerciseEvents()
+            _buildExerciseEvents(),
          ],
        ),
       ),
 
-      persistentFooterButtons: <Widget>[
-        new FlatButton(onPressed: null, child: new Text("Save", style: new TextStyle(color: Colors.green),))
-      ],
-
     );
 
+  }
+  
+  Widget _buildTitleBar() {
+    
+    return new Column(
+      children: <Widget>[
+        new Row(
+          children: <Widget>[
+            new Expanded(
+                child: new Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: new Text("Set up reminders for you to rate your health here"),
+                )
+            )
+          ],
+        )
+      ],
+    );
   }
 
   Widget _buildEmotionSettings() {

@@ -26,8 +26,8 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
 
         controller: _tabController,
           tabs: [
-            new Tab(text: "Rate Reminders",),
-            new Tab(text: "Manage Medications")
+            new Tab(text: "Reminders",),
+            new Tab(text: "Medications")
           ]),
 
       body: new TabBarView(

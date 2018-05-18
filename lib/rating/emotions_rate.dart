@@ -126,7 +126,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     });
   }
 
-  void addEmotionToPallet(String emotion) {
+  void _addEmotionToPallet(String emotion) {
     final index = _palletEmotions.length;
     final newList = new List<EmotionListItem>.from(_palletEmotions)
       ..add(new EmotionListItem(
@@ -195,8 +195,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   void initState() {
     super.initState();
     _pageController = new PageController();
-    addEmotionToPallet("First");
-    addEmotionToPallet("Second");
+    _addEmotionToPallet("First");
   }
 
   @override

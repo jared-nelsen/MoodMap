@@ -173,12 +173,13 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                             onPressed: () {
                               if(_formKey.currentState.validate()) {
                                 setState(() {
-                                  _medications.add(new MedicationListItem(_medicationToAdd, _dosageToAdd, _dateStartedToAdd));
+                                  _medications.add(new MedicationListItem(_medicationToAdd, _dosageToAdd, _dateStartedToAdd, _removeMedication));
                                   Navigator.pop(context, null);
                                 });
                               }
                             }
-                        )],
+                        )
+                      ],
 
                     ),
 
@@ -210,13 +211,30 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
     );
   }
 
+  void _removeMedication(String medicationName) {
+
+    setState(() {
+      int index = 0;
+      for(int i = 0; i < _medications.length; i++) {
+        MedicationListItem item = _medications.elementAt(i);
+        if(medicationName == item.getName()) {
+          index = i;
+          break;
+        }
+      }
+
+      _medications.removeAt(index);
+    });
+
+  }
+
   Future<Null> _selectStartDate(BuildContext context) async {
 
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
         firstDate: new DateTime(2000, 1),
-        lastDate: new DateTime(3000);
+        lastDate: new DateTime(3000)
     );
 
     if(picked != null) {

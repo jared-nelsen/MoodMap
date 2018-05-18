@@ -133,12 +133,14 @@ For some reason pressing the calendar button wont work.
 
 Immediate tasks:
 ----------------
-- Get remove button to remove items from the list of medications.
 - Setup title bar and spacing for medication tab
+- Add Action button to app bar in emotion pallet to add emotions
 
 Future Tasks
 ------------
 1. Save reminders persistence
+2. Change Rating mechanism away from dropdown list.
+
 
 Bug List
 --------

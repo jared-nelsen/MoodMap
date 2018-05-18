@@ -42,9 +42,9 @@ class MedicationListItemState extends State<MedicationListItem> {
     StringBuffer buffer = new StringBuffer();
 
     buffer.write(_medicationName);
-    buffer.write(" ");
+    buffer.write("       ");
     buffer.write(_dosage);
-    buffer.write(" ");
+    buffer.write("       ");
     buffer.write(_startDate);
 
     return buffer.toString();

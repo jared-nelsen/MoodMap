@@ -133,7 +133,6 @@ For some reason pressing the calendar button wont work.
 
 Immediate tasks:
 ----------------
-- Setup title bar and spacing for medication tab
 - Add Action button to app bar in emotion pallet to add emotions
 
 Future Tasks

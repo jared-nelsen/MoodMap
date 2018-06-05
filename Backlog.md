@@ -23,6 +23,10 @@
 4. List tile Dividers
 5. Resize all text and textboxes in application
 
+# Bugs
+
+1. String interpolation in med date picker
+
 # On The Table
 
 1. Correlation Logic to show user trends
@@ -37,3 +41,4 @@
 6. Play Store Submission
 7. LLC
 8. Finance Flow
+

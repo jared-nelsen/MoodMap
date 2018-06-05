@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mood_map/components/ratable_list_item.dart';
 import 'package:mood_map/components/emotion_list_item.dart';
 
+import 'dart:async';
+
 class RateEmotionsView extends StatefulWidget {
 
   Function _navigateToCategories;
@@ -27,6 +29,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
   List<RatableListItem> _ratingEmotions = new List();
   List<EmotionListItem> _palletEmotions = new List();
+
+  final GlobalKey<FormState> _addEmotionFormKey = new GlobalKey<FormState>();
+  String _emotionToAdd = "";
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +87,14 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   Widget _buildEmotionPallet() {
     return new Scaffold(
 
-      appBar: new AppBar(title: new Text("Emotion Pallet"),),
+      appBar: new AppBar(title: new Text("Emotion Pallet"),
+                          actions: <Widget>[
+                            new Padding(
+                              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
+                              child: new RaisedButton(
+                                  onPressed: _addEmotion,
+                                  child: new Text("New Emotion")),)
+                          ],),
 
       body: new ListView(
           children: _palletEmotions
@@ -126,7 +138,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     });
   }
 
-  void _addEmotionToPallet(String emotion) {
+  void _addEmotionToPallet(String emotion, bool pop) {
     final index = _palletEmotions.length;
     final newList = new List<EmotionListItem>.from(_palletEmotions)
       ..add(new EmotionListItem(
@@ -136,6 +148,11 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     setState(() {
       _palletEmotions = newList;
+
+      if(pop){
+        Navigator.pop(context, null);
+      }
+
     });
   }
 
@@ -191,11 +208,106 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     return emotions;
   }
 
+  Future<Null> _addEmotion() async {
+
+    await showDialog(
+
+      context: context,
+
+      child: new Form(
+        key: _addEmotionFormKey,
+        child: new SimpleDialog(
+
+          title: new Text("Add a new emotion"),
+
+          children: <Widget>[
+
+            new Padding(
+
+              padding: const EdgeInsets.all(10.0),
+
+              child: new TextFormField(
+
+                decoration: new InputDecoration(
+
+                    hintText: "Emotion Name",
+
+                    border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
+                        borderSide: new BorderSide(color: Colors.black, width: 1.0)
+                    )
+
+                ),
+
+                autofocus: true,
+
+                validator: (value){
+
+                  _emotionToAdd = value;
+
+                  if(value.isEmpty || value == null) {
+                    return "Please enter a name for the emotion";
+                  }
+
+                },
+              ),
+
+            ),
+
+            new Row(
+
+              children: <Widget>[
+                new Expanded(
+
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+
+                      new FlatButton(
+                          child: new Text("Add", style: new TextStyle(color: Colors.green,),),
+                          onPressed: (){
+                            if(_addEmotionFormKey.currentState.validate()) {
+                              _addEmotionToPallet(_emotionToAdd, true);
+                            }
+                          }
+                      )
+                    ],
+
+                  ),
+
+                ),
+
+                new Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+
+                    new FlatButton(
+
+                        child: new Text("Cancel"),
+
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pop(context, null);
+                          });})
+
+                  ],
+                )
+              ],
+            )
+
+          ],
+
+        ),
+      ),
+
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     _pageController = new PageController();
-    _addEmotionToPallet("First");
+    _addEmotionToPallet("First", false);
   }
 
   @override

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/health/exercise_rate.dart';
+import 'package:mood_map/health/sleep_rate.dart';
+
 class HealthView extends StatefulWidget {
 
   @override
@@ -32,6 +35,8 @@ class HealthViewState extends State<HealthView> with SingleTickerProviderStateMi
 
           children: [
 
+            new SleepView(),
+            new ExerciseView()
 
           ]),
 

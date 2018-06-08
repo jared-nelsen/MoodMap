@@ -4,6 +4,7 @@ import 'manage_view.dart';
 import 'rate_view.dart';
 import 'package:mood_map/journaling/journal_view_shell.dart';
 import 'track_view.dart';
+import 'health_view.dart';
 
 class ApplicationShell extends StatefulWidget {
 
@@ -47,6 +48,9 @@ class ApplicationShellState extends State<ApplicationShell> {
           ///The Emotion Rater
           new RateView(),
 
+          //The Health Rater
+          new HealthView(),
+
           ///The Journaling View
           new JournalView()
 
@@ -62,7 +66,8 @@ class ApplicationShellState extends State<ApplicationShell> {
           items: [
             new BottomNavigationBarItem(icon: new Icon(Icons.apps), title: new Text("Manage")),
             new BottomNavigationBarItem(icon: new Icon(Icons.multiline_chart), title: new Text("Track")),
-            new BottomNavigationBarItem(icon: new Icon(Icons.check_box), title: new Text("Rate")),
+            new BottomNavigationBarItem(icon: new Icon(Icons.check_box), title: new Text("Emotions")),
+            new BottomNavigationBarItem(icon: new Icon(Icons.person_add), title: new Text("Health")),
             new BottomNavigationBarItem(icon: new Icon(Icons.border_color), title: new Text("Journal")),
           ]
       ),

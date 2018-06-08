@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/rating/categories_rate.dart';
-import 'package:mood_map/rating/specifics_rate.dart';
-import 'package:mood_map/rating/emotions_rate.dart';
+import 'package:mood_map/emotions/categories_rate.dart';
+import 'package:mood_map/emotions/specifics_rate.dart';
+import 'package:mood_map/emotions/emotions_rate.dart';
 
 class RateView extends StatefulWidget {
 

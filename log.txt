@@ -145,3 +145,5 @@ Bug List
 --------
 1. Manage Medication Start date not changing on new date selection.
 2. String interpolation in Med date picker
+3. Layout of quality mechanism on Sleep view.
+4. 

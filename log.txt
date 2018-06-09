@@ -133,7 +133,7 @@ For some reason pressing the calendar button wont work.
 
 Immediate tasks:
 ----------------
-- Add Action button to app bar in emotion pallet to add emotions
+-Implement Sleep and Excercise View
 
 Future Tasks
 ------------

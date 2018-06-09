@@ -31,20 +31,7 @@ class SleepViewState extends State<SleepView> {
           child: new Column(
             children: <Widget>[
 
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: <Widget>[
-
-                  new Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
-                      child: new Text("What did your sleep look like last night?", style: new TextStyle(fontSize: 18.0),)
-                  )
-
-                ],
-
-              ),
-
+              _title(),
               _divider(),
               _wentToBed(),
               _whiteSpace(),
@@ -53,7 +40,6 @@ class SleepViewState extends State<SleepView> {
               _wokeUp(),
               _whiteSpace(),
               _quality()
-
 
             ],
           ),
@@ -68,6 +54,22 @@ class SleepViewState extends State<SleepView> {
 
     );
 
+  }
+
+  Widget _title() {
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+
+      children: <Widget>[
+
+        new Padding(
+            padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+            child: new Text("What did your sleep look like last night?", style: new TextStyle(fontSize: 18.0),)
+        )
+
+      ],
+
+    );
   }
 
   Widget _wentToBed() {

@@ -11,11 +11,14 @@ class ExerciseView extends StatefulWidget {
 
 class ExerciseViewState extends State<ExerciseView> {
 
-  List<String> _emotions = new List();
+  String _exercised = 'Yes';
+  var _exercising = ['Yes', 'No'];
 
-  String toAdd = "";
+  String _type = 'Cardio';
+  var _types = ['Cardio', 'Weightlifting'];
 
-  ExerciseViewState();
+  String _duration = '30 minutes';
+  var _durations = ['10 minutes','20 minutes','30 minutes','45 minutes','An hour','More than an hour',];
 
   @override
   Widget build(BuildContext context) {
@@ -24,76 +27,187 @@ class ExerciseViewState extends State<ExerciseView> {
 
       child: new Scaffold(
 
-//        body: new ListView(
-//            children: _emotions.map((String emotion) {
-//              return emotion;
-//            }).toList()
-//        ),
+        body: new Container (
 
-        floatingActionButton: new FloatingActionButton(
-          onPressed: _addCategory,
-          child: new Icon(Icons.add),
+          child: new Column(
+
+            children: <Widget>[
+
+              _title(),
+              _divider(),
+              _didExercise(),
+              _whiteSpace(),
+              _whatType(),
+              _whiteSpace(),
+              _howLong()
+
+            ],
+
+          ),
         ),
 
-      ),
+        persistentFooterButtons: <Widget>[
+          new FlatButton(onPressed: null, child: new Text("Rate it"))
+        ],
+        ),
 
+      );
+
+  }
+
+  Widget _title() {
+
+    return new Row(
+
+      mainAxisAlignment: MainAxisAlignment.center,
+
+      children: <Widget>[
+
+        new Padding(
+            padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+            child: new Text("What did your excercise look like today?", style: new TextStyle(fontSize: 18.0),)
+        )
+
+      ],
+
+    );
+  }
+
+  Widget _didExercise() {
+
+    return new Row(
+
+      children: <Widget>[
+
+        new Expanded(
+          child: new Padding(
+            padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+            child: new Text("Did you exercise today?", style: new TextStyle(fontSize: 18.0),),),
+        ),
+
+        new Column (
+          children: <Widget>[
+
+            new Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                child: new DropdownButton<String>(
+
+                  items: _exercising.map((String rating) {
+                    return new DropdownMenuItem<String>(value: rating, child: new Text(rating));}).toList(),
+
+                  value: _exercised,
+
+                  onChanged: (String value) {
+                    setState(() {
+                      _exercised = value;
+                    });
+                  },
+
+                )
+            ),
+
+          ],
+        )
+
+      ],
     );
 
   }
 
-  Future<Null> _addCategory() async {
-    await showDialog(
-        context: context,
-        child: new SimpleDialog(
-          title: new Text("Add a category"),
+  Widget _whatType() {
+
+    return new Row(
+
+      children: <Widget>[
+
+        new Expanded(
+          child: new Padding(
+            padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+            child: new Text("What type of exercise was it?", style: new TextStyle(fontSize: 18.0),),),
+        ),
+
+        new Column (
           children: <Widget>[
+
             new Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: new TextField(
-                decoration: new InputDecoration(
-                    hintText: "Add a new category",
-                    border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
-                        borderSide: new BorderSide(color: Colors.black, width: 1.0)
-                    )
-                ),
-                autofocus: true,
-                maxLengthEnforced: true,
-                onChanged: (String text) {toAdd = text;},
-              ),),
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      new FlatButton(
-                          child: new Text("Add", style: new TextStyle(color: Colors.green,),),
-                          onPressed: () {
-//                            if(toAdd.isNotEmpty) {
-//                              setState(() {
-//                                _emotions.add(new NavigableListItem(toAdd, _navigateToSpecifics));
-//                                Navigator.pop(context, null);
-//                              });}
-                          }
-                      )],
-                  ),
-                ),
-                new Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    new FlatButton(
-                        child: new Text("Cancel"),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pop(context, null);
-                          });})
-                  ],
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                child: new DropdownButton<String>(
+
+                  items: _types.map((String rating) {
+                    return new DropdownMenuItem<String>(value: rating, child: new Text(rating));}).toList(),
+
+                  value: _type,
+
+                  onChanged: (String value) {
+                    setState(() {
+                      _type = value;
+                    });
+                  },
+
                 )
-              ],
-            )
+            ),
+
           ],
         )
+
+      ],
+    );
+
+  }
+
+  Widget _howLong() {
+
+    return new Row(
+
+      children: <Widget>[
+
+        new Expanded(
+          child: new Padding(
+            padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+            child: new Text("How long did you exercise?", style: new TextStyle(fontSize: 18.0),),),
+        ),
+
+        new Column (
+          children: <Widget>[
+
+            new Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                child: new DropdownButton<String>(
+
+                  items: _durations.map((String rating) {
+                    return new DropdownMenuItem<String>(value: rating, child: new Text(rating));}).toList(),
+
+                  value: _duration,
+
+                  onChanged: (String value) {
+                    setState(() {
+                      _duration = value;
+                    });
+                  },
+
+                )
+            ),
+
+          ],
+        )
+
+      ],
+    );
+
+  }
+
+  Widget _divider() {
+    return new Divider(
+      color: Colors.black,
+      height: 18.0,
+      indent: 0.0,
+    );
+  }
+
+  Widget _whiteSpace() {
+    return new Divider(
+      color: Colors.white,
+      height: 15.0,
     );
   }
 

@@ -128,12 +128,33 @@ Working on add item popup for Rating workflow. Have a prototype.
 Erroring out for some reason on adding Medication button
 
 
-For some reason pressing the calendar button wont work. 
+For some reason pressing the calendar button wont work.
 
+Progress Report
+---------------
+At this point, I am wrapping up the UI development. Of course, there will be things
+left over like themeing and colors but those can wait until a finalization phase.
+There remain several open areas of work that need to be addressed. The first and
+largest area is that of backend development. I am certain now that firestore is the
+proper solution and have created a No SQL data dictionary as proof and point. The
+bulk of the work is in the learning hurdle of understanding how to integrate it into
+the app. The rest is execution and from what I have seen I believe that I am set up
+to succeed here even if the implementation takes a lot of time on task. A second area
+is a critical piece of the app: notifications. From my observations, it seems that I
+will have to rely on third party plugins, which is an area of great concern. This is
+one of the critical areas that I have explored the least in. Thirdly, the other critical
+value proposition is that of charts and graphs in the Tracking area. I have identified
+the libraries I will be using so there is some confidence there. This will be a rather
+large undertaking, however, seeing as I have none of the UI done. It strikes me that
+it may behoove me to do the UI first and the rest will follow. Something else to keep
+in mind is the large amount of mock data I will have to wrangle for testing and building.
+Next comes authentication and login. In my minds eye, it would be the right decision to
+have an actualy login page. Firebase provides an authentication API but I dont know that
+much about it. I saw a tutorial on how to create a login page so it seems that there is
+precedent. This is all I can think of for now but there is definitely more.
 
 Immediate tasks:
 ----------------
--Implement Sleep and Excercise View
 
 Future Tasks
 ------------
@@ -147,3 +168,66 @@ Bug List
 2. String interpolation in Med date picker
 3. Layout of quality mechanism on Sleep view.
 4. 
+
+
+Data Dictionary
+---------------
+
+Collection: Reminders Settings
+
+            reminding emotions : boolean : true
+            emotion interval : string : Daily
+            emotion starting : string : 9:30 AM
+
+            reminding sleep : boolean : true
+            sleep remind time : string : 9:30 AM
+            
+            reminding exercise : boolean : true
+            exercise remind time : string : 9:30 PM
+
+Collection: Medications
+
+            Collection: Medications
+
+                        name: string: : ""
+                        dosage: string : ""
+                        start date : string : ""
+
+Collection: Emotions
+
+            emotion name: string : ""
+
+Collection: Emotion Ratings
+
+            Collection: Categories
+
+                        Collection: Specifics
+
+                                    Collection: Emotions
+
+                                                emotion name: string : ""
+                                                rating: int : 0
+
+Collection: Sleep Ratings
+
+            date : string : todays date
+            to bed : string : 9:30 PM
+            to sleep : string : 9:30 PM
+            woke up : string 7:30 AM
+            quality : int : 10
+
+Collection: Exercise Ratings
+
+            date : string : todays date
+            did exercise : boolean : No
+            type : string : cardio
+            duration : string : 30 Minutes
+
+Collection: Journal Entries
+
+            date : string : todays date
+            circumstances : string : ""
+            description : string : ""
+            external happenings : string : ""
+            internal happenings : string : ""
+            reflections : string : ""

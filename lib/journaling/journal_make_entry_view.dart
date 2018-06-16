@@ -22,7 +22,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
   @override
   Widget build(BuildContext context) {
-
+    return null;
   }
 
   @override

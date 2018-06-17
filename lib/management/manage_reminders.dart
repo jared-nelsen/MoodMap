@@ -43,6 +43,11 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
        ),
       ),
 
+      persistentFooterButtons: <Widget>[
+        new FlatButton(
+            onPressed: null,
+            child: new Text("Save"))
+      ],
     );
 
   }

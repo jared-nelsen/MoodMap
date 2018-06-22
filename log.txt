@@ -261,3 +261,9 @@ every time I switch screens my data disappears.
 Finally, another major piece is notifications. I have a native plugin that I
 know should work for this and have cursorily investigated it. I just havent
 gotten that far with it. 
+
+Some remaining miscelaneous items include
+-----------------------------------------
+Login/Logout
+User management
+Themes and colors

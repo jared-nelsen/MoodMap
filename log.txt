@@ -155,7 +155,7 @@ precedent. This is all I can think of for now but there is definitely more.
 
 Immediate tasks:
 ----------------
-1. Get something in the database from the application.
+
 
 Future Tasks
 ------------
@@ -232,3 +232,32 @@ Collection: Journal Entries
             external happenings : string : ""
             internal happenings : string : ""
             reflections : string : ""
+
+-----------------------------------------------------------------------------------
+
+Where I Left Off
+----------------
+At this point, most all of the UI is mocked out. The remaining areas of UI development
+are in the tracking screen and the Journaling screen. The Journaling screen is being 
+held up by a bug out there in the world that I cant help at the moment, although I 
+cant say I have put that much effort or thought into a workaround. The Tracking
+screen is being held up by the simple fact that I have no data to work with. The 
+thought process was that if I took care of the database first, then I could set up
+the tracking screen using test data therein. Even though implementing the Tracking
+screen will likely need to be approached from both the UI and the backend at the
+same time, I still think fleshing out the database part of it before I get too
+far in is a good policy.
+
+I left off after just having learned how to store data in the database with my 
+proof of concept in the reminder setting screen. This was a major accomplishment.
+I havent learned how to get the data from the database yet but I seem to have
+finally found the right documentation for how to do so. I've book marked it 
+my browser.
+
+One major missing piece of knowledge that still needs to be investigated as
+far as the actual usage of the app goes is how to store state. It seems that
+every time I switch screens my data disappears.
+
+Finally, another major piece is notifications. I have a native plugin that I
+know should work for this and have cursorily investigated it. I just havent
+gotten that far with it. 

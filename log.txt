@@ -155,6 +155,7 @@ precedent. This is all I can think of for now but there is definitely more.
 
 Immediate tasks:
 ----------------
+1. Get something in the database from the application.
 
 Future Tasks
 ------------

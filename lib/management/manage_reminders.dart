@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
+
+import 'package:mood_map/common/reminder_settings.dart';
+
 class ManageRemindersView extends StatefulWidget {
 
   @override
@@ -13,9 +17,9 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
   var _interval = ["Daily", "Hourly", "Every 30 Minutes", "Every 15 Minutes"];
   String _intervalValue = "Daily";
 
-  bool _remindingEmotions;
-  bool _remindingSleep;
-  bool _remindingExercise;
+  bool _remindingEmotions = true;
+  bool _remindingSleep = true;
+  bool _remindingExercise = true;
 
   String _emotionsTime = _formatTime(new TimeOfDay(hour: 9, minute: 30));
   String _sleepTime = _formatTime(new TimeOfDay(hour: 9, minute: 30));
@@ -45,7 +49,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
       persistentFooterButtons: <Widget>[
         new FlatButton(
-            onPressed: null,
+            onPressed: _saveSettings,
             child: new Text("Save"))
       ],
     );
@@ -272,6 +276,16 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
         _sleepTime = _formatTime(picked);
       });
     }
+
+  }
+
+  void _saveSettings() {
+    var ref = FirebaseDatabase.instance.reference().child('reminder_settings');
+
+    ReminderSettings settings = new ReminderSettings(_remindingEmotions, _intervalValue,
+        _emotionsTime, _remindingSleep, _sleepTime, _remindingExercise, _exerciseTime);
+
+    ref.set(settings.toJson());
 
   }
 

@@ -2,6 +2,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
+
+import 'package:mood_map/common/sleep_rating.dart';
+
 class SleepView extends StatefulWidget {
 
   @override
@@ -47,7 +51,7 @@ class SleepViewState extends State<SleepView> {
         ),
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: null, child: new Text("Rate it"))
+          new FlatButton(onPressed: _saveEntry, child: new Text("Rate it"))
         ],
 
       ),
@@ -233,6 +237,14 @@ class SleepViewState extends State<SleepView> {
       });
     }
 
+  }
+
+  void _saveEntry() {
+    var ref = FirebaseDatabase.instance.reference().child("sleep_entries").push();
+
+    SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
+
+    ref.set(settings.toJson());
   }
 
   Widget _divider() {

@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
+
+import 'package:mood_map/common/exercise_rating.dart';
 
 class ExerciseView extends StatefulWidget {
 
@@ -47,7 +50,7 @@ class ExerciseViewState extends State<ExerciseView> {
         ),
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: null, child: new Text("Rate it"))
+          new FlatButton(onPressed: _saveEntry, child: new Text("Rate it"))
         ],
         ),
 
@@ -194,6 +197,14 @@ class ExerciseViewState extends State<ExerciseView> {
       ],
     );
 
+  }
+
+  void _saveEntry() {
+    var ref = FirebaseDatabase.instance.reference().child("exercise_entries").push();
+
+    ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
+
+    ref.set(rating.toJson());
   }
 
   Widget _divider() {

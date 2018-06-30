@@ -292,3 +292,4 @@ Polish
 Bugs
 ----
 -String interpolation in med date picker
+-Notify user of saved settings in Reminder Section

@@ -267,3 +267,28 @@ Some remaining miscelaneous items include
 Login/Logout
 User management
 Themes and colors
+
+
+Docket
+------------------------------------------------------------------------------
+
+Backlog
+-------
+-Tracking Section
+-Journaling Section
+-Notifications
+-User Management
+-Login/Logout
+
+Polish
+------
+-Long press to remove items in Rating workflow
+-Grey out notification Settings with On/Off Switch
+-Change Rating mechanism in Emotion rating list items to something better
+-List tile dividers
+-General formatting: Text Sizing, Placement
+-Colors
+
+Bugs
+----
+-String interpolation in med date picker

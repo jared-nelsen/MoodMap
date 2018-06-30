@@ -87,7 +87,11 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
                   child: new Text("Emotion Reminders", style: new TextStyle(fontSize: 22.0),),
                 ),),
             new Column(children: <Widget>[
-              new Switch(value: true, onChanged: (bool on) { _remindingEmotions = on; })
+              new Switch(value: _remindingEmotions, onChanged: (bool on) {
+                setState(() {
+                  _remindingEmotions = on;
+                });
+              })
             ],)
           ],
         ),
@@ -164,7 +168,11 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
                 child: new Text("Sleep Reminders", style: new TextStyle(fontSize: 22.0),),
               ),),
             new Column(children: <Widget>[
-              new Switch(value: true, onChanged: (bool on) { _remindingSleep = on; })
+              new Switch(value: _remindingSleep, onChanged: (bool on) {
+                setState(() {
+                  _remindingSleep = on;
+                });
+              })
             ],)
           ],
         ),
@@ -210,7 +218,11 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
                 child: new Text("Exercise Reminders", style: new TextStyle(fontSize: 22.0),),
               ),),
             new Column(children: <Widget>[
-              new Switch(value: true, onChanged: (bool on) { _remindingExercise = on; })
+              new Switch(value: _remindingExercise, onChanged: (bool on) {
+                setState(() {
+                  _remindingExercise = on;
+                });
+              })
             ],)
           ],
         ),

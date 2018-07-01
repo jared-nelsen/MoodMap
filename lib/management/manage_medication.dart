@@ -282,7 +282,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                           }
 
                           //Remove from the database
-                          MedicationListItem medication = _medications.elementAt(index);s
+                          MedicationListItem medication = _medications.elementAt(index);
                           FirebaseDatabase.instance.reference().child("medications").child(medication.dbKey).remove();
 
                           _medications.removeAt(index);

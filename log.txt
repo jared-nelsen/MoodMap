@@ -280,9 +280,6 @@ Backlog
 -User Management
 -Login/Logout
 
--Reminders load from database on init
-
--Medication List saving and state keeping
 -Emotion workflow database saving
 
 Polish
@@ -299,3 +296,7 @@ Bugs
 -String interpolation in med date picker
 -Notify user of saved settings in Reminder Section, Sleep Section, and Exercise
  section - Look at snackbars again
+
+Infrastucture
+-------------
+Firebase analytics

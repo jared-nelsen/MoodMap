@@ -12,12 +12,12 @@ class ReminderSettings {
   bool remindingSleep;
   String sleepRemindTime;
 
-  bool remindExercise;
+  bool remindingExercise;
   String exerciseRemindTime;
 
   ReminderSettings(this.remindingEmotions, this.emotionInterval,
       this.emotionStarting, this.remindingSleep, this.sleepRemindTime,
-      this.remindExercise, this.exerciseRemindTime);
+      this.remindingExercise, this.exerciseRemindTime);
 
   ReminderSettings.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,
@@ -26,7 +26,7 @@ class ReminderSettings {
       emotionStarting = snapshot.value['emotion_starting'],
       remindingSleep = snapshot.value['reminding_sleep'],
       sleepRemindTime = snapshot.value['sleep_remind_time'],
-      remindExercise = snapshot.value['reminding_exercise'],
+      remindingExercise = snapshot.value['reminding_exercise'],
       exerciseRemindTime = snapshot.value['exercise_remind_time'];
 
   toJson() {
@@ -36,7 +36,7 @@ class ReminderSettings {
      "emotion_starting": emotionStarting,
      "reminding_sleep": remindingSleep,
      "sleep_remind_time": sleepRemindTime,
-     "reminding_exercise": remindExercise,
+     "reminding_exercise": remindingExercise,
      "exercise_remind_time": exerciseRemindTime
    };
   }

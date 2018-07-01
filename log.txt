@@ -280,9 +280,10 @@ Backlog
 -User Management
 -Login/Logout
 
+-Reminders load from database on init
+
 -Medication List saving and state keeping
 -Emotion workflow database saving
--Medication deletion needs confirm dialog
 
 Polish
 ------

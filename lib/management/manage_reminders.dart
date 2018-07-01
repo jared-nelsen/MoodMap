@@ -292,12 +292,37 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
   }
 
   void _saveSettings() {
+
     var ref = FirebaseDatabase.instance.reference().child('reminder_settings');
 
     ReminderSettings settings = new ReminderSettings(_remindingEmotions, _intervalValue,
         _emotionsTime, _remindingSleep, _sleepTime, _remindingExercise, _exerciseTime);
 
     ref.set(settings.toJson());
+
+  }
+
+  void _loadSettings() {
+
+    FirebaseDatabase.instance.reference().child("reminder_settings").once().then((DataSnapshot snapshot){
+
+      ReminderSettings settings = ReminderSettings.fromSnapshot(snapshot);
+
+      setState(() {
+
+        _intervalValue = settings.emotionInterval;
+
+        _remindingEmotions = settings.remindingEmotions;
+        _remindingSleep = settings.remindingSleep;
+        _remindingExercise = settings.remindingExercise;
+
+        _emotionsTime = settings.emotionStarting;
+        _sleepTime = settings.sleepRemindTime;
+        _exerciseTime = settings.exerciseRemindTime;
+
+      });
+
+    });
 
   }
 
@@ -322,7 +347,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
   void initState() {
     super.initState();
 
-    //This is where I will be pulling down the data from the database intitially.
+    _loadSettings();
   }
 
   @override

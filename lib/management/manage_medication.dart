@@ -271,8 +271,6 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                       child: const Text("Yes"),
                       onPressed: (){
 
-                        //Make server call to remove medication here
-
                         setState(() {
                           int index = 0;
                           for(int i = 0; i < _medications.length; i++) {
@@ -282,6 +280,10 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                               break;
                             }
                           }
+
+                          //Remove from the database
+                          MedicationListItem medication = _medications.elementAt(index);s
+                          FirebaseDatabase.instance.reference().child("medications").child(medication.dbKey).remove();
 
                           _medications.removeAt(index);
                         });

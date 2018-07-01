@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 class MedicationListItem extends StatefulWidget {
 
+  String dbKey;
+
   String _medicationName;
   String _dosage;
   String _startDate;
   Function _removeCallback;
 
-  MedicationListItem(this._medicationName, this._dosage, this._startDate, this._removeCallback);
+  MedicationListItem(this.dbKey, this._medicationName, this._dosage, this._startDate, this._removeCallback);
 
   @override
   State<StatefulWidget> createState() => new MedicationListItemState(this._medicationName, this._dosage, this._startDate, this._removeCallback);

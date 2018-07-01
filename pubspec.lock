@@ -36,20 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  charts_common:
-    dependency: transitive
-    description:
-      name: charts_common
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
-  charts_flutter:
-    dependency: "direct main"
-    description:
-      name: charts_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   collection:
     dependency: transitive
     description:
@@ -85,34 +71,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  firebase_analytics:
-    dependency: "direct main"
+  firebase_core:
+    dependency: transitive
     description:
-      name: firebase_analytics
+      name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
-  firebase_auth:
-    dependency: "direct main"
-    description:
-      name: firebase_auth
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
+    version: "0.2.4"
   firebase_database:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: firebase_database
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
-  firebase_storage:
-    dependency: "direct main"
-    description:
-      name: firebase_storage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.5"
+    version: "1.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -138,12 +110,12 @@ packages:
     source: hosted
     version: "1.1.5"
   google_sign_in:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "3.0.2"
   html:
     dependency: transitive
     description:
@@ -172,20 +144,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.2"
-  image_picker:
-    dependency: "direct main"
-    description:
-      name: image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.15.6"
   io:
     dependency: transitive
     description:
@@ -207,13 +165,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0-alpha.12"
-  local_notifications:
-    dependency: "direct main"
-    description:
-      name: local_notifications
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.7"
   logging:
     dependency: transitive
     description:
@@ -438,3 +389,4 @@ packages:
     version: "2.1.13"
 sdks:
   dart: ">=2.0.0-dev.52.0 <=2.0.0-dev.58.0.flutter-f981f09760"
+  flutter: ">=0.1.4 <2.0.0"

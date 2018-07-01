@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:mood_map/components/medication_list_item.dart';
+import 'package:mood_map/common/medication.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class ManageMedicationView extends StatefulWidget {
 
@@ -13,6 +16,8 @@ class ManageMedicationView extends StatefulWidget {
 
 class ManageMedicationViewState extends State<ManageMedicationView> {
 
+  final firebaseRef = FirebaseDatabase.instance.reference().child("medications");
+
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   List<MedicationListItem> _medications = new List();
@@ -20,6 +25,10 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
   String _medicationToAdd;
   String _dosageToAdd;
   String _dateStartedToAdd = _formatDate(new DateTime.now());
+
+  ManageMedicationViewState() {
+    firebaseRef.onChildAdded.listen(_addMedicationToList);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,10 +181,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                             child: new Text("Add", style: new TextStyle(color: Colors.green,),),
                             onPressed: () {
                               if(_formKey.currentState.validate()) {
-                                setState(() {
-                                  _medications.add(new MedicationListItem(_medicationToAdd, _dosageToAdd, _dateStartedToAdd, _removeMedication));
-                                  Navigator.pop(context, null);
-                                });
+                                _addMedicationToDatabase(_medicationToAdd, _dosageToAdd, _dateStartedToAdd);
                               }
                             }
                         )
@@ -209,6 +215,42 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
         ),
 
     );
+  }
+
+  void _addMedicationToDatabase(String name, String dosage, String startDate) {
+
+    setState(() {
+
+      Medication medication = new Medication(name, dosage, startDate);
+
+      var ref = FirebaseDatabase.instance.reference().child("medications").push();
+
+      ref.set(medication.toJson());
+
+      Navigator.pop(context, null);
+    });
+
+  }
+
+  void _addMedicationToList(Event event) {
+
+    setState(() {
+
+      Medication newMedication = Medication.fromSnapshot(event.snapshot);
+
+      bool alreadyThere = false;
+      for(var medication in _medications) {
+        if(medication.dbKey == newMedication.key) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere){
+        _medications.add(new MedicationListItem(newMedication.key, newMedication.medicationName, newMedication.dosage, newMedication.startDate, _removeMedication));
+      }
+
+    });
   }
 
   void _removeMedication(String medicationName) async {

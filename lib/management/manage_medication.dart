@@ -211,20 +211,57 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
     );
   }
 
-  void _removeMedication(String medicationName) {
+  void _removeMedication(String medicationName) async {
 
-    setState(() {
-      int index = 0;
-      for(int i = 0; i < _medications.length; i++) {
-        MedicationListItem item = _medications.elementAt(i);
-        if(medicationName == item.getName()) {
-          index = i;
-          break;
-        }
+    await showDialog(context: context,
+      builder: (BuildContext context) {
+
+        return new SimpleDialog(
+          title: new Text("Are you sure you would like to remove this medication?"),
+          children: <Widget>[
+
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    new SimpleDialogOption(
+                      child: const Text("Yes"),
+                      onPressed: (){
+
+                        //Make server call to remove medication here
+
+                        setState(() {
+                          int index = 0;
+                          for(int i = 0; i < _medications.length; i++) {
+                            MedicationListItem item = _medications.elementAt(i);
+                            if(medicationName == item.getName()) {
+                              index = i;
+                              break;
+                            }
+                          }
+
+                          _medications.removeAt(index);
+                        });
+
+                        Navigator.pop(context);
+                      },
+                    ),
+                    new SimpleDialogOption(
+                      child: const Text("No"),
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                    )
+                  ],
+                )
+              ],
+            )
+
+          ],
+        );
       }
-
-      _medications.removeAt(index);
-    });
+    );
 
   }
 

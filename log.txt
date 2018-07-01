@@ -280,6 +280,10 @@ Backlog
 -User Management
 -Login/Logout
 
+-Medication List saving and state keeping
+-Emotion workflow database saving
+-Medication deletion needs confirm dialog
+
 Polish
 ------
 -Long press to remove items in Rating workflow
@@ -292,4 +296,5 @@ Polish
 Bugs
 ----
 -String interpolation in med date picker
--Notify user of saved settings in Reminder Section
+-Notify user of saved settings in Reminder Section, Sleep Section, and Exercise
+ section - Look at snackbars again

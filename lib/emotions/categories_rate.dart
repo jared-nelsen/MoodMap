@@ -2,7 +2,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:mood_map/common/navigable_item.dart';
 import 'package:mood_map/components/navigable_list_item.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class RateCategoriesView extends StatefulWidget {
 
@@ -17,13 +20,19 @@ class RateCategoriesView extends StatefulWidget {
 
 class RateCategoriesViewState extends State<RateCategoriesView> {
 
+  final firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories");
+
   Function _navigateToSpecifics;
 
   List<NavigableListItem> _emotions = new List();
 
-  String toAdd = "";
+  String _toAdd = "";
 
-  RateCategoriesViewState(this._navigateToSpecifics);
+  RateCategoriesViewState(_navigateToSpecifics){
+    this._navigateToSpecifics = _navigateToSpecifics;
+
+    firebase.onChildAdded.listen(_retrieveFromDatabase);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +61,11 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
   }
 
   Future<Null> _addCategory() async {
+
     await showDialog(
+
       context: context,
+
       child: new SimpleDialog(
         title: new Text("Add a category"),
         children: <Widget>[
@@ -69,8 +81,9 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
                 ),
                 autofocus: true,
                 maxLengthEnforced: true,
-                onChanged: (String text) {toAdd = text;},
+                onChanged: (String text) {_toAdd = text;},
               ),),
+
           new Row(
             children: <Widget>[
               new Expanded(
@@ -79,13 +92,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
                   children: <Widget>[
                     new FlatButton(
                         child: new Text("Add", style: new TextStyle(color: Colors.green,),),
-                        onPressed: () {
-                          if(toAdd.isNotEmpty) {
-                            setState(() {
-                              _emotions.add(new NavigableListItem(toAdd, _navigateToSpecifics));
-                              Navigator.pop(context, null);
-                            });}
-                          }
+                        onPressed: _addToDatabase
                     )],
                 ),
               ),
@@ -102,9 +109,48 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
               )
             ],
           )
+
         ],
       )
     );
+
+  }
+
+  void _addToDatabase() {
+
+    setState(() {
+
+      var ref = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories").push();
+
+      CategoryItem item = new CategoryItem(_toAdd);
+
+      ref.set(item.toJson());
+
+      Navigator.pop(context, null);
+    });
+
+  }
+
+  void _retrieveFromDatabase(Event event) {
+
+    setState(() {
+
+      CategoryItem item = CategoryItem.fromSnapshot(event.snapshot);
+
+      bool alreadyThere = false;
+      for(var listItem in _emotions) {
+        if(listItem.dbKey == item.key) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere) {
+        _emotions.add(new NavigableListItem(item.key, _toAdd, _navigateToSpecifics));
+      }
+
+    });
+
   }
 
   @override

@@ -282,6 +282,14 @@ Backlog
 
 -Emotion workflow database saving
 
+-Form validation for adding in emotion workflow
+
+-Journal View
+         -Solution to scrolling issue is here:
+                   https://www.didierboelens.com/2018/04/hint-4-ensure-a-textfield-or-textformfield-is-visible-in-the-viewport-when-has-the-focus/
+
+
+
 Polish
 ------
 -Long press to remove items in Rating workflow

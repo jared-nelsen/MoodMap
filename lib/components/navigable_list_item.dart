@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class NavigableListItem extends StatefulWidget {
 
+  String dbKey;
+
   String _title;
   Function _navigationFunction;
 
-  NavigableListItem(this._title, this._navigationFunction);
+  NavigableListItem(this.dbKey, this._title, this._navigationFunction);
 
   @override
   State<StatefulWidget> createState() => new NavigableListItemState(this._title, this._navigationFunction);

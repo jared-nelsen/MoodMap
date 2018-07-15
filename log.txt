@@ -281,7 +281,7 @@ Backlog
 -Login/Logout
 
 -Emotion workflow database saving
-
+-Emotion pallete saving
 -Form validation for adding in emotion workflow
 
 -Journal View
@@ -308,3 +308,21 @@ Bugs
 Infrastucture
 -------------
 Firebase analytics
+
+
+
+Here is how you are going to do this.
+
+1. Create object that holds a string for category, specifics, and emotions (not sure about rating yet).
+   and store it in RateView.
+2. Pass a reference to it into each of the three member views.
+3. Set the state accordingly whenever the navigations happen. Somehow.
+4. See how to nest the data accordingly in the database.
+
+The loading of pages should be kept along with the context. The context should show how to load
+each of the pages using stored values for each level.
+
+
+First pass at emotion context failed. I need to pay attention to what functions I pass into
+each navigable list item. Perhaps I should split the navigable list item into three items
+each for categories, specifics, and rating?

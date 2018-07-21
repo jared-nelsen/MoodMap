@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:mood_map/common/navigable_item.dart';
+import 'package:mood_map/common/category.dart';
 import 'package:mood_map/components/navigable_list_item.dart';
 
 import 'package:firebase_database/firebase_database.dart';

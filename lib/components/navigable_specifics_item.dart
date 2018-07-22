@@ -30,7 +30,7 @@ class NavigableSpecificsItemState extends State<NavigableSpecificsItem> {
     return new ListTile(
       title: new Text(_specific, style: new TextStyle(fontSize: 16.0),),
       trailing: new FlatButton(
-          onPressed: (){ _emotionContext.setAndNavigateSpecific(_specific)},
+          onPressed: (){ _emotionContext.setAndNavigateSpecific(_specific); },
           child: new Icon(Icons.arrow_forward)),
     );
   }

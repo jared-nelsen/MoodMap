@@ -5,18 +5,22 @@ class CategoryItem {
 
   String key;
 
-  String category;
+  String _category;
 
-  CategoryItem(this.category);
+  CategoryItem(this._category);
 
   CategoryItem.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,
-      category = snapshot.value["category"];
+      _category = snapshot.value["category"];
 
   toJson() {
     return {
-      "category" : category,
+      "category" : _category,
     };
+  }
+
+  String getCategory() {
+    return _category;
   }
 
 }

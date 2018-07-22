@@ -5,7 +5,9 @@ import 'package:firebase_database/firebase_database.dart';
 
 class EmotionContext {
 
-  final String _record = "emotion_rating";
+  final String _baseRecords = "emotion_ratings";
+  final String _categoryRecords = "categories";
+  final String _specificsRecords = "specifics";
 
   String _category;
   String _specific;
@@ -13,7 +15,15 @@ class EmotionContext {
   Function navigateSpecifics;
   Function navigateEmotions;
 
-  EmotionContext();
+  EmotionContext(this.navigateSpecifics, this.navigateEmotions);
+
+  String getCategory() {
+    return _category;
+  }
+
+  String getSpecifics() {
+    return _specific;
+  }
 
   void setAndNavigateCategory(String category) {
     _category = category;
@@ -31,7 +41,12 @@ class EmotionContext {
       return;
     }
 
-    var db = FirebaseDatabase.instance.reference().child(_record).child(_category).child(_specific);
+    var db = FirebaseDatabase.instance.reference()
+        .child(_baseRecords)
+        .child(_categoryRecords)
+        .child(_category)
+        .child(_specificsRecords)
+        .child(_specific);
 
     for(RatableListItem emotion in emotions) {
 

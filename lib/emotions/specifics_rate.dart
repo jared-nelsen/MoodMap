@@ -2,30 +2,43 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:mood_map/components/navigable_list_item.dart';
+import 'package:mood_map/common/specific.dart';
+import 'package:mood_map/components/navigable_specifics_item.dart';
+
+import 'package:mood_map/components/emotion_context.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class RateSpecificsView extends StatefulWidget {
 
-  Function _navigateToCategories;
-  Function _navigateToEmotions;
+  EmotionContext _emotionContext;
 
-  RateSpecificsView(this._navigateToCategories, this._navigateToEmotions);
+  RateSpecificsView(this._emotionContext);
 
   @override
-  State<StatefulWidget> createState() => new RateSpecificsViewState(this._navigateToCategories, this._navigateToEmotions);
+  State<StatefulWidget> createState() => new RateSpecificsViewState(this._emotionContext);
 
 }
 
 class RateSpecificsViewState extends State<RateSpecificsView> {
 
-  Function _navigateToCategories;
-  Function _navigateToEmotions;
+  DatabaseReference firebase;
 
-  List<NavigableListItem> _specifics = new List();
+  EmotionContext _emotionContext;
 
-  String toAdd;
+  List<NavigableSpecificsItem> _specifics = new List();
 
-  RateSpecificsViewState(this._navigateToCategories, this._navigateToEmotions);
+  String _toAdd = "";
+
+  RateSpecificsViewState(EmotionContext context) {
+    this._emotionContext = context;
+
+    //Set the category to retrieve these specifics
+    firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories").child(_emotionContext.getCategory());
+
+    //Listen to changes from the database
+    firebase.onChildAdded.listen(_retrieveFromDatabase);
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +48,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
         appBar: new AppBar(title: new Text("More specifically"),),
 
         body: new ListView(
-            children: _specifics.map((NavigableListItem specific) {
+            children: _specifics.map((NavigableSpecificsItem specific) {
               return specific;
             }).toList()
         ),
@@ -47,7 +60,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
         ),
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: _navigateToCategories, child: new Text("Back"))
+          new FlatButton(onPressed: (){ _emotionContext.setAndNavigateCategory(null); }, child: new Text("Back"))
         ],
 
       ),
@@ -72,7 +85,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
                 ),
                 autofocus: true,
                 maxLengthEnforced: true,
-                onChanged: (String text) {toAdd = text;},
+                onChanged: (String text) {_toAdd = text;},
               ),),
             new Row(
               children: <Widget>[
@@ -82,13 +95,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
                     children: <Widget>[
                       new FlatButton(
                           child: new Text("Add", style: new TextStyle(color: Colors.green,),),
-                          onPressed: () {
-                            if(toAdd.isNotEmpty) {
-                              setState(() {
-                               // _specifics.add(new NavigableListItem(toAdd, _navigateToEmotions));
-                                Navigator.pop(context, null);
-                              });}
-                          }
+                          onPressed: _addToDatabase
                       )],
                   ),
                 ),
@@ -108,6 +115,47 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
           ],
         )
     );
+  }
+
+  void _addToDatabase() {
+
+    setState(() {
+
+      var ref = FirebaseDatabase.instance.reference()
+          .child("emotion_ratings")
+          .child("categories")
+          .child(_emotionContext.getCategory())
+          .child("specifics").push();
+
+      SpecificsItem item = new SpecificsItem(_toAdd);
+
+      ref.set(item.toJson());
+
+      Navigator.pop(context, null);
+    });
+
+  }
+
+  void _retrieveFromDatabase(Event event) {
+
+    setState(() {
+
+      SpecificsItem item = SpecificsItem.fromSnapshot(event.snapshot);
+
+      bool alreadyThere = false;
+      for(var listItem in _specifics) {
+        if(listItem.dbKey == item.key) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere) {
+        _specifics.add(new NavigableSpecificsItem(item.key, item.getSpecific(), _emotionContext));
+      }
+
+    });
+
   }
 
   @override

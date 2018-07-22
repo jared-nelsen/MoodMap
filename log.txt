@@ -326,3 +326,14 @@ each of the pages using stored values for each level.
 First pass at emotion context failed. I need to pay attention to what functions I pass into
 each navigable list item. Perhaps I should split the navigable list item into three items
 each for categories, specifics, and rating?
+
+You had to break down the rating away from the emotion item because they are unique in the
+database. You should create a navigable list item for each Category and Specifics and
+figure out how to do a callback to the navigation function but set the Category or specific
+before. Try setting it and calling Funtion.apply();. Pass a reference to the emotion context
+into each Navigable item.
+
+Made a lot of good headway.
+
+Next you need to make specifics rate act like category rate with listening for changes in the
+datebase in the constructor and such. Next is to continue with the emotion level construction.

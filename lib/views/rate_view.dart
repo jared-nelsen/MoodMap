@@ -4,6 +4,8 @@ import 'package:mood_map/emotions/categories_rate.dart';
 import 'package:mood_map/emotions/specifics_rate.dart';
 import 'package:mood_map/emotions/emotions_rate.dart';
 
+import 'package:mood_map/components/emotion_context.dart';
+
 class RateView extends StatefulWidget {
 
   @override
@@ -13,7 +15,10 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  PageController _pageController;
+  static EmotionContext _emotionContext = new EmotionContext(animateToSpecifics, animateToEmotions);
+
+  static PageController _pageController;
+
   @override
   Widget build(BuildContext context) {
     
@@ -26,8 +31,8 @@ class RateViewState extends State<RateView> {
 
         children: <Widget>[
 
-          new RateCategoriesView(animateToSpecifics),
-          new RateSpecificsView(animateToCategories, animateToEmotions),
+          new RateCategoriesView(_emotionContext),
+          new RateSpecificsView(_emotionContext),
           new RateEmotionsView(animateToCategories, animateToSpecifics)
 
         ],
@@ -36,7 +41,7 @@ class RateViewState extends State<RateView> {
     );
   }
 
-  void _animateToPage(int page) {
+  static void _animateToPage(int page) {
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),
@@ -44,15 +49,15 @@ class RateViewState extends State<RateView> {
     );
   }
 
-  void animateToCategories() {
+  static void animateToCategories() {
     _animateToPage(0);
   }
 
-  void animateToSpecifics() {
+  static void animateToSpecifics() {
     _animateToPage(1);
   }
 
-  void animateToEmotions() {
+  static void animateToEmotions() {
     _animateToPage(2);
   }
 

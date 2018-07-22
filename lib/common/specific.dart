@@ -5,18 +5,22 @@ class SpecificsItem {
 
   String key;
 
-  String specific;
+  String _specific;
 
-  SpecificsItem(this.specific);
+  SpecificsItem(this._specific);
 
   SpecificsItem.fromSnapshot(DataSnapshot snapshot) :
         key = snapshot.key,
-        specific = snapshot.value["specific"];
+        _specific = snapshot.value["specific"];
 
   toJson() {
     return {
-      "specific" : specific,
+      "specific" : _specific,
     };
+  }
+
+  String getSpecific() {
+    return _specific;
   }
 
 }

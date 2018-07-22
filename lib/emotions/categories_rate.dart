@@ -3,33 +3,34 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:mood_map/common/category.dart';
-import 'package:mood_map/components/navigable_list_item.dart';
+import 'package:mood_map/components/navigable_category_item.dart';
+import 'package:mood_map/components/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 
 class RateCategoriesView extends StatefulWidget {
 
-  Function _navigateToSpecifics;
+  EmotionContext _emotionContext;
 
-  RateCategoriesView(this._navigateToSpecifics);
+  RateCategoriesView(this._emotionContext);
 
   @override
-  State<StatefulWidget> createState() => new RateCategoriesViewState(_navigateToSpecifics);
+  State<StatefulWidget> createState() => new RateCategoriesViewState(_emotionContext);
 
 }
 
 class RateCategoriesViewState extends State<RateCategoriesView> {
 
-  final firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories");
+  DatabaseReference firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories");
 
-  Function _navigateToSpecifics;
+  EmotionContext _emotionContext;
 
-  List<NavigableListItem> _emotions = new List();
+  List<NavigableCategoryItem> _emotions = new List();
 
   String _toAdd = "";
 
-  RateCategoriesViewState(_navigateToSpecifics){
-    this._navigateToSpecifics = _navigateToSpecifics;
+  RateCategoriesViewState(EmotionContext context){
+    this._emotionContext = context;
 
     firebase.onChildAdded.listen(_retrieveFromDatabase);
   }
@@ -44,7 +45,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
         appBar: new AppBar(title: new Text("Rate My Emotions With..."),),
 
         body: new ListView(
-          children: _emotions.map((NavigableListItem emotion) {
+          children: _emotions.map((NavigableCategoryItem emotion) {
             return emotion;
           }).toList()
         ),
@@ -146,7 +147,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
       }
 
       if(!alreadyThere) {
-        _emotions.add(new NavigableListItem(item.key, _toAdd, _navigateToSpecifics));
+        _emotions.add(new NavigableCategoryItem(item.key, item.getCategory(), _emotionContext));
       }
 
     });

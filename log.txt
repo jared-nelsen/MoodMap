@@ -337,3 +337,5 @@ Made a lot of good headway.
 
 Next you need to make specifics rate act like category rate with listening for changes in the
 datebase in the constructor and such. Next is to continue with the emotion level construction.
+
+It seems now that the database structure is what is messing everything up.

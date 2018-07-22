@@ -7,20 +7,21 @@ class NavigableCategoryItem extends StatefulWidget {
 
   String dbKey;
 
-  String _specific;
+  String _category;
 
   EmotionContext _emotionContext;
 
-  NavigableCategoryItem(this.dbKey, this._specific, this._emotionContext);
+  NavigableCategoryItem(this.dbKey, this._category, this._emotionContext);
 
   @override
-  State<StatefulWidget> createState() => new NavigableCategoryState(this._specific, this._emotionContext);
+  State<StatefulWidget> createState() => new NavigableCategoryState(this._category, this._emotionContext);
 
 }
 
 class NavigableCategoryState extends State<NavigableCategoryItem> {
 
-  String _category;
+  String _category = "";
+
   EmotionContext _emotionContext;
 
   NavigableCategoryState(this._category, this._emotionContext);

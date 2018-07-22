@@ -20,7 +20,7 @@ class NavigableSpecificsItem extends StatefulWidget {
 
 class NavigableSpecificsItemState extends State<NavigableSpecificsItem> {
 
-  String _specific;
+  String _specific = "";
   EmotionContext _emotionContext;
 
   NavigableSpecificsItemState(this._specific, this._emotionContext);

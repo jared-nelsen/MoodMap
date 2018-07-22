@@ -10,35 +10,35 @@ class EmotionContext {
   String _category;
   String _specific;
 
-  Function categoryNavigation;
-  Function specificsNavigation;
-  Function emotionNavigation;
+  Function navigateSpecifics;
+  Function navigateEmotions;
 
-  EmotionContext(this.categoryNavigation, this.specificsNavigation, this.emotionNavigation);
+  EmotionContext();
 
   void setAndNavigateCategory(String category) {
     _category = category;
-    Function.apply(categoryNavigation, null);
+    Function.apply(navigateSpecifics, null);
   }
 
-  void setAndNavigateSpecifics(String specifics) {
+  void setAndNavigateSpecific(String specifics) {
     _specific = specifics;
-    Function.apply(specificsNavigation, null);
-  }
-
-  void navigateEmotions(String emotion) {
-    Function.apply(emotionNavigation, null);
+    Function.apply(navigateEmotions, null);
   }
 
   void saveEmotionContext(List<RatableListItem> emotions) {
 
+    if(_category == null || _specific == null) {
+      return;
+    }
+
     var db = FirebaseDatabase.instance.reference().child(_record).child(_category).child(_specific);
 
     for(RatableListItem emotion in emotions) {
-//
-//      var ref = db.child(emotion.getTitle()).push();
-//
-//      ref.set( {"rating": emotion.getRating()} );
+
+      var ref = db.child(emotion.getTitle()).push();
+
+      ref.set( {"rating": emotion.getRating()} );
+
     }
 
   }

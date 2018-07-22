@@ -85,7 +85,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
                           onPressed: () {
                             if(toAdd.isNotEmpty) {
                               setState(() {
-                                _specifics.add(new NavigableListItem(toAdd, _navigateToEmotions));
+                               // _specifics.add(new NavigableListItem(toAdd, _navigateToEmotions));
                                 Navigator.pop(context, null);
                               });}
                           }

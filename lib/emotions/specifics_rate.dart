@@ -38,7 +38,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
 
     //Listen to changes from the database
     firebase.onChildAdded.listen(_retrieveFromDatabase);
-  };
+  }
 
   @override
   Widget build(BuildContext context) {

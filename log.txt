@@ -292,6 +292,7 @@ Backlog
 
 Polish
 ------
+-Confirmation snackbars for Health section
 -Long press to remove items in Rating workflow
 -Grey out notification Settings with On/Off Switch
 -Change Rating mechanism in Emotion rating list items to something better
@@ -339,3 +340,43 @@ Next you need to make specifics rate act like category rate with listening for c
 datebase in the constructor and such. Next is to continue with the emotion level construction.
 
 It seems now that the database structure is what is messing everything up.
+
+After some research it seems that my initial pass at a model wont work. Because documents are
+static, subcollections are not easily implementable. I need to use several tables instead.
+
+Categories table
+
+           -Category Name
+
+Specifics Table
+
+          -Specifics Name
+          -Category Name
+
+Emotions Table
+
+         -Emotion Name
+         -Specifics
+         -Category
+
+Emotions Rating
+
+         -Emotion Rating
+         -Emotion Name
+         -Specifics Name
+         -Category Name
+
+
+Then when I am querying, the simple way to do things is to get all of the results from
+each table and filter based upon the context.
+
+Emotion Workflow Log
+--------------------
+
+First I am going to just work on categories.
+
+The table will be called emotion_categories.
+
+Now that I am done with categories I am working on the specifics rating.
+
+Changing table name to emotion_specifics

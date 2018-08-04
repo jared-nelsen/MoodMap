@@ -21,7 +21,7 @@ class RateCategoriesView extends StatefulWidget {
 
 class RateCategoriesViewState extends State<RateCategoriesView> {
 
-  DatabaseReference firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories");
+  DatabaseReference firebase = FirebaseDatabase.instance.reference().child("emotion_categories");
 
   EmotionContext _emotionContext;
 
@@ -121,7 +121,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
     setState(() {
 
-      var ref = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories").push();
+      var ref = FirebaseDatabase.instance.reference().child("emotion_categories").push();
 
       CategoryItem item = new CategoryItem(_toAdd);
 

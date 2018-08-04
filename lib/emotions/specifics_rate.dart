@@ -34,7 +34,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
     this._emotionContext = context;
 
     //Set the category to retrieve these specifics
-    firebase = FirebaseDatabase.instance.reference().child("emotion_ratings").child("categories").child(_emotionContext.getCategory());
+    firebase = FirebaseDatabase.instance.reference().child("emotion_specifics");
 
     //Listen to changes from the database
     firebase.onChildAdded.listen(_retrieveFromDatabase);
@@ -60,7 +60,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
         ),
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: (){ _emotionContext.setAndNavigateCategory(null); }, child: new Text("Back"))
+          new FlatButton(onPressed: (){ _emotionContext.navigateBackToCategories(); }, child: new Text("Back"))
         ],
 
       ),
@@ -121,13 +121,9 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
 
     setState(() {
 
-      var ref = FirebaseDatabase.instance.reference()
-          .child("emotion_ratings")
-          .child("categories")
-          .child(_emotionContext.getCategory())
-          .child("specifics").push();
+      var ref = FirebaseDatabase.instance.reference().child("emotion_specifics").push();
 
-      SpecificsItem item = new SpecificsItem(_toAdd);
+      SpecificsItem item = new SpecificsItem(_emotionContext.getCategory(), _toAdd);
 
       ref.set(item.toJson());
 

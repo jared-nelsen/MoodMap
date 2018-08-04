@@ -15,7 +15,7 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  static EmotionContext _emotionContext = new EmotionContext(animateToSpecifics, animateToEmotions);
+  static EmotionContext _emotionContext = new EmotionContext(animateToCategories, animateToSpecifics, animateToEmotions);
 
   static PageController _pageController;
 

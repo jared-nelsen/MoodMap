@@ -12,10 +12,11 @@ class EmotionContext {
   String _category;
   String _specific;
 
+  Function navigateCategories;
   Function navigateSpecifics;
   Function navigateEmotions;
 
-  EmotionContext(this.navigateSpecifics, this.navigateEmotions);
+  EmotionContext(this.navigateCategories, this.navigateSpecifics, this.navigateEmotions);
 
   String getCategory() {
     return _category;
@@ -23,6 +24,10 @@ class EmotionContext {
 
   String getSpecifics() {
     return _specific;
+  }
+
+  void navigateBackToCategories() {
+    Function.apply(navigateCategories, null);
   }
 
   void setAndNavigateCategory(String category) {

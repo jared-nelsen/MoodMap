@@ -22,7 +22,7 @@ class EmotionContext {
     return _category;
   }
 
-  String getSpecifics() {
+  String getSpecific() {
     return _specific;
   }
 
@@ -55,7 +55,7 @@ class EmotionContext {
 
     for(RatableEmotionListItem emotion in emotions) {
 
-      var ref = db.child(emotion.getEmotionName()).push();
+      var ref = db.child(emotion.getEmotion()).push();
 
       ref.set( {"rating": emotion.getRating()} );
 

@@ -5,10 +5,13 @@ class RatableEmotionListItem extends StatefulWidget {
 
   String _dbKey;
 
+  String _category;
+  String _specific;
   String _emotion;
+
   RatingWrapper _rating = new RatingWrapper();
 
-  RatableEmotionListItem(this._dbKey, this._emotion);
+  RatableEmotionListItem(this._dbKey, this._category, this._specific, this._emotion);
 
   @override
   State<StatefulWidget> createState() => new RatableEmotionListItemState(this._emotion, this._rating);
@@ -17,7 +20,15 @@ class RatableEmotionListItem extends StatefulWidget {
     return _dbKey;
   }
 
-  String getEmotionName() {
+  String getCategory() {
+    return _category;
+  }
+
+  String getSpecific() {
+    return _specific;
+  }
+
+  String getEmotion() {
     return _emotion;
   }
 

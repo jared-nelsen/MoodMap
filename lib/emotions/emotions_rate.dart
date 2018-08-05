@@ -5,6 +5,7 @@ import 'package:mood_map/components/ratable_emotion_list_item.dart';
 import 'package:mood_map/components/emotion_list_item.dart';
 
 import 'package:mood_map/common/emotion.dart';
+import 'package:mood_map/common/emotion_rating.dart';
 
 import 'package:mood_map/components/emotion_context.dart';
 
@@ -77,7 +78,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
             padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
             child: new RaisedButton(
                 onPressed: animateToPallet,
-                child: new Text("Add From Pallete")),)
+                child: new Text("Add From Pallet")),)
         ],
       ),
 
@@ -86,7 +87,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       ),
 
       persistentFooterButtons: <Widget>[
-        new FlatButton(onPressed: (){ _emotionContext.navigateBackToCategories(); }, child: new Text("Save")),
+        new FlatButton(onPressed: (){ _saveRatingsToDatabase(); }, child: new Text("Save")),
         new FlatButton(onPressed: null, child: new Text("Save and Journal")),
         new FlatButton(onPressed: (){ _emotionContext.setAndNavigateSpecific(null); }, child: new Text("Back"))
       ],
@@ -145,7 +146,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   void addEmotionsToRating(List<EmotionListItem> emotions) {
     setState(() {
       _ratingEmotions.addAll(emotions.map((EmotionListItem emotion) {
-        return new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotionName());
+        return new RatableEmotionListItem(emotion.getDBKey(), emotion.getCategory(), emotion.getSpecific(), emotion.getEmotion());
       }).toList());
     });
   }
@@ -153,7 +154,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   List<EmotionListItem> getSelectedEmotionsFromPallet() {
     List<EmotionListItem> selected = new List();
     for(EmotionListItem item in _palletEmotions) {
-      if(item.isSelected() && !ratingEmotionStrings().contains(item.getEmotionName())) {
+      if(item.isSelected() && !ratingEmotionStrings().contains(item.getEmotion())) {
         selected.add(item);
       }
     }
@@ -164,7 +165,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   List<String> ratingEmotionStrings() {
     List<String> emotions = new List();
     for(RatableEmotionListItem item in _ratingEmotions) {
-      emotions.add(item.getEmotionName());
+      emotions.add(item.getEmotion());
     }
     return emotions;
   }
@@ -173,7 +174,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     List<String> emotions = new List();
     for(EmotionListItem item in _palletEmotions) {
-      emotions.add(item.getEmotionName());
+      emotions.add(item.getEmotion());
     }
 
     return emotions;
@@ -274,42 +275,29 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     );
   }
 
-  //Adds the emotion as entered from the pallet to the database, associating it with
-  //the Context and Specific
-  void _addEmotionToDatabase() {
-    //This will be called multiple times from where the emotions are sent from the pallet to the emotion screen
-  }
-
-  //Retrieves the emotions from the database that are related to the Context and Specific
-  void _retrieveEmotionsFromDatabasePrototype(Event event) {
-
-    setState(() {
-
-      Emotion emotion = Emotion.fromSnapshot(event.snapshot);
-
-      bool alreadyThere = false;
-      for(var listItem in _ratingEmotions) {
-        if(listItem.getDBKey() == emotion.getDBKey()) {
-          alreadyThere = true;
-          break;
-        }
-      }
-
-      if(!alreadyThere) {
-        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotion()));
-      }
-
-    });
-
-  }
-
   void _saveRatingsToDatabase() {
 
     setState(() {
 
+      var ref = FirebaseDatabase.instance.reference().child("emotion_ratings").push();
 
+      for(var ratingItem in _ratingEmotions) {
+
+        EmotionRating rating = new EmotionRating(
+            ratingItem.getDBKey(),
+            ratingItem.getCategory(),
+            ratingItem.getSpecific(),
+            ratingItem.getEmotion(),
+            ratingItem.getRating());
+
+        ref.set(rating.toJson());
+
+      }
 
     });
+
+    //We are done with the workflow so navigate back to the categories
+    _emotionContext.navigateBackToCategories();
 
   }
 
@@ -317,7 +305,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     //Check to see if we dont already have it in the database which is mirrored with the data in the app
     for(var item in _palletEmotions) {
-      if(item.getEmotionName() == emotionToAdd){
+      if(item.getEmotion() == emotionToAdd){
         Navigator.pop(context, null);
         return;
       }
@@ -327,7 +315,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       var ref = FirebaseDatabase.instance.reference().child("emotions").push();
 
-      Emotion emotion = new Emotion(_emotionContext.getCategory(), _emotionContext.getSpecifics(), emotionToAdd);
+      Emotion emotion = new Emotion(_emotionContext.getCategory(), _emotionContext.getSpecific(), emotionToAdd);
 
       ref.set(emotion.toJson());
 
@@ -366,8 +354,8 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
         }
       }
 
-      if(!alreadyThere && emotion.getSpecifics() == _emotionContext.getSpecifics() && emotion.getCategory() == _emotionContext.getCategory()){
-        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotion()));
+      if(!alreadyThere && emotion.getSpecific() == _emotionContext.getSpecific() && emotion.getCategory() == _emotionContext.getCategory()){
+        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getCategory(), emotion.getSpecific(), emotion.getEmotion()));
       }
 
     });
@@ -379,7 +367,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     final newList = new List<EmotionListItem>.from(_palletEmotions)
       ..add(new EmotionListItem(
         dbKey: emotion.getDBKey(),
-        title: emotion.getEmotion(),
+        category: emotion.getCategory(),
+        specific: emotion.getSpecific(),
+        emotion: emotion.getEmotion(),
         selected: true,
         onChange: (checked) => _palletListItemChange(index, checked),));
 
@@ -395,7 +385,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     newList[listIndex] = new EmotionListItem(
       dbKey: currentItem.getDBKey(),
-      title: currentItem.getEmotionName(),
+      category: currentItem.getCategory(),
+      specific: currentItem.getSpecific(),
+      emotion: currentItem.getEmotion(),
       selected: checked,
       onChange: currentItem.onChanged(),
     );

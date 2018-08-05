@@ -5,18 +5,22 @@ class EmotionListItem extends StatelessWidget {
 
   final String dbKey;
 
-  final String title;
+  final String category;
+  final String specific;
+  final String emotion;
+
   final bool selected;
+
   final ValueChanged<bool> onChange;
 
-  EmotionListItem({this.dbKey, this.title, this.selected, this.onChange});
+  EmotionListItem({this.dbKey, this.category, this.specific, this.emotion, this.selected, this.onChange});
 
   @override
   Widget build(BuildContext context) {
 
     return new CheckboxListTile(
 
-      title: new Text(title),
+      title: new Text(emotion),
       value: selected,
       onChanged: onChange
 
@@ -28,8 +32,16 @@ class EmotionListItem extends StatelessWidget {
     return dbKey;
   }
 
-  String getEmotionName() {
-    return title;
+  String getCategory() {
+    return category;
+  }
+
+  String getSpecific() {
+    return specific;
+  }
+
+  String getEmotion() {
+    return emotion;
   }
 
   bool isSelected() {

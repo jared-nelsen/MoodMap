@@ -42,7 +42,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
     return new Container(
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text("More specifically"),),
+        appBar: new AppBar(title: new Text("More specifically..."),),
 
         body: new ListView(
             children: _specifics.map((NavigableSpecificsItem specific) {
@@ -143,7 +143,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
         }
       }
 
-      if(!alreadyThere && item.getCategory() == _emotionContext.getCategory() && item.getSpecific() == _emotionContext.getSpecifics()) {
+      if(!alreadyThere && item.getCategory() == _emotionContext.getCategory()) {
         _specifics.add(new NavigableSpecificsItem(item.key, item.getSpecific(), _emotionContext));
       }
 

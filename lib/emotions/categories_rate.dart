@@ -42,7 +42,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text("Rate My Emotions With..."),),
+        appBar: new AppBar(title: new Text("Rate My Emotions..."),),
 
         body: new ListView(
           children: _emotions.map((NavigableCategoryItem emotion) {

@@ -33,7 +33,7 @@ class Emotion {
     return _category;
   }
 
-  String getSpecifics() {
+  String getSpecific() {
     return _specifics;
   }
 

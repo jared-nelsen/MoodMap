@@ -1,18 +1,24 @@
 
 import 'package:flutter/material.dart';
 
-class RatableListItem extends StatefulWidget {
+class RatableEmotionListItem extends StatefulWidget {
 
-  String _title;
+  String _dbKey;
+
+  String _emotion;
   RatingWrapper _rating = new RatingWrapper();
 
-  RatableListItem(this._title);
+  RatableEmotionListItem(this._dbKey, this._emotion);
 
   @override
-  State<StatefulWidget> createState() => new RatableListItemState(this._title, this._rating);
+  State<StatefulWidget> createState() => new RatableEmotionListItemState(this._emotion, this._rating);
 
-  String getTitle() {
-    return _title;
+  String getDBKey() {
+    return _dbKey;
+  }
+
+  String getEmotionName() {
+    return _emotion;
   }
 
   String getRating() {
@@ -21,13 +27,13 @@ class RatableListItem extends StatefulWidget {
 
 }
 
-class RatableListItemState extends State<RatableListItem> {
+class RatableEmotionListItemState extends State<RatableEmotionListItem> {
 
   String _title;
 
   var _ratings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  RatableListItemState(this._title, this._ratingWrapper);
+  RatableEmotionListItemState(this._title, this._ratingWrapper);
 
   String _rating = '0';
 

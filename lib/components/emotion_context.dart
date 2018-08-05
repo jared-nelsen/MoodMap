@@ -1,5 +1,5 @@
 
-import 'package:mood_map/components/ratable_list_item.dart';
+import 'package:mood_map/components/ratable_emotion_list_item.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 
@@ -40,7 +40,7 @@ class EmotionContext {
     Function.apply(navigateEmotions, null);
   }
 
-  void saveEmotionContext(List<RatableListItem> emotions) {
+  void saveEmotionContext(List<RatableEmotionListItem> emotions) {
 
     if(_category == null || _specific == null) {
       return;
@@ -53,9 +53,9 @@ class EmotionContext {
         .child(_specificsRecords)
         .child(_specific);
 
-    for(RatableListItem emotion in emotions) {
+    for(RatableEmotionListItem emotion in emotions) {
 
-      var ref = db.child(emotion.getTitle()).push();
+      var ref = db.child(emotion.getEmotionName()).push();
 
       ref.set( {"rating": emotion.getRating()} );
 

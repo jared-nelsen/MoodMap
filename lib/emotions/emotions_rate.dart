@@ -1,33 +1,43 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/components/ratable_list_item.dart';
+import 'package:mood_map/components/ratable_emotion_list_item.dart';
 import 'package:mood_map/components/emotion_list_item.dart';
+
+import 'package:mood_map/common/emotion.dart';
+
+import 'package:mood_map/components/emotion_context.dart';
 
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
+
 class RateEmotionsView extends StatefulWidget {
 
-  Function _navigateToCategories;
-  Function _navigateToSpecifics;
+  EmotionContext _emotionContext;
 
-  RateEmotionsView(this._navigateToCategories, this._navigateToSpecifics);
+  RateEmotionsView(this._emotionContext);
 
   @override
-  State<StatefulWidget> createState() => new RateEmotionsViewState(this._navigateToCategories, this._navigateToSpecifics);
+  State<StatefulWidget> createState() => new RateEmotionsViewState(this._emotionContext);
 
 }
 
 class RateEmotionsViewState extends State<RateEmotionsView> {
 
-  Function _navigateToCategories;
-  Function _navigateToSpecifics;
+  DatabaseReference _firebase = FirebaseDatabase.instance.reference().child("emotions");
+
+  EmotionContext _emotionContext;
 
   PageController _pageController;
 
-  RateEmotionsViewState(this._navigateToCategories, this._navigateToSpecifics);
+  RateEmotionsViewState(_emotionContext) {
+    this._emotionContext = _emotionContext;
 
-  List<RatableListItem> _ratingEmotions = new List();
+    _firebase.onChildAdded.listen(_retrieveEmotionsFromDatabase);
+  }
+
+  List<RatableEmotionListItem> _ratingEmotions = new List();
   List<EmotionListItem> _palletEmotions = new List();
 
   final GlobalKey<FormState> _addEmotionFormKey = new GlobalKey<FormState>();
@@ -76,9 +86,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       ),
 
       persistentFooterButtons: <Widget>[
-        new FlatButton(onPressed: null, child: new Text("Save")),
+        new FlatButton(onPressed: (){ _emotionContext.navigateBackToCategories(); }, child: new Text("Save")),
         new FlatButton(onPressed: null, child: new Text("Save and Journal")),
-        new FlatButton(onPressed: _navigateToSpecifics, child: new Text("Back"))
+        new FlatButton(onPressed: (){ _emotionContext.setAndNavigateSpecific(null); }, child: new Text("Back"))
       ],
 
     );
@@ -132,59 +142,18 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     animateToRating();
   }
 
-  void addEmotionToRating() {
-    setState(() {
-      _ratingEmotions.add(new RatableListItem("Anger"));
-    });
-  }
-
-  void _addEmotionToPallet(String emotion, bool pop) {
-    final index = _palletEmotions.length;
-    final newList = new List<EmotionListItem>.from(_palletEmotions)
-      ..add(new EmotionListItem(
-        title: emotion,
-        selected: true,
-        onChange: (checked) => _palletListItemChange(index, checked),));
-
-    setState(() {
-      _palletEmotions = newList;
-
-      if(pop){
-        Navigator.pop(context, null);
-      }
-
-    });
-  }
-
   void addEmotionsToRating(List<EmotionListItem> emotions) {
     setState(() {
       _ratingEmotions.addAll(emotions.map((EmotionListItem emotion) {
-        return new RatableListItem(emotion.getTitle());
+        return new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotionName());
       }).toList());
     });
-  }
-
-  void _palletListItemChange(int listIndex, bool checked) {
-
-    final newList = new List<EmotionListItem>.from(_palletEmotions);
-    EmotionListItem currentItem = _palletEmotions[listIndex];
-
-    newList[listIndex] = new EmotionListItem(
-      title: currentItem.getTitle(),
-      selected: checked,
-      onChange: currentItem.onChanged(),
-    );
-
-    setState(() {
-      _palletEmotions = newList;
-    });
-
   }
 
   List<EmotionListItem> getSelectedEmotionsFromPallet() {
     List<EmotionListItem> selected = new List();
     for(EmotionListItem item in _palletEmotions) {
-      if(item.isSelected() && !ratingEmotionStrings().contains(item.getTitle())) {
+      if(item.isSelected() && !ratingEmotionStrings().contains(item.getEmotionName())) {
         selected.add(item);
       }
     }
@@ -194,17 +163,19 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
   List<String> ratingEmotionStrings() {
     List<String> emotions = new List();
-    for(RatableListItem item in _ratingEmotions) {
-      emotions.add(item.getTitle());
+    for(RatableEmotionListItem item in _ratingEmotions) {
+      emotions.add(item.getEmotionName());
     }
     return emotions;
   }
 
   List<String> palletEmotionStrings() {
+
     List<String> emotions = new List();
     for(EmotionListItem item in _palletEmotions) {
-      emotions.add(item.getTitle());
+      emotions.add(item.getEmotionName());
     }
+
     return emotions;
   }
 
@@ -267,7 +238,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
                           child: new Text("Add", style: new TextStyle(color: Colors.green,),),
                           onPressed: (){
                             if(_addEmotionFormKey.currentState.validate()) {
-                              _addEmotionToPallet(_emotionToAdd, true);
+                              _addEmotionPalletItemToDatabase(_emotionToAdd);
                             }
                           }
                       )
@@ -303,11 +274,142 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     );
   }
 
+  //Adds the emotion as entered from the pallet to the database, associating it with
+  //the Context and Specific
+  void _addEmotionToDatabase() {
+    //This will be called multiple times from where the emotions are sent from the pallet to the emotion screen
+  }
+
+  //Retrieves the emotions from the database that are related to the Context and Specific
+  void _retrieveEmotionsFromDatabasePrototype(Event event) {
+
+    setState(() {
+
+      Emotion emotion = Emotion.fromSnapshot(event.snapshot);
+
+      bool alreadyThere = false;
+      for(var listItem in _ratingEmotions) {
+        if(listItem.getDBKey() == emotion.getDBKey()) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere) {
+        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotion()));
+      }
+
+    });
+
+  }
+
+  void _saveRatingsToDatabase() {
+
+    setState(() {
+
+
+
+    });
+
+  }
+
+  void _addEmotionPalletItemToDatabase(String emotionToAdd) {
+
+    //Check to see if we dont already have it in the database which is mirrored with the data in the app
+    for(var item in _palletEmotions) {
+      if(item.getEmotionName() == emotionToAdd){
+        Navigator.pop(context, null);
+        return;
+      }
+    }
+
+    setState(() {
+
+      var ref = FirebaseDatabase.instance.reference().child("emotions").push();
+
+      Emotion emotion = new Emotion(_emotionContext.getCategory(), _emotionContext.getSpecifics(), emotionToAdd);
+
+      ref.set(emotion.toJson());
+
+      Navigator.pop(context, null);
+    });
+
+  }
+
+  //We want all available emotions to go to the pallet but only emotions that align with the current emotion context
+  //to go to the emotion rating screen
+  void _retrieveEmotionsFromDatabase(Event event) {
+
+    setState(() {
+
+      Emotion emotion = Emotion.fromSnapshot(event.snapshot);
+
+      //Add the emotion to the pallet
+      bool alreadyThere = false;
+      for(var listItem in _palletEmotions) {
+        if(listItem.getDBKey() == emotion.getDBKey()) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere) {
+        _addEmotionToPallet(emotion);
+      }
+
+      //Add the emotion to the emotions screen based on context
+      alreadyThere = false;
+      for(var listItem in _ratingEmotions) {
+        if(listItem.getDBKey() == emotion.getEmotion()) {
+          alreadyThere = true;
+          break;
+        }
+      }
+
+      if(!alreadyThere && emotion.getSpecifics() == _emotionContext.getSpecifics() && emotion.getCategory() == _emotionContext.getCategory()){
+        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getEmotion()));
+      }
+
+    });
+
+  }
+
+  void _addEmotionToPallet(Emotion emotion) {
+    final index = _palletEmotions.length;
+    final newList = new List<EmotionListItem>.from(_palletEmotions)
+      ..add(new EmotionListItem(
+        dbKey: emotion.getDBKey(),
+        title: emotion.getEmotion(),
+        selected: true,
+        onChange: (checked) => _palletListItemChange(index, checked),));
+
+    setState(() {
+      _palletEmotions = newList;
+    });
+  }
+
+  void _palletListItemChange(int listIndex, bool checked) {
+
+    final newList = new List<EmotionListItem>.from(_palletEmotions);
+    EmotionListItem currentItem = _palletEmotions[listIndex];
+
+    newList[listIndex] = new EmotionListItem(
+      dbKey: currentItem.getDBKey(),
+      title: currentItem.getEmotionName(),
+      selected: checked,
+      onChange: currentItem.onChanged(),
+    );
+
+    setState(() {
+      _palletEmotions = newList;
+    });
+
+  }
+
   @override
   void initState() {
     super.initState();
     _pageController = new PageController();
-    _addEmotionToPallet("First", false);
   }
 
   @override

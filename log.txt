@@ -380,3 +380,18 @@ The table will be called emotion_categories.
 Now that I am done with categories I am working on the specifics rating.
 
 Changing table name to emotion_specifics
+
+Working now on saving emotions from emotion pallete
+
+Finished working on pallet emotions.
+
+Now I need to work on loading and saving emotions that are associate with the specific.
+
+
+Todo
+-----
+May need to implement a generic database get call in specifics rate initState
+and categories rate initstate for persistence management
+
+- Add in filtering in retrievefromdatabase in specifics rate to associate
+only with category in context.

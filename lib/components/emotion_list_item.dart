@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class EmotionListItem extends StatelessWidget {
 
+  final String dbKey;
+
   final String title;
   final bool selected;
   final ValueChanged<bool> onChange;
 
-  EmotionListItem({this.title, this.selected, this.onChange});
+  EmotionListItem({this.dbKey, this.title, this.selected, this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,11 @@ class EmotionListItem extends StatelessWidget {
 
   }
 
-  String getTitle() {
+  String getDBKey() {
+    return dbKey;
+  }
+
+  String getEmotionName() {
     return title;
   }
 

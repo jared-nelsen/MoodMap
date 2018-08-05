@@ -22,7 +22,7 @@ class RateSpecificsView extends StatefulWidget {
 
 class RateSpecificsViewState extends State<RateSpecificsView> {
 
-  DatabaseReference firebase;
+  DatabaseReference firebase = FirebaseDatabase.instance.reference().child("emotion_specifics");
 
   EmotionContext _emotionContext;
 
@@ -32,9 +32,6 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
 
   RateSpecificsViewState(EmotionContext context) {
     this._emotionContext = context;
-
-    //Set the category to retrieve these specifics
-    firebase = FirebaseDatabase.instance.reference().child("emotion_specifics");
 
     //Listen to changes from the database
     firebase.onChildAdded.listen(_retrieveFromDatabase);
@@ -146,7 +143,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
         }
       }
 
-      if(!alreadyThere) {
+      if(!alreadyThere && item.getCategory() == _emotionContext.getCategory() && item.getSpecific() == _emotionContext.getSpecifics()) {
         _specifics.add(new NavigableSpecificsItem(item.key, item.getSpecific(), _emotionContext));
       }
 

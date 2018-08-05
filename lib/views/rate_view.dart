@@ -33,7 +33,7 @@ class RateViewState extends State<RateView> {
 
           new RateCategoriesView(_emotionContext),
           new RateSpecificsView(_emotionContext),
-          new RateEmotionsView(animateToCategories, animateToSpecifics)
+          new RateEmotionsView(_emotionContext)
 
         ],
       ),

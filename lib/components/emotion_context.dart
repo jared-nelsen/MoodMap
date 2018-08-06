@@ -40,27 +40,4 @@ class EmotionContext {
     Function.apply(navigateSpecifics, null);
   }
 
-  void saveEmotionContext(List<RatableEmotionListItem> emotions) {
-
-    if(_category == null || _specific == null) {
-      return;
-    }
-
-    var db = FirebaseDatabase.instance.reference()
-        .child(_baseRecords)
-        .child(_categoryRecords)
-        .child(_category)
-        .child(_specificsRecords)
-        .child(_specific);
-
-    for(RatableEmotionListItem emotion in emotions) {
-
-      var ref = db.child(emotion.getEmotion()).push();
-
-      ref.set( {"rating": emotion.getRating()} );
-
-    }
-
-  }
-
 }

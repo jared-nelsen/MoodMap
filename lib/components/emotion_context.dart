@@ -37,7 +37,7 @@ class EmotionContext {
 
   void setAndNavigateSpecific(String specifics) {
     _specific = specifics;
-    Function.apply(navigateEmotions, null);
+    Function.apply(navigateSpecifics, null);
   }
 
   void saveEmotionContext(List<RatableEmotionListItem> emotions) {

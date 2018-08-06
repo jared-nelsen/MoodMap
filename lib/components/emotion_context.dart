@@ -5,10 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 
 class EmotionContext {
 
-  final String _baseRecords = "emotion_ratings";
-  final String _categoryRecords = "categories";
-  final String _specificsRecords = "specifics";
-
   String _category;
   String _specific;
 

@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'journal_entry_list_view.dart';
-import 'journal_make_entry_view.dart';
-
+import 'package:mood_map/journaling/entry_list_view.dart';
+import 'package:mood_map/journaling/make_entry_view.dart';
 
 class JournalView extends StatefulWidget {
 

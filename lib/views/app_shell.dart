@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'manage_view.dart';
 import 'rate_view.dart';
-import 'package:mood_map/journaling/journal_view_shell.dart';
+import 'package:mood_map/views/journal_view.dart';
 import 'track_view.dart';
 import 'health_view.dart';
 

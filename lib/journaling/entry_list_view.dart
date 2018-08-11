@@ -22,12 +22,16 @@ class JournalEntryListViewState extends State<JournalEntryListView> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+
       body: new ListView(),
+
       floatingActionButton: new FloatingActionButton(
           onPressed: _makeEntryFunction,
           child: new Icon(Icons.add),
       ),
+
     );
+
   }
 
   @override

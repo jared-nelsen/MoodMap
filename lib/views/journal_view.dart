@@ -38,6 +38,8 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
         ],
 
       ),
+
+      resizeToAvoidBottomPadding: false,
     );
     
 
@@ -65,7 +67,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
       if(page == 0) {
         _pageTitle = "Journal Entries";
       } else if(page == 1) {
-        _pageTitle = "Make An Entry";
+        _pageTitle = "Make A Journal Entry";
       }
     });
   }

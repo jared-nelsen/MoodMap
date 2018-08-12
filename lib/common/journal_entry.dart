@@ -34,7 +34,7 @@ class JournalEntry {
       "description" : _description,
       "external_happenings" : _externalHappenings,
       "internal_happenings" : _internalHappenings,
-      "refections_and_corrections" : _reflectionsAndCorrections,
+      "reflections_and_corrections" : _reflectionsAndCorrections,
       "abatement" : _abatement,
     };
   }

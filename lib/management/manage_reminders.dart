@@ -14,7 +14,7 @@ class ManageRemindersView extends StatefulWidget {
 
 class ManageRemindersViewState extends State<ManageRemindersView> {
 
-  var _interval = ["Daily", "Hourly", "Every 30 Minutes", "Every 15 Minutes"];
+  var _interval = ["Daily", "Every 6 hours", "Every 3 Hours", "Hourly", "Every 30 Minutes", "Every 15 Minutes"];
   String _emotionIntervalValue = "Daily";
 
   bool _remindingEmotions = true;

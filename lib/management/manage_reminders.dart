@@ -15,15 +15,16 @@ class ManageRemindersView extends StatefulWidget {
 class ManageRemindersViewState extends State<ManageRemindersView> {
 
   var _interval = ["Daily", "Hourly", "Every 30 Minutes", "Every 15 Minutes"];
-  String _intervalValue = "Daily";
+  String _emotionIntervalValue = "Daily";
 
   bool _remindingEmotions = true;
   bool _remindingSleep = true;
   bool _remindingExercise = true;
 
-  String _emotionsTime = _formatTime(new TimeOfDay(hour: 9, minute: 30));
-  String _sleepTime = _formatTime(new TimeOfDay(hour: 9, minute: 30));
-  String _exerciseTime = _formatTime(new TimeOfDay(hour: 7, minute: 30));
+  String _emotionStartTime = _formatTime(new TimeOfDay(hour: 9, minute: 0));
+  String _emotionEndTime = _formatTime(new TimeOfDay(hour: 20, minute: 0));
+  String _sleepRemindTime = _formatTime(new TimeOfDay(hour: 9, minute: 0));
+  String _exerciseRemindTime = _formatTime(new TimeOfDay(hour: 19, minute: 0));
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +112,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
               child: new DropdownButton<String>(
 
-                  value: _intervalValue,
+                  value: _emotionIntervalValue,
 
                   items: _interval.map((String time) {
                     return new DropdownMenuItem<String>(value: time, child: new Text(time));
@@ -119,7 +120,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
                   onChanged: (String time) {
                     setState(() {
-                      _intervalValue = time;
+                      _emotionIntervalValue = time;
                     });
                   }
 
@@ -128,6 +129,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
           ],
         ),
+
         new Row(
           children: <Widget>[
 
@@ -141,9 +143,31 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
               child: new Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
                 child: new RaisedButton(
-                    child: new Text(_emotionsTime, style: new TextStyle(fontSize: 18.0),),
-                    onPressed: () {_selectEmotionTime(context, _emotionsTime);}
+                    child: new Text(_emotionStartTime, style: new TextStyle(fontSize: 18.0),),
+                    onPressed: () {_selectEmotionStartTime(context, _emotionStartTime);}
                     ),
+              ),
+            )
+
+          ],
+        ),
+
+        new Row(
+          children: <Widget>[
+
+            new Expanded(
+              child: new Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+                child: new Text("ending at", style: new TextStyle(fontSize: 18.0),),),
+            ),
+
+            new Expanded(
+              child: new Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                child: new RaisedButton(
+                    child: new Text(_emotionEndTime, style: new TextStyle(fontSize: 18.0),),
+                    onPressed: () {_selectEmotionEndTime(context, _emotionEndTime);}
+                ),
               ),
             )
 
@@ -191,8 +215,8 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
             new Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
                 child: new RaisedButton(
-                    child: new Text(_sleepTime, style: new TextStyle(fontSize: 18.0),),
-                    onPressed: () {_selectSleepTime(context, _sleepTime);}
+                    child: new Text(_sleepRemindTime, style: new TextStyle(fontSize: 18.0),),
+                    onPressed: () {_selectSleepTime(context, _sleepRemindTime);}
                 ),
             ),
 
@@ -241,8 +265,8 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
             new Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
               child: new RaisedButton(
-                  child: new Text(_exerciseTime, style: new TextStyle(fontSize: 18.0),),
-                  onPressed: () {_selectSleepTime(context, _exerciseTime);}
+                  child: new Text(_exerciseRemindTime, style: new TextStyle(fontSize: 18.0),),
+                  onPressed: () {_selectSleepTime(context, _exerciseRemindTime);}
               ),
             ),
 
@@ -263,7 +287,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
     );
   }
 
-  Future<Null> _selectEmotionTime(BuildContext context, String time) async {
+  Future<Null> _selectEmotionStartTime(BuildContext context, String time) async {
 
     final TimeOfDay picked = await showTimePicker(
         context: context,
@@ -271,7 +295,21 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
     if(picked != null) {
       setState(() {
-        _emotionsTime = _formatTime(picked);
+        _emotionStartTime = _formatTime(picked);
+      });
+    }
+
+  }
+
+  Future<Null> _selectEmotionEndTime(BuildContext context, String time) async {
+
+    final TimeOfDay picked = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now());
+
+    if(picked != null) {
+      setState(() {
+        _emotionEndTime = _formatTime(picked);
       });
     }
 
@@ -285,7 +323,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
     if(picked != null) {
       setState(() {
-        _sleepTime = _formatTime(picked);
+        _sleepRemindTime = _formatTime(picked);
       });
     }
 
@@ -295,8 +333,8 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
     var ref = FirebaseDatabase.instance.reference().child('reminder_settings');
 
-    ReminderSettings settings = new ReminderSettings(_remindingEmotions, _intervalValue,
-        _emotionsTime, _remindingSleep, _sleepTime, _remindingExercise, _exerciseTime);
+    ReminderSettings settings = new ReminderSettings(_remindingEmotions, _emotionIntervalValue,
+        _emotionStartTime, _emotionEndTime, _remindingSleep, _sleepRemindTime, _remindingExercise, _exerciseRemindTime);
 
     ref.set(settings.toJson());
 
@@ -310,15 +348,16 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
       setState(() {
 
-        _intervalValue = settings.emotionInterval;
+        _emotionIntervalValue = settings.getEmotionInterval();
 
-        _remindingEmotions = settings.remindingEmotions;
-        _remindingSleep = settings.remindingSleep;
-        _remindingExercise = settings.remindingExercise;
+        _remindingEmotions = settings.getRemindingEmotions();
+        _remindingSleep = settings.getRemindingSleep();
+        _remindingExercise = settings.getRemindingExercise();
 
-        _emotionsTime = settings.emotionStarting;
-        _sleepTime = settings.sleepRemindTime;
-        _exerciseTime = settings.exerciseRemindTime;
+        _emotionStartTime = settings.getEmotionStartTime();
+        _emotionEndTime = settings.getEmotionEndTime();
+        _sleepRemindTime = settings.getSleepReminderTime();
+        _exerciseRemindTime = settings.getExcerciseRemindTime();
 
       });
 
@@ -331,7 +370,13 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
     buffer.write(time.hourOfPeriod);
     buffer.write(":");
-    buffer.write(time.minute);
+
+    if(time.minute == 0) {
+      buffer.write("00");
+    } else {
+      buffer.write(time.minute);
+    }
+
     buffer.write(" ");
 
     if(time.period == DayPeriod.am) {

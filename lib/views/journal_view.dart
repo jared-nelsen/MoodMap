@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mood_map/journaling/entry_list_view.dart';
 import 'package:mood_map/journaling/make_entry_view.dart';
 
+import 'package:mood_map/components/journaling_context.dart';
+
 class JournalView extends StatefulWidget {
 
   @override
@@ -13,9 +15,11 @@ class JournalView extends StatefulWidget {
 
 class JournalViewState extends State<JournalView> with SingleTickerProviderStateMixin {
 
-  PageController _pageController;
+  static PageController _pageController;
 
-  String _pageTitle = "Journal Entries";
+  static String _pageTitle = "Journal Entries";
+
+  JournalingContext _journalingContext = new JournalingContext(animateToJournalEntryPage, animateToMakeAnEntryPage);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +35,9 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
         children: <Widget>[
 
-          new JournalEntryListView(animateToMakeAnEntryPage),
+          new JournalEntryListView(_journalingContext),
 
-          new MakeEntryView(animateToJournalEntryPage)
+          new MakeEntryView(_journalingContext),
 
         ],
 
@@ -45,7 +49,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   }
 
-  void _animateToPage(int page) {
+  static void _animateToPage(int page) {
     setPageName(page);
     _pageController.animateToPage(
         page,
@@ -54,21 +58,27 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
     );
   }
 
-  void animateToJournalEntryPage() {
+  static void animateToJournalEntryPage() {
     _animateToPage(0);
   }
 
-  void animateToMakeAnEntryPage() {
+  static void animateToMakeAnEntryPage() {
     _animateToPage(1);
   }
 
-  void setPageName(int page) {
+  static void setPageName(int page) {
+
+    if(page == 0) {
+      _pageTitle = "Journal Entries";
+    } else if(page == 1) {
+      _pageTitle = "Make A Journal Entry";
+    }
+
+  }
+
+  void state() {
     setState(() {
-      if(page == 0) {
-        _pageTitle = "Journal Entries";
-      } else if(page == 1) {
-        _pageTitle = "Make A Journal Entry";
-      }
+
     });
   }
 

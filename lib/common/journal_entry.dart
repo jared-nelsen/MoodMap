@@ -5,13 +5,13 @@ class JournalEntry {
 
   String _key;
 
-  String _date;
-  String _circumstances;
-  String _description;
-  String _externalHappenings;
-  String _internalHappenings;
-  String _reflectionsAndCorrections;
-  String _abatement;
+  String _date = "";
+  String _circumstances = "";
+  String _description = "";
+  String _externalHappenings = "";
+  String _internalHappenings = "";
+  String _reflectionsAndCorrections = "";
+  String _abatement = "";
 
   JournalEntry(){
     setDate(DateTime.now());

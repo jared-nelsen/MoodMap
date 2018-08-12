@@ -1,8 +1,4 @@
 
-import 'package:mood_map/components/ratable_emotion_list_item.dart';
-
-import 'package:firebase_database/firebase_database.dart';
-
 class EmotionContext {
 
   String _category;

@@ -1,21 +1,23 @@
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter/rendering.dart';
 
 import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
 import 'package:mood_map/common/journal_entry.dart';
+import 'package:mood_map/components/journaling_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 
 class MakeEntryView extends StatefulWidget {
 
-  final Function _journalEntryFunction;
+  JournalingContext _journalingContext;
 
-  MakeEntryView(this._journalEntryFunction);
+  MakeEntryView(this._journalingContext);
 
   @override
-  State<StatefulWidget> createState() => new MakeEntryState(_journalEntryFunction);
+  State<StatefulWidget> createState() => new MakeEntryState(this._journalingContext);
 
 }
 
@@ -30,11 +32,18 @@ class MakeEntryState extends State<MakeEntryView> {
   FocusNode _focusNodeReflectionsAndCorrections = new FocusNode();
   FocusNode _focusNodeAbatement = new FocusNode();
 
-  Function _journalEntryFunction;
+  TextEditingController _circumstancesController = new TextEditingController();
+  TextEditingController _descriptionController = new TextEditingController();
+  TextEditingController _externalHappeningsController = new TextEditingController();
+  TextEditingController _internalHappeningsController = new TextEditingController();
+  TextEditingController _reflectionsAndCorrectionsController = new TextEditingController();
+  TextEditingController _abatementController = new TextEditingController();
 
-  JournalEntry _journalEntry = new JournalEntry();
+  JournalingContext _journalingContext;
 
-  MakeEntryState(this._journalEntryFunction);
+  JournalEntry _activeJournalEntry;
+
+  MakeEntryState(this._journalingContext);
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +98,8 @@ class MakeEntryState extends State<MakeEntryView> {
       focusNode: _focusNodeCircumstances,
       child: new TextFormField(
 
+        controller: _circumstancesController,
+
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
@@ -105,7 +116,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setCircumstances(value);
+          _activeJournalEntry.setCircumstances(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter some circumstances.";
@@ -126,6 +137,8 @@ class MakeEntryState extends State<MakeEntryView> {
       focusNode: _focusNodeDescription,
       child: new TextFormField(
 
+        controller: _descriptionController,
+
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
@@ -143,7 +156,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setDescription(value);
+          _activeJournalEntry.setDescription(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter a description.";
@@ -164,6 +177,8 @@ class MakeEntryState extends State<MakeEntryView> {
       focusNode: _focusNodeExternalHappenings,
       child: new TextFormField(
 
+        controller: _externalHappeningsController,
+
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
@@ -181,7 +196,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setExternalHappenings(value);
+          _activeJournalEntry.setExternalHappenings(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter some external happenings.";
@@ -202,6 +217,8 @@ class MakeEntryState extends State<MakeEntryView> {
       focusNode: _focusNodeInternalHappenings,
       child: new TextFormField(
 
+        controller: _internalHappeningsController,
+
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
@@ -219,7 +236,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setInternalHappenings(value);
+          _activeJournalEntry.setInternalHappenings(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter some internal happenings.";
@@ -240,6 +257,8 @@ class MakeEntryState extends State<MakeEntryView> {
       focusNode: _focusNodeReflectionsAndCorrections,
       child: new TextFormField(
 
+        controller: _reflectionsAndCorrectionsController,
+
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
@@ -257,7 +276,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setReflectionsAndCorrections(value);
+          _activeJournalEntry.setReflectionsAndCorrections(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter some reflections.";
@@ -273,9 +292,12 @@ class MakeEntryState extends State<MakeEntryView> {
   }
 
   Widget abatement() {
+
     return EnsureVisibleWhenFocused(
       focusNode: _focusNodeAbatement,
       child: new TextFormField(
+
+        controller: _abatementController,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -294,7 +316,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _journalEntry.setAbatement(value);
+          _activeJournalEntry.setAbatement(value);
 
           if(value.isEmpty || value == null) {
             return "Please enter an abatement.";
@@ -315,7 +337,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
         new Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 0.0, 9.0, 0.0),
-          child: new RaisedButton(onPressed: _saveEntry, textColor: Colors.green ,child: new Text("Save Entry")) ,),
+          child: new RaisedButton(onPressed: _saveEntry, textColor: Colors.green ,child: new Text("Save Entry"))),
 
         new RaisedButton(onPressed: _cancel, child: new Text("Cancel"))
 
@@ -333,23 +355,82 @@ class MakeEntryState extends State<MakeEntryView> {
 
       var ref = FirebaseDatabase.instance.reference().child("journal_entries").push();
 
-      ref.set(_journalEntry.toJson());
+      ref.set(_activeJournalEntry.toJson());
 
-      Function.apply(_journalEntryFunction, null);
+      _journalingContext.navigateToEntryListView();
     }
 
+    clearFields();
   }
 
   void _cancel() {
 
-    _formKey.currentState.reset();
-    Function.apply(_journalEntryFunction, null);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: new Text("Cancel your entry?"),
+            children: <Widget>[
 
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+
+                  new FlatButton(
+                      child: new Text("Discard", style: new TextStyle(color: Colors.green),),
+                      onPressed: (){
+
+                        _formKey.currentState.reset();
+                        clearFields();
+                        Navigator.pop(context, null);
+                        _journalingContext.navigateToEntryListView();
+
+                      },
+
+                  ),
+
+                  new FlatButton(
+                      child: new Text("No, Keep My Entry"),
+                      onPressed: (){
+                        Navigator.pop(context, null);
+                      },
+                  )
+
+                ],
+              )
+
+            ],
+          );
+        }
+    );
+
+  }
+
+  void loadJournalEntry() {
+    _circumstancesController.text = _activeJournalEntry.getCircumstances();
+    _descriptionController.text = _activeJournalEntry.getDescription();
+    _externalHappeningsController.text = _activeJournalEntry.getExternalHappenings();
+    _internalHappeningsController.text = _activeJournalEntry.getInternalHappenings();
+    _reflectionsAndCorrectionsController.text = _activeJournalEntry.getReflectionsAndCorrections();
+    _abatementController.text = _activeJournalEntry.getAbatement();
+  }
+
+  void clearFields() {
+    _circumstancesController.text = "";
+    _descriptionController.text = "";
+    _externalHappeningsController.text = "";
+    _internalHappeningsController.text = "";
+    _reflectionsAndCorrectionsController.text = "";
+    _abatementController.text = "";
   }
 
   @override
   void initState() {
     super.initState();
+
+    _activeJournalEntry = _journalingContext.getCurrentJournalEntry();
+    loadJournalEntry();
+
   }
 
   @override

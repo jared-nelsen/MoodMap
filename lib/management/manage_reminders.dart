@@ -20,11 +20,13 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
   bool _remindingEmotions = true;
   bool _remindingSleep = true;
   bool _remindingExercise = true;
+  bool _remindingJournaling = true;
 
   String _emotionStartTime = _formatTime(new TimeOfDay(hour: 9, minute: 0));
   String _emotionEndTime = _formatTime(new TimeOfDay(hour: 20, minute: 0));
   String _sleepRemindTime = _formatTime(new TimeOfDay(hour: 9, minute: 0));
   String _exerciseRemindTime = _formatTime(new TimeOfDay(hour: 19, minute: 0));
+  String _journalingRemindTime = _formatTime(new TimeOfDay(hour: 20, minute: 0));
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
         child: new Column(
           children: <Widget>[
+
             _buildTitleBar(),
             _divider(),
             _buildEmotionSettings(),
@@ -44,6 +47,10 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
             _buildSleepSettings(),
             _divider(),
             _buildExerciseEvents(),
+            _divider(),
+            _buildJournalingSettings(),
+
+
          ],
        ),
       ),
@@ -279,6 +286,56 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
   }
 
+  Widget _buildJournalingSettings() {
+
+      return new Column(
+        children: <Widget>[
+
+          new Row (
+            children: <Widget>[
+              new Expanded(
+                child: new Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: new Text("Journaling Reminders", style: new TextStyle(fontSize: 22.0),),
+                ),),
+              new Column(children: <Widget>[
+                new Switch(value: _remindingJournaling, onChanged: (bool on) {
+                  setState(() {
+                    _remindingJournaling = on;
+                  });
+                })
+              ],)
+            ],
+          ),
+
+          _divider(),
+
+          new Row(
+            children: <Widget>[
+
+              new Expanded(
+                child: new Padding(
+                  padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+                  child: new Text("Rate in the evening at", style: new TextStyle(fontSize: 18.0),),),
+              ),
+
+              new Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                child: new RaisedButton(
+                    child: new Text(_journalingRemindTime, style: new TextStyle(fontSize: 18.0),),
+                    onPressed: () {_selectJournalingTime(context, _journalingRemindTime);}
+                ),
+              ),
+
+
+            ],
+          ),
+
+        ],
+      );
+
+  }
+
   Widget _divider() {
     return new Divider(
       color: Colors.black,
@@ -329,12 +386,35 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
   }
 
+  Future<Null> _selectJournalingTime(BuildContext context, String time) async {
+
+    final TimeOfDay picked = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now());
+
+    if(picked != null) {
+      setState(() {
+        _journalingRemindTime = _formatTime(picked);
+      });
+    }
+
+  }
+
   void _saveSettings() {
 
     var ref = FirebaseDatabase.instance.reference().child('reminder_settings');
 
-    ReminderSettings settings = new ReminderSettings(_remindingEmotions, _emotionIntervalValue,
-        _emotionStartTime, _emotionEndTime, _remindingSleep, _sleepRemindTime, _remindingExercise, _exerciseRemindTime);
+    ReminderSettings settings = new ReminderSettings(
+        _remindingEmotions,
+        _emotionIntervalValue,
+        _emotionStartTime,
+        _emotionEndTime,
+        _remindingSleep,
+        _sleepRemindTime,
+        _remindingExercise,
+        _exerciseRemindTime,
+        _remindingJournaling,
+        _journalingRemindTime);
 
     ref.set(settings.toJson());
 
@@ -353,11 +433,13 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
         _remindingEmotions = settings.getRemindingEmotions();
         _remindingSleep = settings.getRemindingSleep();
         _remindingExercise = settings.getRemindingExercise();
+        _remindingJournaling = settings.getRemindingJournaling();
 
         _emotionStartTime = settings.getEmotionStartTime();
         _emotionEndTime = settings.getEmotionEndTime();
         _sleepRemindTime = settings.getSleepReminderTime();
         _exerciseRemindTime = settings.getExcerciseRemindTime();
+        _journalingRemindTime = settings.getJournalingRemindTime();
 
       });
 
@@ -373,6 +455,9 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
     if(time.minute == 0) {
       buffer.write("00");
+    } else if(time.minute <= 9 && time.minute >= 1) {
+      buffer.write("0");
+      buffer.write(time.minute);
     } else {
       buffer.write(time.minute);
     }

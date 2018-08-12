@@ -16,6 +16,9 @@ class ReminderSettings {
   bool _remindingExercise;
   String _exerciseRemindTime;
 
+  bool _remindingJournaling;
+  String _journalingRemindTime;
+
   ReminderSettings(
       this._remindingEmotions,
       this._emotionInterval,
@@ -24,7 +27,9 @@ class ReminderSettings {
       this._remindingSleep,
       this._sleepRemindTime,
       this._remindingExercise,
-      this._exerciseRemindTime);
+      this._exerciseRemindTime,
+      this._remindingJournaling,
+      this._journalingRemindTime);
 
   ReminderSettings.fromSnapshot(DataSnapshot snapshot) :
       _dbKey = snapshot.key,
@@ -35,7 +40,9 @@ class ReminderSettings {
       _remindingSleep = snapshot.value['reminding_sleep'],
       _sleepRemindTime = snapshot.value['sleep_remind_time'],
       _remindingExercise = snapshot.value['reminding_exercise'],
-      _exerciseRemindTime = snapshot.value['exercise_remind_time'];
+      _exerciseRemindTime = snapshot.value['exercise_remind_time'],
+      _remindingJournaling = snapshot.value['reminding_journaling'],
+      _journalingRemindTime = snapshot.value['journaling_remind_time'];
 
   toJson() {
    return {
@@ -46,7 +53,9 @@ class ReminderSettings {
      "reminding_sleep": _remindingSleep,
      "sleep_remind_time": _sleepRemindTime,
      "reminding_exercise": _remindingExercise,
-     "exercise_remind_time": _exerciseRemindTime
+     "exercise_remind_time": _exerciseRemindTime,
+     "reminding_journaling" : _remindingJournaling,
+     "journaling_remind_time" : _journalingRemindTime
    };
   }
 
@@ -84,6 +93,14 @@ class ReminderSettings {
 
   String getExcerciseRemindTime() {
     return _exerciseRemindTime;
+  }
+
+  bool getRemindingJournaling() {
+    return _remindingJournaling;
+  }
+
+  String getJournalingRemindTime() {
+    return _journalingRemindTime;
   }
 
 }

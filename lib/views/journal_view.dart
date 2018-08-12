@@ -19,7 +19,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   static String _pageTitle = "Journal Entries";
 
-  JournalingContext _journalingContext = new JournalingContext(animateToJournalEntryPage, animateToMakeAnEntryPage);
+  final JournalingContext _journalingContext = new JournalingContext(animateToJournalEntryPage, animateToMakeAnEntryPage);
 
   @override
   Widget build(BuildContext context) {

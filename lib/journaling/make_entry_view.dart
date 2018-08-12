@@ -25,19 +25,21 @@ class MakeEntryState extends State<MakeEntryView> {
 
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
-  FocusNode _focusNodeCircumstances = new FocusNode();
-  FocusNode _focusNodeDescription = new FocusNode();
-  FocusNode _focusNodeExternalHappenings = new FocusNode();
-  FocusNode _focusNodeInternalHappenings = new FocusNode();
-  FocusNode _focusNodeReflectionsAndCorrections = new FocusNode();
-  FocusNode _focusNodeAbatement = new FocusNode();
+  final FocusNode _focusNodeCircumstances = new FocusNode();
+  final FocusNode _focusNodeDescription = new FocusNode();
+  final FocusNode _focusNodeExternalHappenings = new FocusNode();
+  final FocusNode _focusNodeInternalHappenings = new FocusNode();
+  final FocusNode _focusNodeReflectionsAndCorrections = new FocusNode();
+  final FocusNode _focusNodeAbatement = new FocusNode();
 
-  TextEditingController _circumstancesController = new TextEditingController();
-  TextEditingController _descriptionController = new TextEditingController();
-  TextEditingController _externalHappeningsController = new TextEditingController();
-  TextEditingController _internalHappeningsController = new TextEditingController();
-  TextEditingController _reflectionsAndCorrectionsController = new TextEditingController();
-  TextEditingController _abatementController = new TextEditingController();
+  final TextEditingController _circumstancesController = new TextEditingController();
+  final TextEditingController _descriptionController = new TextEditingController();
+  final TextEditingController _externalHappeningsController = new TextEditingController();
+  final TextEditingController _internalHappeningsController = new TextEditingController();
+  final TextEditingController _reflectionsAndCorrectionsController = new TextEditingController();
+  final TextEditingController _abatementController = new TextEditingController();
+
+  final int maxLines = 8;
 
   JournalingContext _journalingContext;
 
@@ -99,6 +101,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _circumstancesController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -138,6 +141,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _descriptionController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -178,6 +182,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _externalHappeningsController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -218,6 +223,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _internalHappeningsController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -258,6 +264,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _reflectionsAndCorrectionsController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(
@@ -298,6 +305,7 @@ class MakeEntryState extends State<MakeEntryView> {
       child: new TextFormField(
 
         controller: _abatementController,
+        maxLines: maxLines,
 
         decoration: const InputDecoration(
           border: const OutlineInputBorder(

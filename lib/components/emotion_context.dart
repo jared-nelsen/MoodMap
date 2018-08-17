@@ -36,5 +36,4 @@ class EmotionContext {
     Function.apply(_navigateEmotions, null);
   }
 
-
 }

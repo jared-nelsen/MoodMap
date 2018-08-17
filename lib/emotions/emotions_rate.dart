@@ -333,6 +333,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       Emotion emotion = Emotion.fromSnapshot(event.snapshot);
 
       //Add the emotion to the pallet
+
       bool alreadyThere = false;
       for(var listItem in _palletEmotions) {
         if(listItem.getDBKey() == emotion.getDBKey()) {
@@ -346,9 +347,10 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       }
 
       //Add the emotion to the emotions screen based on context
+
       alreadyThere = false;
       for(var listItem in _ratingEmotions) {
-        if(listItem.getDBKey() == emotion.getEmotion()) {
+        if(listItem.getDBKey() == emotion.getDBKey()) {
           alreadyThere = true;
           break;
         }

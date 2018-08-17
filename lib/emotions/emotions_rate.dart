@@ -146,7 +146,12 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
   void addEmotionsToRating(List<EmotionListItem> emotions) {
     setState(() {
       _ratingEmotions.addAll(emotions.map((EmotionListItem emotion) {
-        return new RatableEmotionListItem(emotion.getDBKey(), emotion.getCategory(), emotion.getSpecific(), emotion.getEmotion());
+        return new RatableEmotionListItem(
+            dbKey: emotion.getDBKey(),
+            category: emotion.getCategory(),
+            specific: emotion.getSpecific(),
+            emotion: emotion.getEmotion(),
+        );
       }).toList());
     });
   }
@@ -283,14 +288,14 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       for(var ratingItem in _ratingEmotions) {
 
-        EmotionRating rating = new EmotionRating(
-            ratingItem.getDBKey(),
-            ratingItem.getCategory(),
-            ratingItem.getSpecific(),
-            ratingItem.getEmotion(),
-            ratingItem.getRating());
-
-        ref.set(rating.toJson());
+//        EmotionRating rating = new EmotionRating(
+//            ratingItem.getDBKey(),
+//            ratingItem.getCategory(),
+//            ratingItem.getSpecific(),
+//            ratingItem.getEmotion(),
+//            ratingItem.getRating());
+//
+//        ref.set(rating.toJson());
 
       }
 
@@ -357,9 +362,25 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       }
 
       if(!alreadyThere && emotion.getSpecific() == _emotionContext.getSpecific() && emotion.getCategory() == _emotionContext.getCategory()){
-        _ratingEmotions.add(new RatableEmotionListItem(emotion.getDBKey(), emotion.getCategory(), emotion.getSpecific(), emotion.getEmotion()));
+        _addEmotionToRatingList(emotion);
       }
 
+    });
+
+  }
+
+  void _addEmotionToRatingList(Emotion emotion) {
+
+    final newList = new List<RatableEmotionListItem>.from(_ratingEmotions)
+      ..add(new RatableEmotionListItem(
+        dbKey: emotion.getDBKey(),
+        category: emotion.getCategory(),
+        specific: emotion.getSpecific(),
+        emotion: emotion.getEmotion(),
+      ));
+
+    setState(() {
+      _ratingEmotions = newList;
     });
 
   }
@@ -378,6 +399,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     setState(() {
       _palletEmotions = newList;
     });
+
   }
 
   void _palletListItemChange(int listIndex, bool checked) {

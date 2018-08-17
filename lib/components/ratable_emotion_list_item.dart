@@ -3,37 +3,31 @@ import 'package:flutter/material.dart';
 
 class RatableEmotionListItem extends StatefulWidget {
 
-  String _dbKey;
+  String dbKey;
 
-  String _category;
-  String _specific;
-  String _emotion;
+  String category;
+  String specific;
+  String emotion;
 
-  RatingWrapper _rating = new RatingWrapper();
-
-  RatableEmotionListItem(this._dbKey, this._category, this._specific, this._emotion);
+  RatableEmotionListItem({this.dbKey, this.category, this.specific, this.emotion});
 
   @override
-  State<StatefulWidget> createState() => new RatableEmotionListItemState(this._emotion, this._rating);
+  State<StatefulWidget> createState() => new RatableEmotionListItemState(this.emotion);
 
   String getDBKey() {
-    return _dbKey;
+    return dbKey;
   }
 
   String getCategory() {
-    return _category;
+    return category;
   }
 
   String getSpecific() {
-    return _specific;
+    return specific;
   }
 
   String getEmotion() {
-    return _emotion;
-  }
-
-  String getRating() {
-    _rating.getRating();
+    return emotion;
   }
 
 }
@@ -44,11 +38,9 @@ class RatableEmotionListItemState extends State<RatableEmotionListItem> {
 
   var _ratings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  RatableEmotionListItemState(this._title, this._ratingWrapper);
+  RatableEmotionListItemState(this._title);
 
   String _rating = '0';
-
-  RatingWrapper _ratingWrapper;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +56,6 @@ class RatableEmotionListItemState extends State<RatableEmotionListItem> {
         onChanged: (String value) {
             setState(() {
               _rating = value;
-              _ratingWrapper.setRating(_rating);
             });
         },
 
@@ -80,20 +71,6 @@ class RatableEmotionListItemState extends State<RatableEmotionListItem> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-}
-
-class RatingWrapper{
-
-  String _rating;
-
-  void setRating(String rating) {
-    _rating = rating;
-  }
-
-  String getRating() {
-    return _rating;
   }
 
 }

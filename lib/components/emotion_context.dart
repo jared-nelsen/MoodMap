@@ -29,7 +29,8 @@ class EmotionContext {
 
   void setAndNavigateSpecific(String specifics) {
     _specific = specifics;
-    Function.apply(navigateSpecifics, null);
+    Function.apply(navigateEmotions, null);
   }
+
 
 }

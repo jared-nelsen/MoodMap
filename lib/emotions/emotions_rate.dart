@@ -89,7 +89,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       persistentFooterButtons: <Widget>[
         new FlatButton(onPressed: (){ _saveRatingsToDatabase(); }, child: new Text("Save")),
         new FlatButton(onPressed: null, child: new Text("Save and Journal")),
-        new FlatButton(onPressed: (){ _emotionContext.setAndNavigateSpecific(null); }, child: new Text("Back"))
+        new FlatButton(onPressed: (){ _emotionContext.navigateBackToSpecifics(); }, child: new Text("Back"))
       ],
 
     );

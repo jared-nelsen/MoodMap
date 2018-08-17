@@ -31,7 +31,7 @@ class NavigableCategoryState extends State<NavigableCategoryItem> {
     return new ListTile(
       title: new Text(_category, style: new TextStyle(fontSize: 16.0),),
       trailing: new FlatButton(
-          onPressed: (){ _emotionContext.setAndNavigateCategory(_category); },
+          onPressed: (){ _emotionContext.setCategoryAndNavigateToSpecifics(_category); },
           child: new Icon(Icons.arrow_forward)),
     );
   }

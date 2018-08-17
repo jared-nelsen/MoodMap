@@ -4,11 +4,11 @@ class EmotionContext {
   String _category;
   String _specific;
 
-  Function navigateCategories;
-  Function navigateSpecifics;
-  Function navigateEmotions;
+  Function _navigateCategories;
+  Function _navigateSpecifics;
+  Function _navigateEmotions;
 
-  EmotionContext(this.navigateCategories, this.navigateSpecifics, this.navigateEmotions);
+  EmotionContext(this._navigateCategories, this._navigateSpecifics, this._navigateEmotions);
 
   String getCategory() {
     return _category;
@@ -19,17 +19,21 @@ class EmotionContext {
   }
 
   void navigateBackToCategories() {
-    Function.apply(navigateCategories, null);
+    Function.apply(_navigateCategories, null);
   }
 
-  void setAndNavigateCategory(String category) {
+  void setCategoryAndNavigateToSpecifics(String category) {
     _category = category;
-    Function.apply(navigateSpecifics, null);
+    Function.apply(_navigateSpecifics, null);
   }
 
-  void setAndNavigateSpecific(String specifics) {
+  void navigateBackToSpecifics() {
+    Function.apply(_navigateSpecifics, null);
+  }
+
+  void setSpecificAndNavigateToEmotions(String specifics) {
     _specific = specifics;
-    Function.apply(navigateEmotions, null);
+    Function.apply(_navigateEmotions, null);
   }
 
 

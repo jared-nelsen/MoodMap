@@ -388,10 +388,30 @@ Finished working on pallet emotions.
 Now I need to work on loading and saving emotions that are associate with the specific.
 
 
-Todo
------
-May need to implement a generic database get call in specifics rate initState
-and categories rate initstate for persistence management
+Emotion Rating Issues
+---------------------
+All emotions will show up in the pallet because they are not filtered. However, each
+of those emotions has a specific and context attached to it. This means that when I
+try to add them to the workflow by adding them from the pallet they will be filtered
+out based on the context.
 
-- Add in filtering in retrievefromdatabase in specifics rate to associate
-only with category in context.
+The conceptual problem is that one emotion can have many contexts and specifics but
+I am storing them in one table with the emotion name. So there could be several entries
+with the same type of emotion.
+
+However, this really isnt a problem because I can just filter out duplicates when I
+pull them down for the emotion pallet.
+
+Specifications
+--------------
+1. Emotions are to be pulled down for the pallet from the emotions table and identically
+named emotions are to be filtered out.
+
+2. When an emotion is pulled from the pallet and put onto the rating list I will set the
+context and specific on it such that when it is saved it will persist and reload when
+I once again am in that context.
+
+3. The emotions for the rating screen are to be pulled down based upon the context and
+specifics 
+
+Make two separate firebase references.

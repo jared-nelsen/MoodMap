@@ -30,6 +30,10 @@ class RatableEmotionListItem extends StatefulWidget {
     return emotion;
   }
 
+  String getRating() {
+    return "";
+  }
+
 }
 
 class RatableEmotionListItemState extends State<RatableEmotionListItem> {

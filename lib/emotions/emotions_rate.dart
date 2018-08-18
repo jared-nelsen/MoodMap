@@ -327,9 +327,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     setState(() {
 
-      var ref = FirebaseDatabase.instance.reference().child("emotion_ratings").push();
-
       for(var ratingItem in _ratingEmotions) {
+
+        var ref = FirebaseDatabase.instance.reference().child("emotion_ratings").push();
 
         EmotionRating rating = new EmotionRating(
             ratingItem.getDBKey(),

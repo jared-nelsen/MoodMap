@@ -9,10 +9,16 @@ class RatableEmotionListItem extends StatefulWidget {
   String specific;
   String emotion;
 
+  String _rating = "0";
+
   RatableEmotionListItem({this.dbKey, this.category, this.specific, this.emotion});
 
   @override
   State<StatefulWidget> createState() => new RatableEmotionListItemState(this.emotion);
+
+  _setRating(String rating) {
+    this._rating = rating;
+  }
 
   String getDBKey() {
     return dbKey;
@@ -31,12 +37,15 @@ class RatableEmotionListItem extends StatefulWidget {
   }
 
   String getRating() {
-    return "";
+    return _rating;
   }
 
 }
 
+typedef void SetRating(String value);
+
 class RatableEmotionListItemState extends State<RatableEmotionListItem> {
+  SetRating ratingSetter;
 
   String _title;
 
@@ -61,6 +70,7 @@ class RatableEmotionListItemState extends State<RatableEmotionListItem> {
             setState(() {
               _rating = value;
             });
+            widget._setRating(_rating);
         },
 
        )

@@ -377,7 +377,7 @@ class MakeEntryState extends State<MakeEntryView> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: new Text("Cancel your entry?"),
+            title: new Text("Discard your entry?"),
             children: <Widget>[
 
               new Row(

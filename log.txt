@@ -268,50 +268,6 @@ Login/Logout
 User management
 Themes and colors
 
-
-Docket
-------------------------------------------------------------------------------
-
-Backlog
--------
--Tracking Section
--Journaling Section
--Notifications
--User Management
--Login/Logout
-
--Emotion workflow database saving
--Emotion pallete saving
--Form validation for adding in emotion workflow
-
--Journal View
-         -Solution to scrolling issue is here:
-                   https://www.didierboelens.com/2018/04/hint-4-ensure-a-textfield-or-textformfield-is-visible-in-the-viewport-when-has-the-focus/
-
-
-
-Polish
-------
--Confirmation snackbars for Health section
--Long press to remove items in Rating workflow
--Grey out notification Settings with On/Off Switch
--Change Rating mechanism in Emotion rating list items to something better
--List tile dividers
--General formatting: Text Sizing, Placement
--Colors
-
-Bugs
-----
--String interpolation in med date picker
--Notify user of saved settings in Reminder Section, Sleep Section, and Exercise
- section - Look at snackbars again
-
-Infrastucture
--------------
-Firebase analytics
-
-
-
 Here is how you are going to do this.
 
 1. Create object that holds a string for category, specifics, and emotions (not sure about rating yet).
@@ -405,13 +361,38 @@ pull them down for the emotion pallet.
 Specifications
 --------------
 1. Emotions are to be pulled down for the pallet from the emotions table and identically
-named emotions are to be filtered out.
+named emotions are to be filtered out. Done
 
 2. When an emotion is pulled from the pallet and put onto the rating list I will set the
 context and specific on it such that when it is saved it will persist and reload when
 I once again am in that context.
 
 3. The emotions for the rating screen are to be pulled down based upon the context and
-specifics 
+specifics. Done
 
 Make two separate firebase references.
+
+I need to save new emotions with the new context when I add them from the pallet.
+
+Docket
+------
+
+Major
+-----
+- Tracking
+- Notifications
+- User Management
+- General Way to Rate Emotions without categories
+
+Minor
+-----
+- Long Press to Remove in certain workflows
+
+Polish
+------
+- Snackbar Notifications
+  - Reminder Settings Confirmation
+  - Sleep
+  - Excercise
+  - Tooltips
+    - You can press to remove

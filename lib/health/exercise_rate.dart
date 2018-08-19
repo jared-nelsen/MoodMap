@@ -18,7 +18,7 @@ class ExerciseViewState extends State<ExerciseView> {
   var _exercising = ['Yes', 'No'];
 
   String _type = 'Cardio';
-  var _types = ['Cardio', 'Weightlifting'];
+  var _types = ['Cardio', 'Weightlifting', 'Yoga'];
 
   String _duration = '30 minutes';
   var _durations = ['10 minutes','20 minutes','30 minutes','45 minutes','An hour','More than an hour',];

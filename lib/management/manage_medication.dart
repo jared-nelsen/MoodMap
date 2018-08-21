@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:mood_map/components/medication_list_item.dart';
 import 'package:mood_map/common/medication.dart';
 
+import 'package:mood_map/utilities/DatabaseManager.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class ManageMedicationView extends StatefulWidget {
@@ -16,7 +17,7 @@ class ManageMedicationView extends StatefulWidget {
 
 class ManageMedicationViewState extends State<ManageMedicationView> {
 
-  final firebaseRef = FirebaseDatabase.instance.reference().child("medications");
+  final firebaseRef = DatabaseManager.medicationsReference();
 
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
@@ -223,7 +224,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
 
       Medication medication = new Medication(name, dosage, startDate);
 
-      var ref = FirebaseDatabase.instance.reference().child("medications").push();
+      var ref = DatabaseManager.medicationsPushReference();
 
       ref.set(medication.toJson());
 

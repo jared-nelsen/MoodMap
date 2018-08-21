@@ -6,6 +6,7 @@ import 'package:mood_map/components/journal_entry_list_item.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mood_map/utilities/DatabaseManager.dart';
 
 class JournalEntryListView extends StatefulWidget {
 
@@ -20,7 +21,7 @@ class JournalEntryListView extends StatefulWidget {
 
 class JournalEntryListViewState extends State<JournalEntryListView> {
 
-  final DatabaseReference firebase = FirebaseDatabase.instance.reference().child("journal_entries");
+  final DatabaseReference firebase = DatabaseManager.journalEntriesReference();
 
   JournalingContext _journalingContext;
 

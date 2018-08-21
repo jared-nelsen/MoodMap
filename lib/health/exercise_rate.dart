@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:mood_map/utilities/DatabaseManager.dart';
 
 import 'package:mood_map/common/exercise_rating.dart';
 
@@ -200,7 +200,7 @@ class ExerciseViewState extends State<ExerciseView> {
   }
 
   void _saveEntry() {
-    var ref = FirebaseDatabase.instance.reference().child("exercise_entries").push();
+    var ref = DatabaseManager.exercisePushReference();
 
     ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
 

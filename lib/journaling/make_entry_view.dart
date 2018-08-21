@@ -8,7 +8,7 @@ import 'package:mood_map/components/ensure_visible_when_focused.dart';
 import 'package:mood_map/common/journal_entry.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:mood_map/utilities/DatabaseManager.dart';
 
 class MakeEntryView extends StatefulWidget {
 
@@ -361,7 +361,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
     if(_formKey.currentState.validate()) {
 
-      var ref = FirebaseDatabase.instance.reference().child("journal_entries").push();
+      var ref = DatabaseManager.journalEntriesPushReference();
 
       ref.set(_activeJournalEntry.toJson());
 

@@ -9,6 +9,8 @@ class EmotionRating {
   String _specifics;
   String _emotion;
 
+  DateTime _dateTime = DateTime.now();
+
   String _rating;
 
   EmotionRating(this._dbKey, this._category, this._specifics, this._emotion, this._rating);
@@ -18,13 +20,15 @@ class EmotionRating {
       _category = snapshot.value["category"],
       _specifics = snapshot.value["specifics"],
       _emotion = snapshot.value["emotion"],
-      _rating = snapshot.value["rating"];
+      _rating = snapshot.value["rating"],
+      _dateTime = DateTime.parse(snapshot.value["date_time"]);
 
   toJson() {
     return {
       "category" : _category,
       "specifics" : _specifics,
       "emotion" : _emotion,
+      "date_time": _dateTime.toIso8601String(),
       "rating" : _rating
     };
   }

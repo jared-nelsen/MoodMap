@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mood_map/journaling/entry_list_view.dart';
 import 'package:mood_map/journaling/make_entry_view.dart';
+import 'package:mood_map/journaling/view_entry_view.dart';
 
 import 'package:mood_map/components/journaling_context.dart';
 
@@ -19,7 +20,10 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   static String _pageTitle = "Journal Entries";
 
-  final JournalingContext _journalingContext = new JournalingContext(animateToJournalEntryPage, animateToMakeAnEntryPage);
+  final JournalingContext _journalingContext = new JournalingContext(
+      animateToJournalEntryPage,
+      animateToMakeAnEntryPage,
+      animateToViewAnEntryPage);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,8 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
           new JournalEntryListView(_journalingContext),
 
           new MakeEntryView(_journalingContext),
+
+          new ViewEntryView(_journalingContext)
 
         ],
 
@@ -66,20 +72,20 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
     _animateToPage(1);
   }
 
+  static void animateToViewAnEntryPage() {
+    _animateToPage(2);
+  }
+
   static void setPageName(int page) {
 
     if(page == 0) {
       _pageTitle = "Journal Entries";
     } else if(page == 1) {
       _pageTitle = "Make A Journal Entry";
+    } else if(page == 2) {
+      _pageTitle = "View Your Entry";
     }
 
-  }
-
-  void state() {
-    setState(() {
-
-    });
   }
 
   @override

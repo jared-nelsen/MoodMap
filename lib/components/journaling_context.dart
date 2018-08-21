@@ -5,10 +5,11 @@ class JournalingContext {
 
   Function _navigateEntryListView;
   Function _navigateMakeEntryView;
+  Function _navigateViewEntryView;
 
   JournalEntry _currentJournalEntry;
 
-  JournalingContext(this._navigateEntryListView, this._navigateMakeEntryView);
+  JournalingContext(this._navigateEntryListView, this._navigateMakeEntryView, this._navigateViewEntryView);
 
   JournalEntry getCurrentJournalEntry() {
     return _currentJournalEntry;
@@ -21,6 +22,11 @@ class JournalingContext {
   void navigateToMakeEntryListView(JournalEntry currentEntry){
     _currentJournalEntry = currentEntry;
     Function.apply(_navigateMakeEntryView, null);
+  }
+
+  void navigateToViewEntryView(JournalEntry currentEntry) {
+    _currentJournalEntry = currentEntry;
+    Function.apply(_navigateViewEntryView, null);
   }
 
 }

@@ -32,7 +32,7 @@ class JournalEntryListItemState extends State<JournalEntryListItem> {
     return new ListTile(
       title: new Text(_journalEntry.getDate(), style: new TextStyle(fontSize: 16.0),),
       trailing: new FlatButton(
-          onPressed: (){ _journalingContext.navigateToMakeEntryListView(_journalEntry); },
+          onPressed: (){ _journalingContext.navigateToViewEntryView(_journalEntry); },
           child: new Icon(Icons.arrow_forward)),
     );
 

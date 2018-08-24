@@ -6,62 +6,61 @@ import 'package:mood_map/views/journal_view.dart';
 import 'track_view.dart';
 import 'health_view.dart';
 
-class ApplicationShell extends StatefulWidget {
+import 'package:mood_map/utilities/app_compass.dart';
+
+class ViewController extends StatefulWidget {
+
+  final AppCompass _appCompass;
+
+  ViewController(this._appCompass);
 
   @override
-  State createState() => new ApplicationShellState();
+  State createState() => new ViewControllerState(_appCompass);
 
 }
 
-class ApplicationShellState extends State<ApplicationShell> {
+class ViewControllerState extends State<ViewController> {
 
-  ///The Application Shell State controller
-  PageController _pageController;
+  AppCompass _appCompass;
 
-  ///The index of the current page
-  ///0: Manage
-  ///1: Track
-  ///2: Rate
+  static PageController _pageController;
+
   int _pageIndex = 0;
 
+  ViewControllerState(this._appCompass);
 
   @override
   Widget build(BuildContext context) {
 
-    //The top level scaffold of the app
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Mood Map")),
 
-      ///The body of the app
+      appBar: new AppBar(
+        title: new Text("Mood Map"),
+        actions: <Widget>[
+          IconButton(icon: new Icon(Icons.settings), onPressed: (){})
+        ],
+      ),
+
       body: new PageView(
+
         controller: _pageController,
         physics: new NeverScrollableScrollPhysics(),
-        onPageChanged: onPageChanged,
+        onPageChanged: _onPageChanged,
         children: <Widget>[
 
-          ///The Emotion Manager
           new ManageView(),
-
-          ///The Emotion Tracker
           new TrackView(),
-
-          ///The Emotion Rater
           new RateView(),
-
-          //The Health Rater
           new HealthView(),
-
-          ///The Journaling View
           new JournalView()
 
         ],
       ),
 
-      ///The navigation bar between the views
       bottomNavigationBar: new BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           fixedColor: Colors.blue,
-          onTap: navigationTapped,
+          onTap: _navigationTapped,
           currentIndex: _pageIndex,
           items: [
             new BottomNavigationBarItem(icon: new Icon(Icons.apps), title: new Text("Manage")),
@@ -75,9 +74,7 @@ class ApplicationShellState extends State<ApplicationShell> {
 
   }
 
-
-  ///One of the items on the navigation bar has been tapped
-  void navigationTapped(int page) {
+  void _navigationTapped(int page) {
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),
@@ -85,8 +82,7 @@ class ApplicationShellState extends State<ApplicationShell> {
     );
   }
 
-  ///Sets the index of the current page when it is changed via the navigation bar
-  void onPageChanged(int page) {
+  void _onPageChanged(int page) {
     setState(() {
       this._pageIndex = page;
     });

@@ -402,3 +402,18 @@ Polish
 - Ensure entire journal entry fields are visible by either making them scrollable or
   limiting amount of characters that are entered.
 - Information Icon and popup for Journaling Views
+
+Login Workflow
+--------------
+- Figure out how you want logout to work with the gear icon
+- Snackbars for processing
+- The design was built for one phone only in terms of layout. I need to make it flexible.
+      - I may be able to just build the outer component into a scrollable layout. This may
+        help too for focusing on the text fields.
+- Perform create account
+- Perform login
+- Form validation for login and create account screens.
+
+I may have to refactor everything using Routes but Compasses seem to work for now. In order
+to solve the rate an journal navigation issue, it may be acceptable to just define one named
+route.

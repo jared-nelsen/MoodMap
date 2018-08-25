@@ -412,7 +412,10 @@ Login Workflow
         help too for focusing on the text fields.
 - Perform create account
 - Perform login
+- Integrate with Google Email services
 - Form validation for login and create account screens.
+- Integrate username for DatabaseManager for data integrity
+
 
 I may have to refactor everything using Routes but Compasses seem to work for now. In order
 to solve the rate an journal navigation issue, it may be acceptable to just define one named

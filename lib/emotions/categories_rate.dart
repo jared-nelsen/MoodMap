@@ -7,7 +7,7 @@ import 'package:mood_map/components/navigable_category_item.dart';
 import 'package:mood_map/components/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/DatabaseManager.dart';
+import 'package:mood_map/utilities/database_manager.dart';
 
 class RateCategoriesView extends StatefulWidget {
 

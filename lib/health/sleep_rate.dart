@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:mood_map/utilities/DatabaseManager.dart';
+import 'package:mood_map/utilities/database_manager.dart';
 
 import 'package:mood_map/common/sleep_rating.dart';
 

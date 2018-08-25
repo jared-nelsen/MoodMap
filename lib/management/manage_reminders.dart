@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/DatabaseManager.dart';
+import 'package:mood_map/utilities/database_manager.dart';
 
 import 'package:mood_map/common/reminder_settings.dart';
 

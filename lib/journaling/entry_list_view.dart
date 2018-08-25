@@ -6,7 +6,7 @@ import 'package:mood_map/components/journal_entry_list_item.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/DatabaseManager.dart';
+import 'package:mood_map/utilities/database_manager.dart';
 
 class JournalEntryListView extends StatefulWidget {
 

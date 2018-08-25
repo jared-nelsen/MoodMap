@@ -8,7 +8,7 @@ import 'package:mood_map/components/ensure_visible_when_focused.dart';
 import 'package:mood_map/common/journal_entry.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
-import 'package:mood_map/utilities/DatabaseManager.dart';
+import 'package:mood_map/utilities/database_manager.dart';
 
 class MakeEntryView extends StatefulWidget {
 

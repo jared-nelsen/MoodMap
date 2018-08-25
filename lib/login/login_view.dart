@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/components/ensure_visible_when_focused.dart';
+
 import 'package:mood_map/utilities/app_compass.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,39 +26,61 @@ class LoginScreenState extends State<LoginScreen> {
 
   final _formKey = new GlobalKey<FormState>();
 
+  FocusNode _emailFocusNode = new FocusNode();
+  TextEditingController _emailController = new TextEditingController();
+  FocusNode _passwordFocusNode = new FocusNode();
+  TextEditingController _passwordController = new TextEditingController();
+
   LoginScreenState(this._appCompass);
 
   @override
   Widget build(BuildContext context) {
 
-    return new Container(
+    return new Scaffold(
 
-      decoration: new BoxDecoration(
+      body: new SingleChildScrollView(
 
-        gradient: new LinearGradient(
+        child: new Container(
+
+          decoration: new BoxDecoration(
+
+          gradient: new LinearGradient(
           begin: Alignment.centerLeft,
-          end: new Alignment(1.0, 0.0), // 10% of the width, so there are ten blinds.
-          colors: [this.backgroundColor1, this.backgroundColor2], // whitish to gray
-          tileMode: TileMode.repeated, // repeats the gradient over the canvas
+            end: new Alignment(1.0, 0.0), // 10% of the width, so there are ten blinds.
+            colors: [this.backgroundColor1, this.backgroundColor2], // whitish to gray
+            tileMode: TileMode.repeated, // repeats the gradient over the canvas
+          ),
+
+          ),
+
+          height: MediaQuery.of(context).size.height,
+
+          child: new Form(
+
+            key: _formKey,
+
+            child: new Column(
+
+              children: <Widget>[
+
+                _avatarBlock(),
+                _emailBlock(context),
+                _passwordBlock(context),
+                _loginButtonBlock(context),
+                _forgotPasswordBlock(context),
+                _divider(),
+                _noAccount(context),
+
+              ],
+
+            ),
+
+          ),
+
         ),
-
       ),
 
-      height: MediaQuery.of(context).size.height,
-
-      child: new Column(
-        children: <Widget>[
-
-          _avatarBlock(),
-          _emailBlock(context),
-          _passwordBlock(context),
-          _loginButtonBlock(context),
-          _forgotPasswordBlock(context),
-          _divider(),
-          _noAccount(context),
-
-        ],
-      ),
+      resizeToAvoidBottomPadding: false,
     );
 
   }
@@ -65,7 +89,7 @@ class LoginScreenState extends State<LoginScreen> {
 
     return new Container(
 
-      padding: const EdgeInsets.only(top: 150.0, bottom: 50.0),
+      padding: const EdgeInsets.only(top: 70.0, bottom: 30.0),
 
       child: new Center(
 
@@ -153,14 +177,34 @@ class LoginScreenState extends State<LoginScreen> {
 
           new Expanded(
 
-            child: new TextField(
-              textAlign: TextAlign.center,
-              decoration: new InputDecoration(
-                border: InputBorder.none,
-                hintText: 'user@website.com',
-                hintStyle: new TextStyle(color: this.foregroundColor),
-              ),
-            ),
+            child: new EnsureVisibleWhenFocused(
+
+                child: new TextFormField(
+
+                  controller: _emailController,
+                  focusNode: _emailFocusNode,
+
+                  textAlign: TextAlign.center,
+
+                  decoration: new InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'user@website.com',
+                    hintStyle: new TextStyle(color: this.foregroundColor),
+
+                  ),
+
+                  validator: (value) {
+
+                    if(value == null || value.isEmpty) {
+                      return "Please enter an email address.";
+                    }
+
+                  },
+                ),
+
+                focusNode: _emailFocusNode
+
+            )
 
           ),
 
@@ -211,16 +255,35 @@ class LoginScreenState extends State<LoginScreen> {
 
           new Expanded(
 
-            child: new TextField(
-              obscureText: true,
-              textAlign: TextAlign.center,
-              decoration: new InputDecoration(
-                border: InputBorder.none,
-                hintText: '*********',
-                hintStyle: new TextStyle(color: this.foregroundColor),
-              ),
+            child: new EnsureVisibleWhenFocused(
 
-            ),
+                child: new TextFormField(
+
+                  controller: _passwordController,
+                  focusNode: _passwordFocusNode,
+
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+
+                  decoration: new InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '*********',
+                    hintStyle: new TextStyle(color: this.foregroundColor),
+                  ),
+
+                  validator: (value) {
+
+                    if(value == null || value.isEmpty) {
+                      return "Please enter a password.";
+                    }
+
+                  },
+
+                ),
+
+                focusNode: _passwordFocusNode
+
+            )
 
           ),
 
@@ -311,7 +374,7 @@ class LoginScreenState extends State<LoginScreen> {
     return new Container(
 
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0, bottom: 20.0),
+      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 0.0, bottom: 0.0),
       alignment: Alignment.center,
 
       child: new Row(

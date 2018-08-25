@@ -121,7 +121,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setCircumstances(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter some circumstances.";
           }
 
@@ -162,7 +162,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setDescription(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter a description.";
           }
 
@@ -203,7 +203,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setExternalHappenings(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter some external happenings.";
           }
 
@@ -244,7 +244,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setInternalHappenings(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter some internal happenings.";
           }
 
@@ -285,7 +285,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setReflectionsAndCorrections(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter some reflections.";
           }
 
@@ -326,7 +326,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           _activeJournalEntry.setAbatement(value);
 
-          if(value.isEmpty || value == null) {
+          if(value == null || value.isEmpty) {
             return "Please enter an abatement.";
           }
 

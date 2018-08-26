@@ -4,6 +4,8 @@ import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
 import 'package:mood_map/utilities/app_compass.dart';
 
+
+
 class CreateAccountView extends StatefulWidget {
 
   AppCompass _appCompass;
@@ -395,7 +397,7 @@ class CreateAccountViewState extends State<CreateAccountView> {
                   vertical: 20.0, horizontal: 20.0),
               color: this.highlightColor,
 
-              onPressed: () => {},
+              onPressed: (){  },
 
               child: new Text(
                 "Create Account",

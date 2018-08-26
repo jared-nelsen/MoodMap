@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/components/ensure_visible_when_focused.dart';
+
 import 'package:mood_map/utilities/app_compass.dart';
 
 class CreateAccountView extends StatefulWidget {
@@ -15,44 +17,71 @@ class CreateAccountView extends StatefulWidget {
 
 class CreateAccountViewState extends State<CreateAccountView> {
 
+  AppCompass _appCompass;
+
   final Color backgroundColor1 = new Color(0xFF444152);
   final Color backgroundColor2 = new Color(0xFF6f6c7d);
   final Color highlightColor = new Color(0xfff65aa3);
   final Color foregroundColor = Colors.white;
 
-  AppCompass _appCompass;
+  final _formKey = new GlobalKey<FormState>();
+
+  FocusNode _emailFocusNode = new FocusNode();
+  TextEditingController _emailController = new TextEditingController();
+  FocusNode _passwordFocusNode = new FocusNode();
+  TextEditingController _passwordController = new TextEditingController();
+  FocusNode _repeatPasswordFocusNode = new FocusNode();
+  TextEditingController _repeatPasswordController = new TextEditingController();
 
   CreateAccountViewState(this._appCompass);
 
   @override
   Widget build(BuildContext context) {
 
-    return new Container(
 
-      decoration: new BoxDecoration(
+    return new Scaffold(
 
-        gradient: new LinearGradient(
-          begin: Alignment.centerLeft,
-          end: new Alignment(1.0, 0.0), // 10% of the width, so there are ten blinds.
-          colors: [this.backgroundColor1, this.backgroundColor2], // whitish to gray
-          tileMode: TileMode.repeated, // repeats the gradient over the canvas
+      body: new SingleChildScrollView(
+
+        child: new Container(
+
+          decoration: new BoxDecoration(
+
+            gradient: new LinearGradient(
+              begin: Alignment.centerLeft,
+              end: new Alignment(1.0, 0.0), // 10% of the width, so there are ten blinds.
+              colors: [this.backgroundColor1, this.backgroundColor2], // whitish to gray
+              tileMode: TileMode.repeated, // repeats the gradient over the canvas
+            ),
+
+          ),
+
+          height: MediaQuery.of(context).size.height,
+
+          child: new Form(
+
+              key: _formKey,
+
+              child: new Column(
+                children: <Widget>[
+
+                  _avatarBlock(),
+                  _emailBlock(context),
+                  _passwordBlock(context),
+                  _repeatPasswordBlock(context),
+                  _createAccountButtonBlock(context),
+
+                ],
+              ),
+
+          )
+
         ),
 
       ),
 
-      height: MediaQuery.of(context).size.height,
+      resizeToAvoidBottomPadding: false,
 
-      child: new Column(
-        children: <Widget>[
-
-          _avatarBlock(),
-          _emailBlock(context),
-          _passwordBlock(context),
-          _repeatPasswordBlock(context),
-          _createAccountButtonBlock(context),
-
-        ],
-      ),
     );
 
   }
@@ -61,7 +90,7 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
     return new Container(
 
-      padding: const EdgeInsets.only(top: 150.0, bottom: 50.0),
+      padding: const EdgeInsets.only(top: 70.0, bottom: 30.0),
 
       child: new Center(
 
@@ -150,14 +179,34 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
           new Expanded(
 
-            child: new TextField(
-              textAlign: TextAlign.center,
-              decoration: new InputDecoration(
-                border: InputBorder.none,
-                hintText: 'user@website.com',
-                hintStyle: new TextStyle(color: this.foregroundColor),
-              ),
-            ),
+            child: new EnsureVisibleWhenFocused(
+
+                child: new TextFormField(
+
+                  controller: _emailController,
+                  focusNode: _emailFocusNode,
+
+                  textAlign: TextAlign.center,
+
+                  decoration: new InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'user@website.com',
+                    hintStyle: new TextStyle(color: this.foregroundColor),
+                  ),
+
+                  validator: (value) {
+
+                    if(value == null || value.isEmpty) {
+                      return "Please enter an email address";
+                    }
+
+                  },
+
+                ),
+
+                focusNode: _emailFocusNode,
+
+            )
 
           ),
 
@@ -208,16 +257,35 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
           new Expanded(
 
-            child: TextField(
-              obscureText: true,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Password',
-                hintStyle: TextStyle(color: this.foregroundColor),
-              ),
+            child: new EnsureVisibleWhenFocused(
 
-            ),
+                child: new TextFormField(
+
+                  controller: _passwordController,
+                  focusNode: _passwordFocusNode,
+
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Password',
+                    hintStyle: TextStyle(color: this.foregroundColor),
+                  ),
+
+                  validator: (value){
+
+                    if(value == null || value.isEmpty) {
+                      return "Please enter a password";
+                    }
+
+                  },
+
+                ),
+
+                focusNode: _passwordFocusNode
+
+            )
 
           ),
 
@@ -268,16 +336,35 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
           new Expanded(
 
-            child: new TextField(
-              obscureText: true,
-              textAlign: TextAlign.center,
-              decoration: new InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Repeat Password',
-                hintStyle: TextStyle(color: this.foregroundColor),
-              ),
+            child: new EnsureVisibleWhenFocused(
 
-            ),
+                child: new TextFormField(
+
+                  controller: _repeatPasswordController,
+                  focusNode: _repeatPasswordFocusNode,
+
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+
+                  decoration: new InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Repeat Password',
+                    hintStyle: TextStyle(color: this.foregroundColor),
+                  ),
+
+                  validator: (value) {
+
+                    if(value == null || value.isEmpty) {
+                      return "Please repeat the password";
+                    }
+
+                  },
+
+                ),
+
+                focusNode: _repeatPasswordFocusNode
+
+            )
 
           ),
 

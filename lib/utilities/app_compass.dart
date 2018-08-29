@@ -3,13 +3,13 @@ class AppCompass {
 
   Function _navigateToSplashScreen;
   Function _navigateToLoginScreen;
-  Function _navigateToCreateAccountView;
+  Function _navigateToCreateAccountScreen;
   Function _navigateToApplicationShell;
 
   AppCompass(
       this._navigateToSplashScreen,
       this._navigateToLoginScreen,
-      this._navigateToCreateAccountView,
+      this._navigateToCreateAccountScreen,
       this._navigateToApplicationShell);
 
   void navigateToSplashScreen() {
@@ -20,8 +20,8 @@ class AppCompass {
     Function.apply(_navigateToLoginScreen, null);
   }
 
-  void navigateToCreateAccountView() {
-    Function.apply(_navigateToCreateAccountView, null);
+  void navigateToCreateAccountScreen() {
+    Function.apply(_navigateToCreateAccountScreen, null);
   }
 
   void navigateToApplicationShell() {

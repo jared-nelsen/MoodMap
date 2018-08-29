@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
+import 'package:mood_map/utilities/session.dart';
 import 'package:mood_map/utilities/app_compass.dart';
-
+import 'package:mood_map/utilities/utilities.dart';
 
 
 class CreateAccountView extends StatefulWidget {
@@ -397,7 +398,29 @@ class CreateAccountViewState extends State<CreateAccountView> {
                   vertical: 20.0, horizontal: 20.0),
               color: this.highlightColor,
 
-              onPressed: (){  },
+              onPressed: () {
+
+                if(_formKey.currentState.validate()) {
+
+                  if(_passwordController.text != _repeatPasswordController.text) {
+                    Utilities.showMessageDialog(context, "Passwords do not match!");
+                    return;
+                  }
+
+                  if(Session.userAlreadyExists(_emailController.text)){
+                    Utilities.showMessageDialog(context, "User already exists").then((Null){_appCompass.navigateToLoginScreen();});
+                  }
+
+                  if(Session.login(_emailController.text, _passwordController.text)) {
+                    _appCompass.navigateToApplicationShell();
+                  } else {
+                    Utilities.showMessageDialog(context, "Sucessfully created user but login failed.\nPlease check your network connection.");
+                    _appCompass.navigateToLoginScreen();
+                  }
+
+                }
+                
+              },
 
               child: new Text(
                 "Create Account",

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
 import 'package:mood_map/utilities/app_compass.dart';
+import 'package:mood_map/utilities/session.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -314,7 +316,19 @@ class LoginScreenState extends State<LoginScreen> {
                   vertical: 20.0, horizontal: 20.0),
               color: this.highlightColor,
 
-              onPressed: () => {},
+              onPressed: () {
+
+                if(_formKey.currentState.validate()) {
+
+                  if(Session.login(_emailController.text, _passwordController.text)) {
+                    _appCompass.navigateToApplicationShell();
+                  } else {
+                    Utilities.showMessageDialog(context, "Login failed.\nPlease check your network connection.");
+                  }
+
+                }
+
+              },
 
               child: new Text(
                 "Log In",
@@ -351,7 +365,7 @@ class LoginScreenState extends State<LoginScreen> {
                   vertical: 20.0, horizontal: 20.0),
               color: Colors.transparent,
 
-              onPressed: () => {},
+              onPressed: () {},
 
               child: new Text(
                 "Forgot your password?",
@@ -389,7 +403,7 @@ class LoginScreenState extends State<LoginScreen> {
                   vertical: 20.0, horizontal: 20.0),
               color: Colors.transparent,
 
-              onPressed: () => {},
+              onPressed: () { _appCompass.navigateToCreateAccountScreen(); },
 
               child: new Text(
                 "Don't have an account? Create One",

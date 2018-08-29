@@ -407,14 +407,12 @@ Login Workflow
 --------------
 - Figure out how you want logout to work with the gear icon
 - Snackbars for processing
-- The design was built for one phone only in terms of layout. I need to make it flexible.
-      - I may be able to just build the outer component into a scrollable layout. This may
-        help too for focusing on the text fields.
-- Perform create account
-- Perform login
-- Integrate with Google Email services
-- Form validation for login and create account screens.
+- Forgot password email
 - Integrate username for DatabaseManager for data integrity
+- Initial data upload for create user:
+  -Default datasets for screens
+  -User info
+
 
 
 I may have to refactor everything using Routes but Compasses seem to work for now. In order

@@ -25,7 +25,7 @@ class SplashScreenState extends State<SplashScreen> {
       child: new Column(
         children: <Widget>[
           new FlatButton(onPressed: (){ _appCompass.navigateToLoginScreen(); }, child: new Text("Login Screen")),
-          new FlatButton(onPressed: (){ _appCompass.navigateToCreateAccountView(); }, child: new Text("Create Account")),
+          new FlatButton(onPressed: (){ _appCompass.navigateToCreateAccountScreen(); }, child: new Text("Create Account")),
           new FlatButton(onPressed: (){ _appCompass.navigateToApplicationShell(); }, child: new Text("App")),
         ],
       )

@@ -387,7 +387,6 @@ Major
 
 Minor
 -----
-- View Only View For Journaling
 - Long Press to Remove in certain workflows
 - Change the component that is used to rate things. The drop downs are not easy to use.
 - Navigate To Journal from emotions rate on button press

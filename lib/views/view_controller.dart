@@ -92,6 +92,9 @@ class ViewControllerState extends State<ViewController> {
   void initState() {
     super.initState();
     _pageController = new PageController();
+
+    //The initial screen is the Emotions Rating Screen
+    _pageIndex = 2;
   }
 
   @override

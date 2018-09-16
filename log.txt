@@ -379,6 +379,7 @@ Docket
 
 Major
 -----
+- Initial Setup
 - Tracking
 - Notifications
 - User Management
@@ -390,6 +391,7 @@ Minor
 - Long Press to Remove in certain workflows
 - Change the component that is used to rate things. The drop downs are not easy to use.
 - Navigate To Journal from emotions rate on button press
+- Default App View to Emotions Screen
 
 Polish
 ------
@@ -413,8 +415,5 @@ Login Workflow
   -Default datasets for screens
   -User info
 
-
-
-I may have to refactor everything using Routes but Compasses seem to work for now. In order
-to solve the rate an journal navigation issue, it may be acceptable to just define one named
-route.
+Task List
+--------

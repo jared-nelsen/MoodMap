@@ -380,10 +380,70 @@ Docket
 Major
 -----
 - Initial Setup
+
+          - When a user is created, I need to execute code that uploads the default
+            data categories to the server
+
 - Tracking
+
+          - Function to generate random data
+
+          - Build out my idea for this section of the app.
+          
+          - Graphs:
+            ---------
+            
+                Emotions
+                --------
+
+                - All time proportion
+                - All time fluctuation
+
+                - Given Day proportion
+                - Given Day fluctuation
+                - Time Span proportion
+                - Time Span fluctuation
+
+                       Proportion
+                       ----------
+                       Proportion should be a pie graph where each emotion has
+                       a weight to it
+
+                       Cool Feature
+                       ------------
+                       Use a volume slider to change the time stamp of the proportion
+                       over time. Sliding will show the change in proportion over time.
+
+                       Time
+                       ----
+                       Emotions should be able to be graphed on a traditional
+                       timeline. There should be the ability to check which
+                       emotions 
+
+                       Nice To Have
+                       ------------
+                       Links to journal entries on timeline
+
+                Health
+                ------
+                            
+                - Summary of Excercise
+                - Summary of Sleep
+            
+
 - Notifications
+
+          - Research Module
+          - Come up with tests
+
 - User Management
+
+          - Working on User Creation with login workflow
+          - Need to have the option to delete account
+
 - General Way to Rate Emotions without categories
+
+          - This shouldnt be all that difficult
 
 Minor
 -----
@@ -416,3 +476,5 @@ Login Workflow
 
 Task List
 --------
+Journaling section is broken by the update - put out a call
+

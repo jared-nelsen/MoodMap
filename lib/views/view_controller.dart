@@ -70,6 +70,8 @@ class ViewControllerState extends State<ViewController> {
             new BottomNavigationBarItem(icon: new Icon(Icons.border_color), title: new Text("Journal")),
           ]
       ),
+
+      resizeToAvoidBottomPadding: false,
     );
 
   }

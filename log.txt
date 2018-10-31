@@ -452,6 +452,10 @@ Minor
 - Navigate To Journal from emotions rate on button press
 - Default App View to Emotions Screen
 
+Bugs
+----
+- Journaling title bar not changing text
+
 Polish
 ------
 - Snackbar Notifications
@@ -463,6 +467,7 @@ Polish
 - Ensure entire journal entry fields are visible by either making them scrollable or
   limiting amount of characters that are entered.
 - Information Icon and popup for Journaling Views
+- Consider removing journaling title bar to give more space
 
 Login Workflow
 --------------

@@ -25,13 +25,6 @@ class MakeEntryState extends State<MakeEntryView> {
 
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
-  final FocusNode _focusNodeCircumstances = new FocusNode();
-  final FocusNode _focusNodeDescription = new FocusNode();
-  final FocusNode _focusNodeExternalHappenings = new FocusNode();
-  final FocusNode _focusNodeInternalHappenings = new FocusNode();
-  final FocusNode _focusNodeReflectionsAndCorrections = new FocusNode();
-  final FocusNode _focusNodeAbatement = new FocusNode();
-
   final TextEditingController _circumstancesController = new TextEditingController();
   final TextEditingController _descriptionController = new TextEditingController();
   final TextEditingController _externalHappeningsController = new TextEditingController();
@@ -96,9 +89,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
   Widget circumstances() {
 
-    return new EnsureVisibleWhenFocused(
-      focusNode: _focusNodeCircumstances,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _circumstancesController,
         maxLines: maxLines,
@@ -127,18 +118,13 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeCircumstances,
-
-      ),
-    );
+      );
 
   }
 
   Widget description() {
 
-    return new EnsureVisibleWhenFocused(
-      focusNode: _focusNodeDescription,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _descriptionController,
         maxLines: maxLines,
@@ -168,18 +154,13 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeDescription,
-
-      ),
-    );
+      );
 
   }
 
   Widget externalHappenings() {
 
-    return new EnsureVisibleWhenFocused(
-      focusNode: _focusNodeExternalHappenings,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _externalHappeningsController,
         maxLines: maxLines,
@@ -209,18 +190,13 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeExternalHappenings,
-
-      ),
-    );
+      );
 
   }
 
   Widget internalHappenings() {
 
-    return new EnsureVisibleWhenFocused(
-      focusNode: _focusNodeInternalHappenings,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _internalHappeningsController,
         maxLines: maxLines,
@@ -250,18 +226,13 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeInternalHappenings,
-
-      ),
-    );
+      );
 
   }
 
   Widget reflectionsAndCorrections() {
 
-    return EnsureVisibleWhenFocused(
-      focusNode: _focusNodeReflectionsAndCorrections,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _reflectionsAndCorrectionsController,
         maxLines: maxLines,
@@ -291,18 +262,13 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeReflectionsAndCorrections,
-
-      ),
-    );
+      );
 
   }
 
   Widget abatement() {
 
-    return EnsureVisibleWhenFocused(
-      focusNode: _focusNodeAbatement,
-      child: new TextFormField(
+    return new TextFormField(
 
         controller: _abatementController,
         maxLines: maxLines,
@@ -332,10 +298,8 @@ class MakeEntryState extends State<MakeEntryView> {
 
         },
 
-        focusNode: _focusNodeAbatement,
+      );
 
-      ),
-    );
   }
 
   Widget footerButtons() {

@@ -18,12 +18,16 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   static PageController _pageController;
 
-  static String _pageTitle = "Journal Entries";
+  String _pageTitle = "Journal Entries";
 
-  final JournalingContext _journalingContext = new JournalingContext(
-      animateToJournalEntryPage,
-      animateToMakeAnEntryPage,
-      animateToViewAnEntryPage);
+  JournalingContext _journalingContext;
+
+  JournalViewState() {
+    _journalingContext = new JournalingContext(
+        animateToJournalEntryPage,
+        animateToMakeAnEntryPage,
+        animateToViewAnEntryPage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   }
 
-  static void _animateToPage(int page) {
+  void _animateToPage(int page) {
     setPageName(page);
     _pageController.animateToPage(
         page,
@@ -64,27 +68,31 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
     );
   }
 
-  static void animateToJournalEntryPage() {
+  void animateToJournalEntryPage() {
     _animateToPage(0);
   }
 
-  static void animateToMakeAnEntryPage() {
+  void animateToMakeAnEntryPage() {
     _animateToPage(1);
   }
 
-  static void animateToViewAnEntryPage() {
+  void animateToViewAnEntryPage() {
     _animateToPage(2);
   }
 
-  static void setPageName(int page) {
+  void setPageName(int page) {
 
-    if(page == 0) {
-      _pageTitle = "Journal Entries";
-    } else if(page == 1) {
-      _pageTitle = "Make A Journal Entry";
-    } else if(page == 2) {
-      _pageTitle = "View Your Entry";
-    }
+    setState(() {
+
+      if(page == 0) {
+        _pageTitle = "Journal Entries";
+      } else if(page == 1) {
+        _pageTitle = "Make A Journal Entry";
+      } else if(page == 2) {
+        _pageTitle = "View Your Entry";
+      }
+
+    });
 
   }
 

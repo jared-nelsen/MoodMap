@@ -43,7 +43,14 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
       child: new Scaffold(
 
-        appBar: new AppBar(title: new Text("Rate My Emotions..."),),
+        appBar: new AppBar(title: new Text("Rate My Emotions..."),
+                           actions: <Widget>[
+                             new Padding(
+                              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                              child: new RaisedButton(
+                                  onPressed: () { _emotionContext.navigateToQuickRate(); },
+                                  child: new Text("Quick Rate")),)
+                          ],),
 
         body: new ListView(
           children: _emotions.map((NavigableCategoryItem emotion) {
@@ -51,10 +58,14 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
           }).toList()
         ),
 
-        floatingActionButton: new FloatingActionButton(
-          onPressed: _addCategory,
-          child: new Icon(Icons.add),
+        floatingActionButton: new Padding(
+          padding: EdgeInsets.all(10.0),
+          child: FloatingActionButton.extended(onPressed: _addCategory,
+                                               icon: new Icon(Icons.add),
+                                               label: new Text("Add a Category")),
         ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       ),
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_map/emotions/categories_rate.dart';
 import 'package:mood_map/emotions/specifics_rate.dart';
 import 'package:mood_map/emotions/emotions_rate.dart';
+import 'package:mood_map/emotions/emotions_quick_rate.dart';
 
 import 'package:mood_map/components/emotion_context.dart';
 
@@ -15,7 +16,10 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  static EmotionContext _emotionContext = new EmotionContext(animateToCategories, animateToSpecifics, animateToEmotions);
+  static EmotionContext _emotionContext = new EmotionContext(animateToCategories,
+                                                             animateToSpecifics,
+                                                             animateToEmotions,
+                                                             animateToQuickRate);
 
   static PageController _pageController;
 
@@ -33,7 +37,8 @@ class RateViewState extends State<RateView> {
 
           new RateCategoriesView(_emotionContext),
           new RateSpecificsView(_emotionContext),
-          new RateEmotionsView(_emotionContext)
+          new RateEmotionsView(_emotionContext),
+          new EmotionsQuickRateView(_emotionContext)
 
         ],
       ),
@@ -59,6 +64,10 @@ class RateViewState extends State<RateView> {
 
   static void animateToEmotions() {
     _animateToPage(2);
+  }
+
+  static void animateToQuickRate() {
+    _animateToPage(3);
   }
 
   @override

@@ -66,6 +66,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
           ],
 
         ),
+
       )
     );
 
@@ -77,13 +78,6 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       appBar: new AppBar(
         title: new Text("My emotions"),
-        actions: <Widget>[
-          new Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
-            child: new RaisedButton(
-                onPressed: animateToPallet,
-                child: new Text("Add From Pallet")),)
-        ],
       ),
 
       body: new ListView(
@@ -91,10 +85,27 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       ),
 
       persistentFooterButtons: <Widget>[
-        new FlatButton(onPressed: (){ _saveRatingsToDatabase(); }, child: new Text("Save")),
-        new FlatButton(onPressed: null, child: new Text("Save and Journal")),
-        new FlatButton(onPressed: (){ _emotionContext.navigateBackToSpecifics(); }, child: new Text("Back"))
+
+        new FlatButton(onPressed: (){ _saveRatingsToDatabase(); },
+          child: new Text("Rate"),
+          padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),),
+
+        new FlatButton(onPressed: null,
+          child: new Text("Rate and Journal"),
+          padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),),
+
+        new FlatButton(onPressed: (){ _emotionContext.navigateBackToSpecifics(); },
+          child: new Text("Back", style: new TextStyle(color: Colors.red),),
+          padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),)
+
       ],
+
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: animateToPallet,
+          icon: new Icon(Icons.add),
+          label: new Text("Add From Emotion Pallet")),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
     );
 
@@ -104,23 +115,34 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     return new Scaffold(
 
-      appBar: new AppBar(title: new Text("Emotion Pallet"),
-                          actions: <Widget>[
-                            new Padding(
-                              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0.0, 10.0),
-                              child: new RaisedButton(
-                                  onPressed: _addEmotion,
-                                  child: new Text("New Emotion")),)
-                          ],),
+      appBar: new AppBar(title: new Text("Emotion Pallet"),),
 
       body: new ListView(
           children: _palletEmotions
       ),
 
       persistentFooterButtons: <Widget>[
-        new FlatButton(onPressed: _addAllButton, child: new Text("Add all")),
-        new FlatButton(onPressed: animateToRating, child: new Text("Back"))
+
+        new FlatButton(
+            onPressed: _addAllButton,
+            child: new Text("Add all"),
+            padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
+        ),
+
+        new FlatButton(
+            onPressed: animateToRating,
+            child: new Text("Back", style: new TextStyle(color: Colors.red),),
+            padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
+        )
+
       ],
+
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: _addEmotion,
+          icon: new Icon(Icons.add),
+          label: new Text("New Emotion")),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
     );
 

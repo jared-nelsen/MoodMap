@@ -51,14 +51,19 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
             }).toList()
         ),
 
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: _addSpecific,
+            icon: new Icon(Icons.add),
+            label: new Text("Add some specifics to " + _emotionContext.getCategory())),
 
-        floatingActionButton: new FloatingActionButton(
-          onPressed: _addSpecific,
-          child: new Icon(Icons.add),
-        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: (){ _emotionContext.navigateBackToCategories(); }, child: new Text("Back"))
+          new FlatButton(
+              onPressed: (){ _emotionContext.navigateBackToCategories(); },
+              child: new Text("Back", style: new TextStyle(color: Colors.red),),
+              padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
+          )
         ],
 
       ),

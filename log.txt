@@ -441,10 +441,6 @@ Major
           - Working on User Creation with login workflow
           - Need to have the option to delete account
 
-- General Way to Rate Emotions without categories
-
-          - This shouldnt be all that difficult
-
 Minor
 -----
 - Long Press to Remove in certain workflows
@@ -454,7 +450,8 @@ Minor
 
 Bugs
 ----
-- Journaling title bar not changing text
+- Entering the app correctly selects the emotion section on the navigation bar but does not
+  show the contents
 
 Polish
 ------
@@ -468,6 +465,8 @@ Polish
   limiting amount of characters that are entered.
 - Information Icon and popup for Journaling Views
 - Consider removing journaling title bar to give more space
+- Consider changing where the save and back buttons are in the journaling section.
+- Change color of Quick Rate button
 
 Login Workflow
 --------------

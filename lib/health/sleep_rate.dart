@@ -51,7 +51,11 @@ class SleepViewState extends State<SleepView> {
         ),
 
         persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: _saveEntry, child: new Text("Rate it"))
+          new FlatButton(
+            onPressed: _saveEntry,
+            child: new Text("Rate it"),
+            color: Colors.green,
+            textColor: Colors.white,)
         ],
 
       ),

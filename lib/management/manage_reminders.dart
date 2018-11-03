@@ -59,7 +59,9 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
       persistentFooterButtons: <Widget>[
         new FlatButton(
             onPressed: _saveSettings,
-            child: new Text("Save"))
+            child: new Text("Save"),
+            color: Colors.green,
+            textColor: Colors.white,)
       ],
     );
 

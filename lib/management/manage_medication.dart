@@ -155,10 +155,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                       children: <Widget>[
                         new Padding(
                           padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
-                          child: new IconButton(
-                              icon: new Icon(Icons.date_range),
-                              iconSize: 40.0,
-                              onPressed: (){_selectStartDate(context);}),
+                          child: new Icon(Icons.date_range, size: 40.0,)
                         )
                       ],
 
@@ -307,23 +304,6 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
         );
       }
     );
-
-  }
-
-  Future<Null> _selectStartDate(BuildContext context) async {
-
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: new DateTime.now(),
-        firstDate: new DateTime(2000, 1),
-        lastDate: new DateTime(3000)
-    );
-
-    if(picked != null) {
-      setState(() {
-        _dateStartedToAdd = _formatDate(picked);
-      });
-    }
 
   }
 

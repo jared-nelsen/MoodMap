@@ -319,7 +319,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
               new Expanded(
                 child: new Padding(
                   padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
-                  child: new Text("Rate in the evening at", style: new TextStyle(fontSize: 18.0),),),
+                  child: new Text("Journal at", style: new TextStyle(fontSize: 18.0),),),
               ),
 
               new Padding(
@@ -508,6 +508,11 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
       buffer.write("AM");
     } else {
       buffer.write("PM");
+    }
+
+    if(buffer.toString() == "0:00 AM") {
+      buffer.clear();
+      buffer.write("12:00 AM");
     }
 
     return buffer.toString();

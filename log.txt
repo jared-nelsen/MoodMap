@@ -452,6 +452,7 @@ Bugs
 ----
 - Entering the app correctly selects the emotion section on the navigation bar but does not
   show the contents
+- Entering 12am on the clock for a reminder setting saves in the database as 0:00 am
 
 Polish
 ------

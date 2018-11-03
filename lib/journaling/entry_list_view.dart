@@ -43,11 +43,12 @@ class JournalEntryListViewState extends State<JournalEntryListView> {
         }).toList(),
       ),
 
-      floatingActionButton: new FloatingActionButton(
-          onPressed:(){ _journalingContext.navigateToMakeEntryListView(new JournalEntry()); },
-          child: new Icon(Icons.add),
-      ),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){ _journalingContext.navigateToMakeEntryListView(new JournalEntry());},
+          icon: new Icon(Icons.add),
+          label: new Text("Add an Entry")),
 
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
 
   }

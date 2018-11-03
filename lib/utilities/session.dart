@@ -9,18 +9,32 @@ class Session {
   //Get User
   //-------------------------------------------------------------------------------------------
   static FirebaseUser getCurrentUser() {
-      _getCurrentUser().then((FirebaseUser user) { return user; });
+
+    FirebaseUser currentUser;
+
+    _getCurrentUser().then((FirebaseUser user) { currentUser = user; });
+
+    return currentUser;
   }
 
   static Future<FirebaseUser> _getCurrentUser() async {
     return await _authenticator.currentUser();
   }
 
+  static String getUUID() {
+    return getCurrentUser().uid;
+  }
+
   //Login
   //-------------------------------------------------------------------------------------------
 
   static bool login(String email, String password) {
-    _login(email, password).then((bool success) { return success; });
+
+    bool loginSuccess = false;
+
+    _login(email, password).then((bool success) { loginSuccess = success; });
+
+    return loginSuccess;
   }
 
   static Future<bool> _login(String email, String password) async {
@@ -33,7 +47,12 @@ class Session {
   //-------------------------------------------------------------------------------------------
 
   static bool createUser(String email, String password) {
-    _createUser(email, password).then((bool success) { return success; });
+
+    bool userCreated = false;
+
+    _createUser(email, password).then((bool success) { userCreated = success; });
+
+    return userCreated;
   }
 
   static Future<bool> _createUser(String email, String password) async {
@@ -46,7 +65,16 @@ class Session {
   //-------------------------------------------------------------------------------------------
 
   static bool userAlreadyExists(String email) {
-    _fetchEmailProviders(email).then((providers) { return providers.isNotEmpty; });
+
+    bool alreadyExists = false;
+
+    _userAlreadyExists(email).then((bool exists) { alreadyExists = exists; });
+
+    return alreadyExists;
+  }
+
+  static Future<bool> _userAlreadyExists(String email) async {
+    return await _fetchEmailProviders(email).then((providers) { return providers.isNotEmpty; });
   }
 
   static Future<List<String>> _fetchEmailProviders(String email) async {

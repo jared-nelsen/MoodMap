@@ -403,18 +403,18 @@ class CreateAccountViewState extends State<CreateAccountView> {
                 if(_formKey.currentState.validate()) {
 
                   if(_passwordController.text != _repeatPasswordController.text) {
-                    Utilities.showMessageDialog(context, "Passwords do not match!");
+                    Utilities.showMessageDialog(context, "Passwords do not match. Please try again.");
                     return;
                   }
 
                   if(Session.userAlreadyExists(_emailController.text)){
-                    Utilities.showMessageDialog(context, "User already exists").then((Null){_appCompass.navigateToLoginScreen();});
+                    Utilities.showMessageDialog(context, "User already exists. Please select another username").then((Null){_appCompass.navigateToLoginScreen();});
                   }
 
                   if(Session.login(_emailController.text, _passwordController.text)) {
                     _appCompass.navigateToApplicationShell();
                   } else {
-                    Utilities.showMessageDialog(context, "Sucessfully created user but login failed.\nPlease check your network connection.");
+                    Utilities.showMessageDialog(context, "Successfully created user but login failed.\nPlease check your network connection.");
                     _appCompass.navigateToLoginScreen();
                   }
 

@@ -403,24 +403,60 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
   }
 
-  void _saveSettings() {
+  Future<Null> _saveSettings() async {
 
-    //Note that we do not need to push because we are just setting
-    var ref = DatabaseManager.reminderSettingsReference();
+    if(await showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return SimpleDialog(
+        title: new Text("Save your reminder settings?"),
+        children: <Widget>[
 
-    ReminderSettings settings = new ReminderSettings(
-        _remindingEmotions,
-        _emotionIntervalValue,
-        _emotionStartTime,
-        _emotionEndTime,
-        _remindingSleep,
-        _sleepRemindTime,
-        _remindingExercise,
-        _exerciseRemindTime,
-        _remindingJournaling,
-        _journalingRemindTime);
+          new Column(
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
 
-    ref.set(settings.toJson());
+                  SimpleDialogOption(
+                    onPressed: (){ Navigator.pop(context, true); },
+                    child: new Text("Save them!", style: new TextStyle(color: Colors.green,),),
+                  ),
+
+                  SimpleDialogOption(
+                    onPressed: (){ Navigator.pop(context, false); },
+                    child: new Text("Nevermind"),
+                  )
+
+                ],
+              )
+            ],
+          )
+
+        ],
+      );
+    }
+    ))
+    {
+
+      //Note that we do not need to push because we are just setting
+      var ref = DatabaseManager.reminderSettingsReference();
+
+      ReminderSettings settings = new ReminderSettings(
+          _remindingEmotions,
+          _emotionIntervalValue,
+          _emotionStartTime,
+          _emotionEndTime,
+          _remindingSleep,
+          _sleepRemindTime,
+          _remindingExercise,
+          _exerciseRemindTime,
+          _remindingJournaling,
+          _journalingRemindTime);
+
+      ref.set(settings.toJson());
+
+    }
 
   }
 

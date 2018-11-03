@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'dart:async';
+
 import 'package:mood_map/utilities/database_manager.dart';
 
 import 'package:mood_map/common/exercise_rating.dart';
@@ -203,12 +205,50 @@ class ExerciseViewState extends State<ExerciseView> {
 
   }
 
-  void _saveEntry() {
-    var ref = DatabaseManager.exercisePushReference();
+  Future<Null> _saveEntry() async {
 
-    ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
+    if(await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+        return SimpleDialog(
+          title: new Text("Rate your exercise?"),
+          children: <Widget>[
 
-    ref.set(rating.toJson());
+            new Column(
+              children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+
+                    SimpleDialogOption(
+                      onPressed: (){ Navigator.pop(context, true); },
+                      child: new Text("Rate it!", style: new TextStyle(color: Colors.green,),),
+                    ),
+
+                    SimpleDialogOption(
+                      onPressed: (){ Navigator.pop(context, false); },
+                      child: new Text("Nevermind"),
+                    )
+
+                  ],
+                )
+              ],
+            )
+
+          ],
+        );
+      }
+    ))
+    {
+
+      var ref = DatabaseManager.exercisePushReference();
+
+      ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
+
+      ref.set(rating.toJson());
+
+    }
+
   }
 
   Widget _divider() {

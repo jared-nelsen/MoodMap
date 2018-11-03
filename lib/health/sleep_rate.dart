@@ -243,12 +243,48 @@ class SleepViewState extends State<SleepView> {
 
   }
 
-  void _saveEntry() {
-    var ref = DatabaseManager.sleepEntriesPushReference();
+  Future<Null> _saveEntry() async {
 
-    SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
+    if(await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: new Text("Rate your sleep?"),
+            children: <Widget>[
 
-    ref.set(settings.toJson());
+              new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+
+                      SimpleDialogOption(
+                        onPressed: (){ Navigator.pop(context, true); },
+                        child: new Text("Rate it!", style: new TextStyle(color: Colors.green,),),
+                      ),
+
+                      SimpleDialogOption(
+                        onPressed: (){ Navigator.pop(context, false); },
+                        child: new Text("Nevermind"),
+                      )
+
+                    ],
+                  )
+                ],
+              )
+
+            ],
+          );
+      }
+    ))
+    {
+      var ref = DatabaseManager.sleepEntriesPushReference();
+
+      SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
+
+      ref.set(settings.toJson());
+    }
+
   }
 
   Widget _divider() {

@@ -440,6 +440,7 @@ Major
 
           - Working on User Creation with login workflow
           - Need to have the option to delete account
+          - Forgot your password email and button on screen
 
 Minor
 -----

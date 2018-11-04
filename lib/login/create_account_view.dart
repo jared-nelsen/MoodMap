@@ -73,6 +73,7 @@ class CreateAccountViewState extends State<CreateAccountView> {
                   _passwordBlock(context),
                   _repeatPasswordBlock(context),
                   _createAccountButtonBlock(context),
+                  _alreadyHaveAccount(context)
 
                 ],
               ),
@@ -402,20 +403,40 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
                 if(_formKey.currentState.validate()) {
 
+                  if(!Utilities.isEmail(_emailController.text)) {
+                    Utilities.showMessageDialog(context, "Please enter a valid email address.");
+                    return;
+                  }
+
                   if(_passwordController.text != _repeatPasswordController.text) {
                     Utilities.showMessageDialog(context, "Passwords do not match. Please try again.");
                     return;
                   }
 
                   if(Session.userAlreadyExists(_emailController.text)){
-                    Utilities.showMessageDialog(context, "User already exists. Please select another username").then((Null){_appCompass.navigateToLoginScreen();});
+                    Utilities.showMessageDialog(context, "User already exists. Please use another email address or login.");
+                    return;
                   }
 
-                  if(Session.login(_emailController.text, _passwordController.text)) {
-                    _appCompass.navigateToApplicationShell();
-                  } else {
-                    Utilities.showMessageDialog(context, "Successfully created user but login failed.\nPlease check your network connection.");
-                    _appCompass.navigateToLoginScreen();
+                  bool userCreatedSuccessfully = Session.createUser(_emailController.text, _passwordController.text);
+
+                  if(!userCreatedSuccessfully) {
+
+                    Utilities.showMessageDialog(context, "User creation failed. Please check your network connection.");
+
+                    return;
+
+                  } else if (userCreatedSuccessfully) {
+
+                    bool loginSuccess = Session.login(_emailController.text, _passwordController.text);
+
+                    if(loginSuccess) {
+                      _appCompass.navigateToApplicationShell();
+                    } else {
+                      Utilities.showMessageDialog(context, "Login Failed. Please check your network connection.");
+                      _appCompass.navigateToLoginScreen();
+                    }
+
                   }
 
                 }
@@ -432,6 +453,44 @@ class CreateAccountViewState extends State<CreateAccountView> {
 
         ],
 
+      ),
+
+    );
+
+  }
+
+  Widget _alreadyHaveAccount(BuildContext context) {
+
+    return new Container(
+
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 0.0, bottom: 0.0),
+      alignment: Alignment.center,
+
+      child: new Row(
+
+        children: <Widget>[
+
+          new Expanded(
+
+            child: new FlatButton(
+
+              padding: const EdgeInsets.symmetric(
+                  vertical: 20.0, horizontal: 20.0),
+              color: Colors.transparent,
+
+              onPressed: () { _appCompass.navigateToLoginScreen(); },
+
+              child: new Text(
+                "Already have an account? Login",
+                style: new TextStyle(color: this.foregroundColor.withOpacity(0.5)),
+              ),
+
+            ),
+
+          ),
+
+        ],
       ),
 
     );

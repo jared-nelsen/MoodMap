@@ -197,10 +197,6 @@ class LoginScreenState extends State<LoginScreen> {
 
                   validator: (value) {
 
-                    if(value == null || value.isEmpty) {
-                      return "Please enter an email address";
-                    }
-
                   },
                 ),
 
@@ -275,10 +271,6 @@ class LoginScreenState extends State<LoginScreen> {
 
                   validator: (value) {
 
-                    if(value == null || value.isEmpty) {
-                      return "Please enter a password";
-                    }
-
                   },
 
                 ),
@@ -320,10 +312,21 @@ class LoginScreenState extends State<LoginScreen> {
 
                 if(_formKey.currentState.validate()) {
 
+                  if(!Utilities.isEmail(_emailController.text)) {
+                    Utilities.showMessageDialog(context, "Please enter a valid email address.");
+                    return;
+                  }
+
+                  if(_passwordController.text.isEmpty) {
+                    Utilities.showMessageDialog(context, "Please enter a password.");
+                    return;
+                  }
+
                   if(Session.login(_emailController.text, _passwordController.text)) {
                     _appCompass.navigateToApplicationShell();
                   } else {
-                    Utilities.showMessageDialog(context, "Login failed.\nPlease check your network connection.");
+                    Utilities.showMessageDialog(context, "Sorry, that's not a match.");
+                    return;
                   }
 
                 }

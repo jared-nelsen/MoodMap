@@ -45,6 +45,8 @@ class MakeEntryState extends State<MakeEntryView> {
 
     return new Scaffold(
 
+      appBar: new AppBar(title: new Text("Make a Journal Entry")),
+
       body: new SafeArea(
           child: new Form(
 

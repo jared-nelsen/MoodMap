@@ -34,8 +34,6 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
     return new Scaffold(
 
-      appBar: new AppBar(title: new Text(_pageTitle)),
-
       body: new PageView(
 
         controller: _pageController,
@@ -59,8 +57,7 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   }
 
-  void _animateToPage(int page) {
-    setPageName(page);
+  static void _animateToPage(int page) {
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),
@@ -68,32 +65,16 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
     );
   }
 
-  void animateToJournalEntryPage() {
+  static void animateToJournalEntryPage() {
     _animateToPage(0);
   }
 
-  void animateToMakeAnEntryPage() {
+  static void animateToMakeAnEntryPage() {
     _animateToPage(1);
   }
 
-  void animateToViewAnEntryPage() {
+  static void animateToViewAnEntryPage() {
     _animateToPage(2);
-  }
-
-  void setPageName(int page) {
-
-    setState(() {
-
-      if(page == 0) {
-        _pageTitle = "Journal Entries";
-      } else if(page == 1) {
-        _pageTitle = "Make A Journal Entry";
-      } else if(page == 2) {
-        _pageTitle = "View Your Entry";
-      }
-
-    });
-
   }
 
   @override

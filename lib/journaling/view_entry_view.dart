@@ -45,6 +45,8 @@ class ViewEntryViewState extends State<ViewEntryView> {
 
     return new Scaffold(
 
+      appBar: new AppBar(title: new Text("View Your Journal Entry")),
+
       body: new SafeArea(
           child: new Form(
 

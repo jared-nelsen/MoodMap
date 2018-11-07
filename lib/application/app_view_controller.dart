@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/utilities/app_compass.dart';
-
 import 'package:mood_map/login/login_view.dart';
 import 'package:mood_map/login/create_account_view.dart';
 import 'package:mood_map/login/splash_screen.dart';
@@ -18,12 +16,6 @@ class AppViewControllerState extends State<AppViewController> {
 
   static PageController _pageController;
 
-  final AppCompass _appCompass = new AppCompass(
-      navigateToSplashScreen,
-      navigateToLoginScreen,
-      navigateToCreateAccountView,
-      navigateToApplicationShell);
-
   @override
   Widget build(BuildContext context) {
 
@@ -36,10 +28,10 @@ class AppViewControllerState extends State<AppViewController> {
 
         children: <Widget>[
 
-          new SplashScreen(_appCompass),
-          new LoginScreen(_appCompass),
-          new CreateAccountView(_appCompass),
-          new ViewController(_appCompass)
+          new SplashScreen(),
+          new LoginScreen(),
+          new CreateAccountView(),
+          new AppShellViewController()
 
         ],
 

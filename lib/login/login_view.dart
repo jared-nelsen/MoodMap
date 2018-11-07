@@ -2,24 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
-import 'package:mood_map/utilities/app_compass.dart';
 import 'package:mood_map/utilities/session.dart';
 import 'package:mood_map/utilities/utilities.dart';
 
+import 'package:mood_map/application/app_navigator.dart';
+
 class LoginScreen extends StatefulWidget {
 
-  AppCompass _appCompass;
-
-  LoginScreen(this._appCompass);
-
   @override
-  State<StatefulWidget> createState() => new LoginScreenState(_appCompass);
+  State<StatefulWidget> createState() => new LoginScreenState();
 
 }
 
 class LoginScreenState extends State<LoginScreen> {
-
-  AppCompass _appCompass;
 
   final Color backgroundColor1 = new Color(0xFF444152);
   final Color backgroundColor2 = new Color(0xFF6f6c7d);
@@ -33,7 +28,7 @@ class LoginScreenState extends State<LoginScreen> {
   FocusNode _passwordFocusNode = new FocusNode();
   TextEditingController _passwordController = new TextEditingController();
 
-  LoginScreenState(this._appCompass);
+  LoginScreenState();
 
   @override
   Widget build(BuildContext context) {
@@ -194,10 +189,6 @@ class LoginScreenState extends State<LoginScreen> {
                     hintStyle: new TextStyle(color: this.foregroundColor),
 
                   ),
-
-                  validator: (value) {
-
-                  },
                 ),
 
                 focusNode: _emailFocusNode
@@ -269,10 +260,6 @@ class LoginScreenState extends State<LoginScreen> {
                     hintStyle: new TextStyle(color: this.foregroundColor),
                   ),
 
-                  validator: (value) {
-
-                  },
-
                 ),
 
                 focusNode: _passwordFocusNode
@@ -322,12 +309,7 @@ class LoginScreenState extends State<LoginScreen> {
                     return;
                   }
 
-                  if(Session.login(_emailController.text, _passwordController.text)) {
-                    _appCompass.navigateToApplicationShell();
-                  } else {
-                    Utilities.showMessageDialog(context, "Sorry, that's not a match.");
-                    return;
-                  }
+                  Session.login(context, _emailController.text, _passwordController.text);
 
                 }
 
@@ -406,7 +388,7 @@ class LoginScreenState extends State<LoginScreen> {
                   vertical: 20.0, horizontal: 20.0),
               color: Colors.transparent,
 
-              onPressed: () { _appCompass.navigateToCreateAccountScreen(); },
+              onPressed: () { AppNavigator.navigateToCreateAccountView(); },
 
               child: new Text(
                 "Don't have an account? Create One",

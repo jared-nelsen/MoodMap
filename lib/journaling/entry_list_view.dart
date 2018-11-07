@@ -35,7 +35,10 @@ class JournalEntryListViewState extends State<JournalEntryListView> {
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
+
+      appBar: new AppBar(title: new Text("Journal Entries")),
 
       body: new ListView(
         children: _entries.map((JournalEntryListItem entry) {

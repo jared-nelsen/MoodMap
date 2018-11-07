@@ -6,28 +6,18 @@ import 'package:mood_map/views/journal_view.dart';
 import 'track_view.dart';
 import 'health_view.dart';
 
-import 'package:mood_map/utilities/app_compass.dart';
-
-class ViewController extends StatefulWidget {
-
-  final AppCompass _appCompass;
-
-  ViewController(this._appCompass);
+class AppShellViewController extends StatefulWidget {
 
   @override
-  State createState() => new ViewControllerState(_appCompass);
+  State createState() => new AppShellViewControllerState();
 
 }
 
-class ViewControllerState extends State<ViewController> {
-
-  AppCompass _appCompass;
+class AppShellViewControllerState extends State<AppShellViewController> {
 
   static PageController _pageController;
 
-  int _pageIndex = 0;
-
-  ViewControllerState(this._appCompass);
+  int _pageIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +66,7 @@ class ViewControllerState extends State<ViewController> {
 
   }
 
-  void _navigationTapped(int page) {
+  static void _navigationTapped(int page) {
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),
@@ -90,13 +80,30 @@ class ViewControllerState extends State<ViewController> {
     });
   }
 
+  static void navigateToManageView() {
+    _navigationTapped(0);
+  }
+
+  static void navigateToTrackView() {
+    _navigationTapped(1);
+  }
+
+  static void navigateToRateView() {
+    _navigationTapped(2);
+  }
+
+  static void navigateToHealthView() {
+    _navigationTapped(3);
+  }
+
+  static void navigateToJournalView() {
+    _navigationTapped(4);
+  }
+
   @override
   void initState() {
     super.initState();
     _pageController = new PageController();
-
-    //The initial screen is the Emotions Rating Screen
-    _pageIndex = 2;
   }
 
   @override

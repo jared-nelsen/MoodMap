@@ -3,24 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:mood_map/components/ensure_visible_when_focused.dart';
 
 import 'package:mood_map/utilities/session.dart';
-import 'package:mood_map/utilities/app_compass.dart';
 import 'package:mood_map/utilities/utilities.dart';
+
+import 'package:mood_map/application/app_navigator.dart';
 
 
 class CreateAccountView extends StatefulWidget {
 
-  AppCompass _appCompass;
-
-  CreateAccountView(this._appCompass);
-
   @override
-  State<StatefulWidget> createState() => new CreateAccountViewState(_appCompass);
+  State<StatefulWidget> createState() => new CreateAccountViewState();
 
 }
 
 class CreateAccountViewState extends State<CreateAccountView> {
-
-  AppCompass _appCompass;
 
   final Color backgroundColor1 = new Color(0xFF444152);
   final Color backgroundColor2 = new Color(0xFF6f6c7d);
@@ -35,8 +30,6 @@ class CreateAccountViewState extends State<CreateAccountView> {
   TextEditingController _passwordController = new TextEditingController();
   FocusNode _repeatPasswordFocusNode = new FocusNode();
   TextEditingController _repeatPasswordController = new TextEditingController();
-
-  CreateAccountViewState(this._appCompass);
 
   @override
   Widget build(BuildContext context) {
@@ -198,14 +191,6 @@ class CreateAccountViewState extends State<CreateAccountView> {
                     hintStyle: new TextStyle(color: this.foregroundColor),
                   ),
 
-                  validator: (value) {
-
-                    if(value == null || value.isEmpty) {
-                      return "Please enter an email address";
-                    }
-
-                  },
-
                 ),
 
                 focusNode: _emailFocusNode,
@@ -276,14 +261,6 @@ class CreateAccountViewState extends State<CreateAccountView> {
                     hintText: 'Password',
                     hintStyle: TextStyle(color: this.foregroundColor),
                   ),
-
-                  validator: (value){
-
-                    if(value == null || value.isEmpty) {
-                      return "Please enter a password";
-                    }
-
-                  },
 
                 ),
 
@@ -356,14 +333,6 @@ class CreateAccountViewState extends State<CreateAccountView> {
                     hintStyle: TextStyle(color: this.foregroundColor),
                   ),
 
-                  validator: (value) {
-
-                    if(value == null || value.isEmpty) {
-                      return "Please repeat the password";
-                    }
-
-                  },
-
                 ),
 
                 focusNode: _repeatPasswordFocusNode
@@ -408,36 +377,22 @@ class CreateAccountViewState extends State<CreateAccountView> {
                     return;
                   }
 
+                  if(_passwordController.text.isEmpty) {
+                    Utilities.showMessageDialog(context, "Please enter a password.");
+                    return;
+                  }
+
+                  if(_repeatPasswordController.text.isEmpty) {
+                    Utilities.showMessageDialog(context, "Please repeat your entered password.");
+                    return;
+                  }
+
                   if(_passwordController.text != _repeatPasswordController.text) {
                     Utilities.showMessageDialog(context, "Passwords do not match. Please try again.");
                     return;
                   }
 
-                  if(Session.userAlreadyExists(_emailController.text)){
-                    Utilities.showMessageDialog(context, "User already exists. Please use another email address or login.");
-                    return;
-                  }
-
-                  bool userCreatedSuccessfully = Session.createUser(_emailController.text, _passwordController.text);
-
-                  if(!userCreatedSuccessfully) {
-
-                    Utilities.showMessageDialog(context, "User creation failed. Please check your network connection.");
-
-                    return;
-
-                  } else if (userCreatedSuccessfully) {
-
-                    bool loginSuccess = Session.login(_emailController.text, _passwordController.text);
-
-                    if(loginSuccess) {
-                      _appCompass.navigateToApplicationShell();
-                    } else {
-                      Utilities.showMessageDialog(context, "Login Failed. Please check your network connection.");
-                      _appCompass.navigateToLoginScreen();
-                    }
-
-                  }
+                  Session.createUserAccount(context, _emailController.text, _passwordController.text);
 
                 }
                 
@@ -479,7 +434,7 @@ class CreateAccountViewState extends State<CreateAccountView> {
                   vertical: 20.0, horizontal: 20.0),
               color: Colors.transparent,
 
-              onPressed: () { _appCompass.navigateToLoginScreen(); },
+              onPressed: () { AppNavigator.navigateToLoginScreen(); },
 
               child: new Text(
                 "Already have an account? Login",

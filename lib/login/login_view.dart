@@ -350,7 +350,7 @@ class LoginScreenState extends State<LoginScreen> {
                   vertical: 20.0, horizontal: 20.0),
               color: Colors.transparent,
 
-              onPressed: () {},
+              onPressed: () { Session.passwordReset(context); },
 
               child: new Text(
                 "Forgot your password?",

@@ -8,6 +8,10 @@ class Session {
 
   static final FirebaseAuth _authenticator = FirebaseAuth.instance;
 
+  static final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+  static String _resetEmail;
+
   //Get User
   //-------------------------------------------------------------------------------------------
 
@@ -24,17 +28,17 @@ class Session {
     password = password.trim();
 
     //Check if the user already exists
-    await _checkUserAlreadyExists(email).then((exists) {
+    await _checkUserAlreadyExists(email).then((exists) async {
 
       if(exists) {
 
-        _authenticator.signInWithEmailAndPassword(email: email, password: password)
-            .then((FirebaseUser user) { _loginSuccess(); })
-            .catchError((Error e) { _loginFailure(context); });
+        await _authenticator.signInWithEmailAndPassword(email: email, password: password)
+                .then((FirebaseUser user) { _loginSuccess(); })
+                .catchError((Error e) { _loginFailure(context); });
 
       } else {
 
-        Utilities.showMessageDialog(context, "That user doesn't exist. Please create an account below.");
+        _userDoesntExist(context);
 
       }
 
@@ -56,7 +60,7 @@ class Session {
   static Future createUserAccount(BuildContext context, email, String password) async {
 
     //Check if the user already exists
-    await _checkUserAlreadyExists(email).then((exists) {
+    await _checkUserAlreadyExists(email).then((exists) async {
 
       if(exists) {
 
@@ -65,9 +69,9 @@ class Session {
 
       } else {
 
-        _authenticator.createUserWithEmailAndPassword(email: email, password: password)
-            .then((FirebaseUser user) { _createUserSuccess(); })
-            .catchError((Error e) { _createUserFailure(context); });
+        await _authenticator.createUserWithEmailAndPassword(email: email, password: password)
+              .then((FirebaseUser user) { _createUserSuccess(); })
+              .catchError((Error e) { _createUserFailure(context); });
 
       }
 
@@ -104,6 +108,125 @@ class Session {
 
   static Future<List<String>> _fetchEmailProviders(String email) async {
     return await _authenticator.fetchProvidersForEmail(email: email);
+  }
+
+  static void _userDoesntExist(BuildContext context) {
+    Utilities.showMessageDialog(context, "That user doesn't exist. Please create an account below.");
+  }
+
+  //Reset Password
+  //------------------------------------------------------------------------------------------
+
+  static void passwordReset(BuildContext context) async {
+
+    await showDialog(
+
+      context: context,
+
+      child: new Form(
+        key: _formKey,
+        child: new SimpleDialog(
+
+          title: new Text("Send a password reset email to"),
+
+          children: <Widget>[
+
+            new Padding(
+
+              padding: const EdgeInsets.all(10.0),
+
+              child: new TextFormField(
+
+                decoration: new InputDecoration(
+
+                    hintText: "Email Address",
+
+                    border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(const Radius.circular(0.0)),
+                        borderSide: new BorderSide(color: Colors.black, width: 1.0)
+                    )
+
+                ),
+
+                autofocus: true,
+
+                validator: (value) {
+
+                  if(!Utilities.isEmail(value)) {
+                    return "Please enter a valid email address";
+                  }
+
+                  _resetEmail = value;
+                },
+              ),
+
+            ),
+
+            new Row(
+
+              children: <Widget>[
+                new Expanded(
+
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+
+                      new FlatButton(
+                          child: new Text("Send Reset Email", style: new TextStyle(color: Colors.green,),),
+                          onPressed: () async {
+
+                            if(_formKey.currentState.validate()) {
+
+                              await _authenticator.sendPasswordResetEmail(email: _resetEmail)
+                              .then((result) {
+                                Navigator.pop(context, null);
+
+                                var info = SnackBar(content: new Text("A Password Reset Email was sent to " + _resetEmail),);
+                                Scaffold.of(context).showSnackBar(info);
+
+                              })
+                              .catchError((error) {
+
+                                Navigator.pop(context, null);
+
+                                var info = SnackBar(content: new Text("That user doesn't exist. Please create an account above."),);
+                                Scaffold.of(context).showSnackBar(info);
+
+                              });
+
+                            }
+
+                          }
+                      )
+                    ],
+
+                  ),
+
+                ),
+
+                new Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+
+                    new FlatButton(
+
+                        child: new Text("Cancel"),
+
+                        onPressed: () { Navigator.pop(context, null); }
+
+                    )
+                  ],
+                )
+              ],
+            )
+
+          ],
+
+        ),
+      ),
+
+    );
+
   }
 
 }

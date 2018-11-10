@@ -114,6 +114,14 @@ class Session {
     Utilities.showMessageDialog(context, "That user doesn't exist. Please create an account below.");
   }
 
+  //Sign Out
+  //------------------------------------------------------------------------------------------
+
+  static Future<void> logOut() async {
+    AppNavigator.navigateToLoginScreen();
+    return _authenticator.signOut();
+  }
+
   //Reset Password
   //------------------------------------------------------------------------------------------
 

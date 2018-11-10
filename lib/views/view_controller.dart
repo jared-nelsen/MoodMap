@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mood_map/utilities/session.dart';
+
 import 'manage_view.dart';
 import 'rate_view.dart';
 import 'package:mood_map/views/journal_view.dart';
@@ -27,7 +29,64 @@ class AppShellViewControllerState extends State<AppShellViewController> {
       appBar: new AppBar(
         title: new Text("Mood Map"),
         actions: <Widget>[
-          IconButton(icon: new Icon(Icons.settings), onPressed: (){})
+          //IconButton(icon: new Icon(Icons.settings), onPressed: (){})
+
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+
+              const PopupMenuItem(child: const Text("Log Out"), value: "T",),
+
+            ],
+            
+            onSelected: (String s) {
+
+              showDialog<bool>(
+                  context: context,
+                  builder: (BuildContext context) {
+
+                    return SimpleDialog(
+                      title: new Text("Are you sure you would like to log out?"),
+                      children: <Widget>[
+
+                        new Column(
+                          children: <Widget>[
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+
+                                SimpleDialogOption(
+                                  child: new Text("Yes", style: new TextStyle(color: Colors.green),),
+                                  onPressed: () {
+
+                                    Navigator.pop(context);
+                                    Session.logOut();
+                                    
+                                    },
+
+                                ),
+
+                                SimpleDialogOption(
+                                  child: new Text("No"),
+                                  onPressed: () {
+
+                                    Navigator.pop(context);
+
+                                    },
+                                )
+
+                              ],
+                            )
+                          ],
+                        ),
+
+                      ],
+                    );
+
+                  });
+            },
+                
+          )
+
         ],
       ),
 

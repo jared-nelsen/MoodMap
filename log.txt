@@ -439,8 +439,6 @@ Major
 - User Management
 
           - Working on User Creation with login workflow
-          - Need to have the option to delete account
-          - Forgot your password email and button on screen
 
 Minor
 -----
@@ -452,7 +450,7 @@ Minor
 Bugs
 ----
 - Entering the app correctly selects the emotion section on the navigation bar but does not
-  show the contents
+  show the contents -- Attempted fix
 
 Polish
 ------

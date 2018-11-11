@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 import 'package:mood_map/components/ratable_emotion_list_item.dart';
 import 'package:mood_map/components/emotion_list_item.dart';
@@ -9,8 +10,8 @@ import 'package:mood_map/common/emotion_rating.dart';
 
 import 'package:mood_map/components/emotion_context.dart';
 
-import 'dart:async';
 import 'package:mood_map/utilities/utilities.dart';
+import 'package:mood_map/application/app_navigator.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database_manager.dart';
@@ -87,15 +88,15 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       persistentFooterButtons: <Widget>[
 
-        new FlatButton(onPressed: (){ _saveRatingsToDatabase(); },
+        new FlatButton(onPressed: () { _saveRatingsToDatabase(); },
           child: new Text("Rate"),
           padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),),
 
-        new FlatButton(onPressed: null,
+        new FlatButton(onPressed: () { _saveRatingsToDatabase(); AppNavigator.navigateToMakeJournalView(); },
           child: new Text("Rate and Journal"),
           padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),),
 
-        new FlatButton(onPressed: (){ _emotionContext.navigateBackToSpecifics(); },
+        new FlatButton(onPressed: () { _emotionContext.navigateBackToSpecifics(); },
           child: new Text("Back", style: new TextStyle(color: Colors.red),),
           padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),)
 

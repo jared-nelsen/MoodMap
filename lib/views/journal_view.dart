@@ -18,8 +18,6 @@ class JournalViewState extends State<JournalView> with SingleTickerProviderState
 
   static PageController _pageController;
 
-  String _pageTitle = "Journal Entries";
-
   JournalingContext _journalingContext;
 
   JournalViewState() {

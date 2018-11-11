@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/components/emotion_context.dart';
+import 'package:mood_map/application/emotion_context.dart';
 
 class NavigableSpecificsItem extends StatefulWidget {
 

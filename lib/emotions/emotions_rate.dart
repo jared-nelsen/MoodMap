@@ -8,7 +8,7 @@ import 'package:mood_map/components/emotion_list_item.dart';
 import 'package:mood_map/common/emotion.dart';
 import 'package:mood_map/common/emotion_rating.dart';
 
-import 'package:mood_map/components/emotion_context.dart';
+import 'package:mood_map/application/emotion_context.dart';
 
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/application/app_navigator.dart';

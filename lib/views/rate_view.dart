@@ -5,7 +5,7 @@ import 'package:mood_map/emotions/specifics_rate.dart';
 import 'package:mood_map/emotions/emotions_rate.dart';
 import 'package:mood_map/emotions/emotions_quick_rate.dart';
 
-import 'package:mood_map/components/emotion_context.dart';
+import 'package:mood_map/application/emotion_context.dart';
 
 class RateView extends StatefulWidget {
 

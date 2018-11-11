@@ -436,9 +436,6 @@ Major
           - Research Module
           - Come up with tests
 
-- User Management
-
-          - Working on User Creation with login workflow
 
 Minor
 -----
@@ -450,14 +447,13 @@ Minor
 Bugs
 ----
 - Firebase Login call not working. Documented issue on github. Noted as being worked on ~11-01-18
+           -CreateUserWithPasswordAndEmail
+- Pressing back button on Emotion quick rate throws exceptions
 
 Polish
 ------
 - Snackbar Notifications
-  - Reminder Settings Confirmation
-  - Sleep
-  - Excercise
-  - Tooltips
+- Tooltips
     - You can press to remove
 - Ensure entire journal entry fields are visible by either making them scrollable or
   limiting amount of characters that are entered.
@@ -469,6 +465,7 @@ Polish
 Task List
 --------------
 - Snackbars for processing
+- Navigate to Make Journal Entry from Emotion Quick Rate and Emotion Rate 
 - Title Field for Journal Entries
 - Integrate username for DatabaseManager for data integrity
 - Initial data upload for create user:

@@ -420,7 +420,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
                   SimpleDialogOption(
                     onPressed: (){ Navigator.pop(context, true); },
-                    child: new Text("Save them!", style: new TextStyle(color: Colors.green,),),
+                    child: new Text("Save them", style: new TextStyle(color: Colors.green,),),
                   ),
 
                   SimpleDialogOption(
@@ -455,6 +455,8 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
           _journalingRemindTime);
 
       ref.set(settings.toJson());
+
+      Scaffold.of(context).showSnackBar(SnackBar(content: new Text("Reminder settings saved"), duration: new Duration(seconds: 2),));
 
     }
 

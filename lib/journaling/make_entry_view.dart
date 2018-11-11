@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/rendering.dart';
 
-import 'package:mood_map/components/ensure_visible_when_focused.dart';
-
 import 'package:mood_map/common/journal_entry.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
 import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 class MakeEntryView extends StatefulWidget {
 
@@ -332,6 +331,8 @@ class MakeEntryState extends State<MakeEntryView> {
       ref.set(_activeJournalEntry.toJson());
 
       _journalingContext.navigateToEntryListView();
+
+      Utilities.showSnackbarMessage(context, "Journal entry saved");
     }
 
     clearFields();

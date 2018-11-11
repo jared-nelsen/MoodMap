@@ -9,6 +9,7 @@ import 'package:mood_map/common/emotion_rating.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 class EmotionsQuickRateView extends StatefulWidget {
 
@@ -97,6 +98,8 @@ class EmotionsQuickRateViewState extends State<EmotionsQuickRateView> {
       }
 
     });
+
+    Utilities.showSnackbarMessage(context, "Emotions rated successfully");
 
     //We are done with the workflow so navigate back to the categories
     _emotionContext.navigateBackToCategories();

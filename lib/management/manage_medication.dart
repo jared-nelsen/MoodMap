@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:mood_map/utilities/utilities.dart';
+
 import 'package:mood_map/components/medication_list_item.dart';
 import 'package:mood_map/common/medication.dart';
 
@@ -226,6 +228,8 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
       ref.set(medication.toJson());
 
       Navigator.pop(context, null);
+
+      _confirm("Medication added");
     });
 
   }
@@ -245,7 +249,13 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
       }
 
       if(!alreadyThere){
-        _medications.add(new MedicationListItem(newMedication.key, newMedication.medicationName, newMedication.dosage, newMedication.startDate, _removeMedication));
+        _medications.add(new MedicationListItem(
+            newMedication.key,
+            newMedication.medicationName,
+            newMedication.dosage,
+            newMedication.startDate,
+            _removeMedication));
+
       }
 
     });
@@ -265,8 +275,9 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
+
                     new SimpleDialogOption(
-                      child: const Text("Yes"),
+                      child: const Text("Yes", style: const TextStyle(color: Colors.green),),
                       onPressed: (){
 
                         setState(() {
@@ -284,6 +295,9 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                           FirebaseDatabase.instance.reference().child("medications").child(medication.dbKey).remove();
 
                           _medications.removeAt(index);
+
+                          _confirm("Medication removed");
+
                         });
 
                         Navigator.pop(context);
@@ -295,6 +309,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                         Navigator.pop(context);
                       },
                     )
+
                   ],
                 )
               ],
@@ -317,6 +332,10 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
     b.write(time.year);
 
     return b.toString();
+  }
+
+  void _confirm(String confirmation) {
+    Utilities.showSnackbarMessage(context, confirmation);
   }
 
   @override

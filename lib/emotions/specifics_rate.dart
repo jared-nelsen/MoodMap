@@ -9,6 +9,7 @@ import 'package:mood_map/components/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 class RateSpecificsView extends StatefulWidget {
 
@@ -131,6 +132,8 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
       ref.set(item.toJson());
 
       Navigator.pop(context, null);
+
+      Utilities.showSnackbarMessage(context, "Specifics added successfully");
     });
 
   }

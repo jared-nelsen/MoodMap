@@ -10,6 +10,7 @@ import 'package:mood_map/common/emotion_rating.dart';
 import 'package:mood_map/components/emotion_context.dart';
 
 import 'dart:async';
+import 'package:mood_map/utilities/utilities.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database_manager.dart';
@@ -174,6 +175,8 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     });
 
     animateToRating();
+
+    Utilities.showSnackbarMessage(context, "Emotions added from Pallet");
   }
 
   void _addEmotionsFromPalletToRatingScreen(List<EmotionListItem> emotions) {
@@ -342,6 +345,9 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       _addEmotionPalletItemToDatabase(emotionToAdd);
 
       Navigator.pop(context, null);
+
+      Utilities.showSnackbarMessage(context, "Emotion added to database");
+
     });
 
   }
@@ -366,6 +372,8 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       }
 
     });
+
+    Utilities.showSnackbarMessage(context, "Emotions sucessfully rated");
 
     //We are done with the workflow so navigate back to the categories
     _emotionContext.navigateBackToCategories();

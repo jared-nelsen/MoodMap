@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 
+import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/utilities/database_manager.dart';
 
 import 'package:mood_map/common/exercise_rating.dart';
@@ -222,7 +223,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
                     SimpleDialogOption(
                       onPressed: (){ Navigator.pop(context, true); },
-                      child: new Text("Rate it!", style: new TextStyle(color: Colors.green,),),
+                      child: new Text("Rate it", style: new TextStyle(color: Colors.green,),),
                     ),
 
                     SimpleDialogOption(
@@ -247,6 +248,8 @@ class ExerciseViewState extends State<ExerciseView> {
 
       ref.set(rating.toJson());
 
+      Utilities.showSnackbarMessage(context, "Exercise rating successful");
+
     }
 
   }
@@ -264,6 +267,10 @@ class ExerciseViewState extends State<ExerciseView> {
       color: Colors.white,
       height: 15.0,
     );
+  }
+
+  void _confirm(String confirmation) {
+    Utilities.showSnackbarMessage(context, confirmation);
   }
 
   @override

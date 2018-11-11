@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/utilities/database_manager.dart';
 
 import 'package:mood_map/common/sleep_rating.dart';
@@ -260,7 +261,7 @@ class SleepViewState extends State<SleepView> {
 
                       SimpleDialogOption(
                         onPressed: (){ Navigator.pop(context, true); },
-                        child: new Text("Rate it!", style: new TextStyle(color: Colors.green,),),
+                        child: new Text("Rate it", style: new TextStyle(color: Colors.green,),),
                       ),
 
                       SimpleDialogOption(
@@ -283,6 +284,8 @@ class SleepViewState extends State<SleepView> {
       SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
 
       ref.set(settings.toJson());
+
+      _confirm("Sleep rated successfully");
     }
 
   }
@@ -300,6 +303,10 @@ class SleepViewState extends State<SleepView> {
       color: Colors.white,
       height: 15.0,
     );
+  }
+
+  void _confirm(String confirmation) {
+    Utilities.showSnackbarMessage(context, confirmation);
   }
 
   static String _formatTime(TimeOfDay time) {

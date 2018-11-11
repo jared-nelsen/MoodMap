@@ -8,6 +8,7 @@ import 'package:mood_map/components/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 class RateCategoriesView extends StatefulWidget {
 
@@ -140,6 +141,9 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
       ref.set(item.toJson());
 
       Navigator.pop(context, null);
+
+      Utilities.showSnackbarMessage(context, "Category added successfully");
+
     });
 
   }

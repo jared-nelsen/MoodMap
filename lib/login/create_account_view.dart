@@ -373,24 +373,26 @@ class CreateAccountViewState extends State<CreateAccountView> {
                 if(_formKey.currentState.validate()) {
 
                   if(!Utilities.isEmail(_emailController.text)) {
-                    Utilities.showMessageDialog(context, "Please enter a valid email address.");
+                    Utilities.showSnackbarMessage(context, "Please enter a valid email address.");
                     return;
                   }
 
                   if(_passwordController.text.isEmpty) {
-                    Utilities.showMessageDialog(context, "Please enter a password.");
+                    Utilities.showSnackbarMessage(context, "Please enter a password.");
                     return;
                   }
 
                   if(_repeatPasswordController.text.isEmpty) {
-                    Utilities.showMessageDialog(context, "Please repeat your entered password.");
+                    Utilities.showSnackbarMessage(context, "Please repeat your entered password.");
                     return;
                   }
 
                   if(_passwordController.text != _repeatPasswordController.text) {
-                    Utilities.showMessageDialog(context, "Passwords do not match. Please try again.");
+                    Utilities.showSnackbarMessage(context, "Passwords do not match. Please try again.");
                     return;
                   }
+
+                  Utilities.showSnackbarMessage(context, "Logging in...");
 
                   Session.createUserAccount(context, _emailController.text, _passwordController.text);
 

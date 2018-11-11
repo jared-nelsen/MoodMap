@@ -33,7 +33,7 @@ class Session {
       if(exists) {
 
         await _authenticator.signInWithEmailAndPassword(email: email, password: password)
-                .then((FirebaseUser user) { _loginSuccess(); })
+                .then((FirebaseUser user) { _loginSuccess(context); })
                 .catchError((Error e) { _loginFailure(context); });
 
       } else {
@@ -46,8 +46,9 @@ class Session {
 
   }
 
-  static void _loginSuccess() {
+  static void _loginSuccess(BuildContext context) {
     AppNavigator.navigateToApplicationShell();
+    Utilities.showSnackbarMessage(context, "Successfully logged in");
   }
 
   static void _loginFailure(BuildContext context) {
@@ -64,7 +65,8 @@ class Session {
 
       if(exists) {
 
-        Utilities.showMessageDialog(context, "That user already exists. Please login or select another account.");
+        _userAlreadyExists(context);
+
         AppNavigator.navigateToLoginScreen();
 
       } else {
@@ -111,7 +113,11 @@ class Session {
   }
 
   static void _userDoesntExist(BuildContext context) {
-    Utilities.showMessageDialog(context, "That user doesn't exist. Please create an account below.");
+    Utilities.showSnackbarMessage(context, "That user doesn't exist. Please create an account down here.");
+  }
+
+  static void _userAlreadyExists(BuildContext context) {
+    Utilities.showSnackbarMessage(context, "That user already exists. Please login or select another account.");
   }
 
   //Sign Out
@@ -189,7 +195,10 @@ class Session {
                               .then((result) {
                                 Navigator.pop(context, null);
 
-                                var info = SnackBar(content: new Text("A Password Reset Email was sent to " + _resetEmail),);
+                                var info = SnackBar(
+                                  content: new Text("A Password Reset Email was sent to " + _resetEmail),
+                                  duration: new Duration(seconds: 2),);
+
                                 Scaffold.of(context).showSnackBar(info);
 
                               })
@@ -197,8 +206,7 @@ class Session {
 
                                 Navigator.pop(context, null);
 
-                                var info = SnackBar(content: new Text("That user doesn't exist. Please create an account above."),);
-                                Scaffold.of(context).showSnackBar(info);
+                                Utilities.showSnackbarMessage(context, "That user doesn't exist. Please create an account down here.");
 
                               });
 

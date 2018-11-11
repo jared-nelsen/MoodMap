@@ -33,4 +33,9 @@ class Utilities {
     return regExp.hasMatch(test);
   }
 
+  static void showSnackbarMessage(BuildContext context, String confirmation) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 2),));
+  }
+
+
 }

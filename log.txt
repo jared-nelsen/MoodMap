@@ -449,8 +449,7 @@ Minor
 
 Bugs
 ----
-- Entering the app correctly selects the emotion section on the navigation bar but does not
-  show the contents -- Attempted fix
+- Firebase Login call not working. Documented issue on github. Noted as being worked on ~11-01-18
 
 Polish
 ------
@@ -467,17 +466,11 @@ Polish
 - Consider changing where the save and back buttons are in the journaling section.
 - Change color of Quick Rate button
 
-Login Workflow
+Task List
 --------------
-- Figure out how you want logout to work with the gear icon
 - Snackbars for processing
-- Forgot password email
+- Title Field for Journal Entries
 - Integrate username for DatabaseManager for data integrity
 - Initial data upload for create user:
   -Default datasets for screens
   -User info
-
-Task List
---------
-Journaling section is broken by the update - put out a call
-

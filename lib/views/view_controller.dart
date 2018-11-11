@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 
 import 'package:mood_map/utilities/session.dart';
 
@@ -15,7 +16,7 @@ class AppShellViewController extends StatefulWidget {
 
 }
 
-class AppShellViewControllerState extends State<AppShellViewController> {
+class AppShellViewControllerState extends State<AppShellViewController> with AfterLayoutMixin<AppShellViewController> {
 
   static PageController _pageController;
 
@@ -169,6 +170,11 @@ class AppShellViewControllerState extends State<AppShellViewController> {
   void dispose(){
     super.dispose();
     _pageController.dispose();
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    navigateToRateView();
   }
 
 }

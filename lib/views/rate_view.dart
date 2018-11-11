@@ -16,10 +16,10 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  static EmotionContext _emotionContext = new EmotionContext(animateToCategories,
-                                                             animateToSpecifics,
-                                                             animateToEmotions,
-                                                             animateToQuickRate);
+  static EmotionContext _emotionContext = new EmotionContext(navigateToCategories,
+                                                             navigateToSpecifics,
+                                                             navigateToEmotions,
+                                                             navigateToQuickRate);
 
   static PageController _pageController;
 
@@ -46,7 +46,7 @@ class RateViewState extends State<RateView> {
     );
   }
 
-  static void _animateToPage(int page) {
+  static void _navigateToPage(int page) {
     _pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 300),
@@ -54,20 +54,20 @@ class RateViewState extends State<RateView> {
     );
   }
 
-  static void animateToCategories() {
-    _animateToPage(0);
+  static void navigateToCategories() {
+    _navigateToPage(0);
   }
 
-  static void animateToSpecifics() {
-    _animateToPage(1);
+  static void navigateToSpecifics() {
+    _navigateToPage(1);
   }
 
-  static void animateToEmotions() {
-    _animateToPage(2);
+  static void navigateToEmotions() {
+    _navigateToPage(2);
   }
 
-  static void animateToQuickRate() {
-    _animateToPage(3);
+  static void navigateToQuickRate() {
+    _navigateToPage(3);
   }
 
   @override

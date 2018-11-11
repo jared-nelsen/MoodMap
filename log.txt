@@ -434,15 +434,13 @@ Major
 - Notifications
 
           - Research Module
-          - Come up with tests
+           - Come up with tests
 
 
 Minor
 -----
 - Long Press to Remove in certain workflows
 - Change the component that is used to rate things. The drop downs are not easy to use.
-- Navigate To Journal from emotions rate on button press
-- Default App View to Emotions Screen
 
 Bugs
 ----
@@ -452,11 +450,6 @@ Bugs
 
 Polish
 ------
-- Snackbar Notifications
-- Tooltips
-    - You can press to remove
-- Ensure entire journal entry fields are visible by either making them scrollable or
-  limiting amount of characters that are entered.
 - Information Icon and popup for Journaling Views
 - Consider removing journaling title bar to give more space
 - Consider changing where the save and back buttons are in the journaling section.
@@ -464,10 +457,9 @@ Polish
 
 Task List
 --------------
-- Snackbars for processing
-- Navigate to Make Journal Entry from Emotion Quick Rate and Emotion Rate 
 - Title Field for Journal Entries
 - Integrate username for DatabaseManager for data integrity
+
 - Initial data upload for create user:
   -Default datasets for screens
   -User info

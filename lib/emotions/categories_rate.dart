@@ -7,7 +7,7 @@ import 'package:mood_map/components/navigable_category_item.dart';
 import 'package:mood_map/application/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 import 'package:mood_map/utilities/utilities.dart';
 
 class RateCategoriesView extends StatefulWidget {
@@ -23,7 +23,7 @@ class RateCategoriesView extends StatefulWidget {
 
 class RateCategoriesViewState extends State<RateCategoriesView> {
 
-  DatabaseReference firebase = DatabaseManager.categoriesReference();
+  DatabaseReference firebase = Database.categoriesReference();
 
   EmotionContext _emotionContext;
 
@@ -134,7 +134,7 @@ class RateCategoriesViewState extends State<RateCategoriesView> {
 
     setState(() {
 
-      var ref = DatabaseManager.categoriesPushReference();
+      var ref = Database.categoriesPushReference();
 
       CategoryItem item = new CategoryItem(_toAdd);
 

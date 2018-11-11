@@ -8,7 +8,7 @@ import 'package:mood_map/components/navigable_specifics_item.dart';
 import 'package:mood_map/application/emotion_context.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 import 'package:mood_map/utilities/utilities.dart';
 
 class RateSpecificsView extends StatefulWidget {
@@ -24,7 +24,7 @@ class RateSpecificsView extends StatefulWidget {
 
 class RateSpecificsViewState extends State<RateSpecificsView> {
 
-  DatabaseReference firebase = DatabaseManager.specificsReference();
+  DatabaseReference firebase = Database.specificsReference();
 
   EmotionContext _emotionContext;
 
@@ -125,7 +125,7 @@ class RateSpecificsViewState extends State<RateSpecificsView> {
 
     setState(() {
 
-      var ref = DatabaseManager.specificsPushReference();
+      var ref = Database.specificsPushReference();
 
       SpecificsItem item = new SpecificsItem(_emotionContext.getCategory(), _toAdd);
 

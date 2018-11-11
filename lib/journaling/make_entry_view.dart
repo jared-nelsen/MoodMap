@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mood_map/common/journal_entry.dart';
 import 'package:mood_map/components/journaling_context.dart';
 
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 import 'package:mood_map/utilities/utilities.dart';
 
 class MakeEntryView extends StatefulWidget {
@@ -326,7 +326,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
     if(_formKey.currentState.validate()) {
 
-      var ref = DatabaseManager.journalEntriesPushReference();
+      var ref = Database.journalEntriesPushReference();
 
       ref.set(_activeJournalEntry.toJson());
 

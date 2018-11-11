@@ -14,7 +14,7 @@ import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/application/app_navigator.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 
 class RateEmotionsView extends StatefulWidget {
 
@@ -29,8 +29,8 @@ class RateEmotionsView extends StatefulWidget {
 
 class RateEmotionsViewState extends State<RateEmotionsView> {
 
-  DatabaseReference _palletFirebase = DatabaseManager.emotionsReference();
-  DatabaseReference _ratingFirebase = DatabaseManager.emotionsReference();
+  DatabaseReference _palletFirebase = Database.emotionsReference();
+  DatabaseReference _ratingFirebase = Database.emotionsReference();
 
   EmotionContext _emotionContext;
 
@@ -359,7 +359,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
       for(var ratingItem in _ratingEmotions) {
 
-        var ref = DatabaseManager.emotionRatingPushReference();
+        var ref = Database.emotionRatingPushReference();
 
         EmotionRating rating = new EmotionRating(
             ratingItem.getDBKey(),
@@ -385,7 +385,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     setState(() {
 
-      var ref = DatabaseManager.emotionsPushReference();
+      var ref = Database.emotionsPushReference();
 
       Emotion emotion = new Emotion(_emotionContext.getCategory(), _emotionContext.getSpecific(), emotionToAdd);
 

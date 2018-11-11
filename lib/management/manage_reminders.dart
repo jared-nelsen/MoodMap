@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 
 import 'package:mood_map/common/reminder_settings.dart';
 
@@ -440,7 +440,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
     {
 
       //Note that we do not need to push because we are just setting
-      var ref = DatabaseManager.reminderSettingsReference();
+      var ref = Database.reminderSettingsReference();
 
       ReminderSettings settings = new ReminderSettings(
           _remindingEmotions,
@@ -464,7 +464,7 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
 
   void _loadSettings() {
 
-    DatabaseManager.reminderSettingsReference().once().then((DataSnapshot snapshot){
+    Database.reminderSettingsReference().once().then((DataSnapshot snapshot){
 
       ReminderSettings settings = ReminderSettings.fromSnapshot(snapshot);
 

@@ -1,7 +1,7 @@
 
 import 'package:firebase_database/firebase_database.dart';
 
-class DatabaseManager {
+class Database {
 
   static DatabaseReference categoriesReference() {
     return FirebaseDatabase.instance.reference().child("emotion_categories");

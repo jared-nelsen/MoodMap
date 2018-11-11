@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:mood_map/utilities/utilities.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 
 import 'package:mood_map/common/sleep_rating.dart';
 
@@ -279,7 +279,7 @@ class SleepViewState extends State<SleepView> {
       }
     ))
     {
-      var ref = DatabaseManager.sleepEntriesPushReference();
+      var ref = Database.sleepEntriesPushReference();
 
       SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
 

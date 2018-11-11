@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:mood_map/utilities/utilities.dart';
-import 'package:mood_map/utilities/database_manager.dart';
+import 'package:mood_map/utilities/database.dart';
 
 import 'package:mood_map/common/exercise_rating.dart';
 
@@ -242,7 +242,7 @@ class ExerciseViewState extends State<ExerciseView> {
     ))
     {
 
-      var ref = DatabaseManager.exercisePushReference();
+      var ref = Database.exercisePushReference();
 
       ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
 

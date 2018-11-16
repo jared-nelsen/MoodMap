@@ -379,10 +379,10 @@ Docket
 
 Major
 -----
-- Initial Setup
 
-          - When a user is created, I need to execute code that uploads the default
-            data categories to the server
+- Workflow
+
+  - Deleting items and data from the emotions workflow
 
 - Tracking
 
@@ -463,3 +463,5 @@ Task List
 - Initial data upload for create user:
   -Default datasets for screens
   -User info
+
+Change Abatement

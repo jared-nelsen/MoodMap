@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/application/app_navigator.dart';
+import 'package:mood_map/utilities/initial_data.dart';
 
 class Session {
 
@@ -72,7 +73,11 @@ class Session {
       } else {
 
         await _authenticator.createUserWithEmailAndPassword(email: email, password: password)
-              .then((FirebaseUser user) { _createUserSuccess(); })
+              .then((FirebaseUser user) {
+                FirstTimeDataUploader.uploadUserCreationData().then((nothing) {
+                  _createUserSuccess();
+                }).catchError((Error e) { _createUserFailure(context); });
+              })
               .catchError((Error e) { _createUserFailure(context); });
 
       }

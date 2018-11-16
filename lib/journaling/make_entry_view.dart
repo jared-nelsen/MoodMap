@@ -282,7 +282,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           filled: true,
 
-          labelText: "Abatement",
+          labelText: "Mood Passing",
           hintText: "How and when did the mood pass?",
 
         ),
@@ -387,7 +387,7 @@ class MakeEntryState extends State<MakeEntryView> {
     _externalHappeningsController.text = _activeJournalEntry.getExternalHappenings();
     _internalHappeningsController.text = _activeJournalEntry.getInternalHappenings();
     _reflectionsAndCorrectionsController.text = _activeJournalEntry.getReflectionsAndCorrections();
-    _abatementController.text = _activeJournalEntry.getAbatement();
+    _abatementController.text = _activeJournalEntry.getMoodPassing();
   }
 
   void clearFields() {

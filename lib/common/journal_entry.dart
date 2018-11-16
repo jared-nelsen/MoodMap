@@ -11,7 +11,7 @@ class JournalEntry {
   String _externalHappenings = "";
   String _internalHappenings = "";
   String _reflectionsAndCorrections = "";
-  String _abatement = "";
+  String _moodPassing = "";
 
   JournalEntry(){
     setDate(DateTime.now());
@@ -25,7 +25,7 @@ class JournalEntry {
       _externalHappenings = snapshot.value["external_happenings"],
       _internalHappenings = snapshot.value["internal_happenings"],
       _reflectionsAndCorrections = snapshot.value["reflections_and_corrections"],
-      _abatement = snapshot.value["abatement"];
+      _moodPassing = snapshot.value["abatement"];
 
   toJson() {
     return {
@@ -35,7 +35,7 @@ class JournalEntry {
       "external_happenings" : _externalHappenings,
       "internal_happenings" : _internalHappenings,
       "reflections_and_corrections" : _reflectionsAndCorrections,
-      "abatement" : _abatement,
+      "abatement" : _moodPassing,
     };
   }
 
@@ -67,8 +67,8 @@ class JournalEntry {
     return _reflectionsAndCorrections;
   }
 
-  String getAbatement() {
-    return _abatement;
+  String getMoodPassing() {
+    return _moodPassing;
   }
 
   void setDate(DateTime date) {
@@ -105,7 +105,7 @@ class JournalEntry {
   }
 
   void setAbatement(String abatement) {
-    this._abatement = abatement;
+    this._moodPassing = abatement;
   }
 
 }

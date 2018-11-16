@@ -296,7 +296,7 @@ class ViewEntryViewState extends State<ViewEntryView> {
     _externalHappeningsController.text = _activeJournalEntry.getExternalHappenings();
     _internalHappeningsController.text = _activeJournalEntry.getInternalHappenings();
     _reflectionsAndCorrectionsController.text = _activeJournalEntry.getReflectionsAndCorrections();
-    _abatementController.text = _activeJournalEntry.getAbatement();
+    _abatementController.text = _activeJournalEntry.getMoodPassing();
   }
 
   @override

@@ -434,12 +434,17 @@ Major
 - Notifications
 
           - Research Module
-           - Come up with tests
+          - Come up with tests
+
+- Polish
+
+  - Color scheme selection
+  - Fonts
+  - Icon Procurement
 
 
 Minor
 -----
-- Long Press to Remove in certain workflows
 - Change the component that is used to rate things. The drop downs are not easy to use.
 
 Bugs
@@ -451,17 +456,12 @@ Bugs
 Polish
 ------
 - Information Icon and popup for Journaling Views
-- Consider removing journaling title bar to give more space
 - Consider changing where the save and back buttons are in the journaling section.
 - Change color of Quick Rate button
 
 Task List
 --------------
-- Title Field for Journal Entries
+- Workflow for deleting items
+- Change journal entry item to be a string: February 3rd, 2008
 - Integrate username for DatabaseManager for data integrity
 
-- Initial data upload for create user:
-  -Default datasets for screens
-  -User info
-
-Change Abatement

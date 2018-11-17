@@ -23,14 +23,14 @@ class ViewEntryViewState extends State<ViewEntryView> {
   final FocusNode _focusNodeExternalHappenings = new FocusNode();
   final FocusNode _focusNodeInternalHappenings = new FocusNode();
   final FocusNode _focusNodeReflectionsAndCorrections = new FocusNode();
-  final FocusNode _focusNodeAbatement = new FocusNode();
+  final FocusNode _focusNodePassing = new FocusNode();
 
   final TextEditingController _circumstancesController = new TextEditingController();
   final TextEditingController _descriptionController = new TextEditingController();
   final TextEditingController _externalHappeningsController = new TextEditingController();
   final TextEditingController _internalHappeningsController = new TextEditingController();
   final TextEditingController _reflectionsAndCorrectionsController = new TextEditingController();
-  final TextEditingController _abatementController = new TextEditingController();
+  final TextEditingController _passingController = new TextEditingController();
 
   final int _maxLines = 8;
 
@@ -69,7 +69,7 @@ class ViewEntryViewState extends State<ViewEntryView> {
                     divider(),
                     reflectionsAndCorrections(),
                     divider(),
-                    abatement(),
+                    passing(),
                     divider(),
                     footerButtons()
 
@@ -241,13 +241,13 @@ class ViewEntryViewState extends State<ViewEntryView> {
 
   }
 
-  Widget abatement() {
+  Widget passing() {
 
     return new TextFormField(
 
         maxLines: _maxLines,
 
-        controller: _abatementController,
+        controller: _passingController,
 
         enabled: false,
 
@@ -259,14 +259,14 @@ class ViewEntryViewState extends State<ViewEntryView> {
 
           filled: true,
 
-          labelText: "Abatement",
+          labelText: "Passing",
           hintText: "How and when did the mood pass?",
 
         ),
 
         autofocus: true,
 
-        focusNode: _focusNodeAbatement,
+        focusNode: _focusNodePassing,
 
       );
 
@@ -296,7 +296,7 @@ class ViewEntryViewState extends State<ViewEntryView> {
     _externalHappeningsController.text = _activeJournalEntry.getExternalHappenings();
     _internalHappeningsController.text = _activeJournalEntry.getInternalHappenings();
     _reflectionsAndCorrectionsController.text = _activeJournalEntry.getReflectionsAndCorrections();
-    _abatementController.text = _activeJournalEntry.getMoodPassing();
+    _passingController.text = _activeJournalEntry.getMoodPassing();
   }
 
   @override

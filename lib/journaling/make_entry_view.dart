@@ -29,7 +29,7 @@ class MakeEntryState extends State<MakeEntryView> {
   final TextEditingController _externalHappeningsController = new TextEditingController();
   final TextEditingController _internalHappeningsController = new TextEditingController();
   final TextEditingController _reflectionsAndCorrectionsController = new TextEditingController();
-  final TextEditingController _abatementController = new TextEditingController();
+  final TextEditingController _passingController = new TextEditingController();
 
   final int maxLines = 8;
 
@@ -70,7 +70,7 @@ class MakeEntryState extends State<MakeEntryView> {
                     divider(),
                     reflectionsAndCorrections(),
                     divider(),
-                    abatement(),
+                    passing(),
                     divider(),
                     footerButtons()
 
@@ -267,11 +267,11 @@ class MakeEntryState extends State<MakeEntryView> {
 
   }
 
-  Widget abatement() {
+  Widget passing() {
 
     return new TextFormField(
 
-        controller: _abatementController,
+        controller: _passingController,
         maxLines: maxLines,
 
         decoration: const InputDecoration(
@@ -282,7 +282,7 @@ class MakeEntryState extends State<MakeEntryView> {
 
           filled: true,
 
-          labelText: "Mood Passing",
+          labelText: "Passing",
           hintText: "How and when did the mood pass?",
 
         ),
@@ -291,10 +291,10 @@ class MakeEntryState extends State<MakeEntryView> {
 
         validator: (value) {
 
-          _activeJournalEntry.setAbatement(value);
+          _activeJournalEntry.setMoodPassing(value);
 
           if(value == null || value.isEmpty) {
-            return "Please enter an abatement.";
+            return "Please enter how the mood passed.";
           }
 
         },
@@ -387,7 +387,7 @@ class MakeEntryState extends State<MakeEntryView> {
     _externalHappeningsController.text = _activeJournalEntry.getExternalHappenings();
     _internalHappeningsController.text = _activeJournalEntry.getInternalHappenings();
     _reflectionsAndCorrectionsController.text = _activeJournalEntry.getReflectionsAndCorrections();
-    _abatementController.text = _activeJournalEntry.getMoodPassing();
+    _passingController.text = _activeJournalEntry.getMoodPassing();
   }
 
   void clearFields() {
@@ -396,7 +396,7 @@ class MakeEntryState extends State<MakeEntryView> {
     _externalHappeningsController.text = "";
     _internalHappeningsController.text = "";
     _reflectionsAndCorrectionsController.text = "";
-    _abatementController.text = "";
+    _passingController.text = "";
   }
 
   @override

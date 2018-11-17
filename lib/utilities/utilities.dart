@@ -33,6 +33,57 @@ class Utilities {
     return regExp.hasMatch(test);
   }
 
+  static String formatDateNamedMonth(String date) {
+
+    StringBuffer formatted = new StringBuffer();
+
+    var numeralsToMonths = {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December",
+    };
+
+    List<String> parts = date.split('/');
+
+
+    formatted.write(numeralsToMonths[parts.elementAt(0)]);
+    formatted.write(" ");
+    formatted.write(parts.elementAt(1));
+    int day = int.parse(parts.elementAt(1));
+    switch(day) {
+      case 1:
+      case 21:
+      case 31:
+        formatted.write("st");
+        break;
+      case 2:
+      case 22:
+        formatted.write("nd");
+        break;
+      case 3:
+      case 23:
+        formatted.write("rd");
+        break;
+      case 4:
+      case 24:
+        formatted.write("th");
+    }
+
+    formatted.write(", ");
+    formatted.write(parts.elementAt(2));
+
+    return formatted.toString();
+  }
+
   static void showSnackbarMessage(BuildContext context, String confirmation) {
     Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 2),));
   }

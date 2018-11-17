@@ -104,7 +104,7 @@ class JournalEntry {
     this._reflectionsAndCorrections = reflectionsAndCorrections;
   }
 
-  void setAbatement(String abatement) {
+  void setMoodPassing(String abatement) {
     this._moodPassing = abatement;
   }
 

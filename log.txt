@@ -459,6 +459,7 @@ Polish
 - Information Icon and popup for Journaling Views
 - Consider changing where the save and back buttons are in the journaling section.
 - Change color of Quick Rate button
+- Format text of medication in medication management screen
 
 Task List
 --------------

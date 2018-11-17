@@ -383,6 +383,7 @@ Major
 - Workflow
 
   - Deleting items and data from the emotions workflow
+  - Deleting items from journal Entries Section
 
 - Tracking
 
@@ -462,6 +463,5 @@ Polish
 Task List
 --------------
 - Workflow for deleting items
-- Change journal entry item to be a string: February 3rd, 2008
 - Integrate username for DatabaseManager for data integrity
 

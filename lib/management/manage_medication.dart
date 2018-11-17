@@ -242,7 +242,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
 
       bool alreadyThere = false;
       for(var medication in _medications) {
-        if(medication.dbKey == newMedication.key) {
+        if(medication.getDbKey() == newMedication.key) {
           alreadyThere = true;
           break;
         }
@@ -261,7 +261,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
     });
   }
 
-  void _removeMedication(String medicationName) async {
+  void _removeMedication(String medicationDbKey) async {
 
     await showDialog(context: context,
       builder: (BuildContext context) {
@@ -284,7 +284,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
                           int index = 0;
                           for(int i = 0; i < _medications.length; i++) {
                             MedicationListItem item = _medications.elementAt(i);
-                            if(medicationName == item.getName()) {
+                            if(medicationDbKey == item.getDbKey()) {
                               index = i;
                               break;
                             }
@@ -292,7 +292,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
 
                           //Remove from the database
                           MedicationListItem medication = _medications.elementAt(index);
-                          FirebaseDatabase.instance.reference().child("medications").child(medication.dbKey).remove();
+                          Database.medicationsReference().child(medication.getDbKey()).remove();
 
                           _medications.removeAt(index);
 

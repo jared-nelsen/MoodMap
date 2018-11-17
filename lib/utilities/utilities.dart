@@ -37,5 +37,8 @@ class Utilities {
     Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 2),));
   }
 
+  static void showPageInfoSnackbarMessage(BuildContext context, String message) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: new Text(message), duration: new Duration(seconds: 1),));
+  }
 
 }

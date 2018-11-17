@@ -10,6 +10,8 @@ import 'package:mood_map/common/medication.dart';
 import 'package:mood_map/utilities/database.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+import 'package:after_layout/after_layout.dart';
+
 class ManageMedicationView extends StatefulWidget {
 
   @override
@@ -17,7 +19,7 @@ class ManageMedicationView extends StatefulWidget {
 
 }
 
-class ManageMedicationViewState extends State<ManageMedicationView> {
+class ManageMedicationViewState extends State<ManageMedicationView> with AfterLayoutMixin<ManageMedicationView> {
 
   final firebaseRef = Database.medicationsReference();
 
@@ -51,6 +53,11 @@ class ManageMedicationViewState extends State<ManageMedicationView> {
 
     );
 
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    Utilities.showPageInfoSnackbarMessage(context, "You can long press to remove medications");
   }
 
   Future<Null> _addMedication() async {

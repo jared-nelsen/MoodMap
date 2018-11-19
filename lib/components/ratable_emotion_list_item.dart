@@ -11,10 +11,12 @@ class RatableEmotionListItem extends StatefulWidget {
 
   String _rating = "0";
 
-  RatableEmotionListItem({this.dbKey, this.category, this.specific, this.emotion});
+  Function deletionCallback;
+
+  RatableEmotionListItem({this.dbKey, this.category, this.specific, this.emotion, this.deletionCallback});
 
   @override
-  State<StatefulWidget> createState() => new RatableEmotionListItemState(this.emotion);
+  State<StatefulWidget> createState() => new RatableEmotionListItemState(this.emotion, this.deletionCallback);
 
   _setRating(String rating) {
     this._rating = rating;
@@ -45,20 +47,23 @@ class RatableEmotionListItem extends StatefulWidget {
 typedef void SetRating(String value);
 
 class RatableEmotionListItemState extends State<RatableEmotionListItem> {
+
   SetRating ratingSetter;
 
-  String _title;
+  String _emotion;
 
   var _ratings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  RatableEmotionListItemState(this._title);
+  Function _deletionCallback;
+
+  RatableEmotionListItemState(this._emotion, this._deletionCallback);
 
   String _rating = '0';
 
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      leading: new Text(_title),
+      leading: new Text(_emotion),
       trailing: new DropdownButton<String>(
 
           items: _ratings.map((String rating) {
@@ -73,7 +78,8 @@ class RatableEmotionListItemState extends State<RatableEmotionListItem> {
             widget._setRating(_rating);
         },
 
-       )
+       ),
+      onLongPress: () { _deletionCallback(_emotion); },
     );
   }
 

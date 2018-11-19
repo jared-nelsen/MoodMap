@@ -25,7 +25,7 @@ class Emotion {
     };
   }
 
-  String getDBKey() {
+  String getDbKey() {
     return _dbkey;
   }
 

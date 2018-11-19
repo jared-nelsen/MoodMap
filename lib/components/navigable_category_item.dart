@@ -11,20 +11,32 @@ class NavigableCategoryItem extends StatefulWidget {
 
   EmotionContext _emotionContext;
 
-  NavigableCategoryItem(this.dbKey, this._category, this._emotionContext);
+  Function _deletionCallback;
+
+  NavigableCategoryItem(this.dbKey, this._category, this._emotionContext, this._deletionCallback);
 
   @override
-  State<StatefulWidget> createState() => new NavigableCategoryState(this._category, this._emotionContext);
+  State<StatefulWidget> createState() => new NavigableCategoryState(this._category, this._emotionContext, this._deletionCallback);
+
+  String getCategory() {
+    return _category;
+  }
+
+  String getDbKey() {
+    return dbKey;
+  }
 
 }
 
 class NavigableCategoryState extends State<NavigableCategoryItem> {
 
-  String _category = "";
+  String _category;
 
   EmotionContext _emotionContext;
 
-  NavigableCategoryState(this._category, this._emotionContext);
+  Function _deletionCallback;
+
+  NavigableCategoryState(this._category, this._emotionContext, this._deletionCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +45,7 @@ class NavigableCategoryState extends State<NavigableCategoryItem> {
       trailing: new FlatButton(
           onPressed: (){ _emotionContext.setCategoryAndNavigateToSpecifics(_category); },
           child: new Icon(Icons.arrow_forward)),
+      onLongPress: () { _deletionCallback(_category); },
     );
   }
 

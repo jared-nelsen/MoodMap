@@ -41,6 +41,10 @@ class EmotionRating {
     return _category;
   }
 
+  String getCategory() {
+    return _category;
+  }
+
   String getSpecifics() {
     return _specifics;
   }

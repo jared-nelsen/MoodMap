@@ -13,6 +13,10 @@ import 'package:mood_map/utilities/database.dart';
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/application/app_navigator.dart';
 
+import 'package:after_layout/after_layout.dart';
+
+import 'package:mood_map/emotions/emotion_deletion.dart';
+
 class EmotionsQuickRateView extends StatefulWidget {
 
   EmotionContext _emotionContext;
@@ -134,10 +138,11 @@ class EmotionsQuickRateViewState extends State<EmotionsQuickRateView> {
 
     final newList = new List<RatableEmotionListItem>.from(_ratingEmotions)
       ..add(new RatableEmotionListItem(
-        dbKey: emotion.getDBKey(),
+        dbKey: emotion.getDbKey(),
         category: emotion.getCategory(),
         specific: emotion.getSpecific(),
         emotion: emotion.getEmotion(),
+        deletionCallback: _deleteEmotionRatingItem,
       ));
 
     setState(() {
@@ -272,6 +277,73 @@ class EmotionsQuickRateViewState extends State<EmotionsQuickRateView> {
 
     });
 
+  }
+
+
+  void _deleteEmotionRatingItem(String emotion) async {
+
+    await showDialog(context: context,
+        builder: (BuildContext context) {
+
+          return new SimpleDialog(
+            title: new Text("Are you sure you would like to delete the $emotion emotion under this context?\n\n"
+                "All emotion rating data associated with this emotion will also be deleted."),
+            children: <Widget>[
+
+              new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+
+                      new SimpleDialogOption(
+                        child: const Text("Yes", style: const TextStyle(color: Colors.green),),
+                        onPressed: (){
+
+                          setState(() {
+                            int index = 0;
+                            for(int i = 0; i < _ratingEmotions.length; i++) {
+                              RatableEmotionListItem item = _ratingEmotions.elementAt(i);
+                              if(emotion == item.getEmotion()) {
+                                index = i;
+                                break;
+                              }
+                            }
+
+                            //Remove from the database
+                            EmotionDeletionModule.deleteEmotion(emotion);
+
+                            //Remove from the list
+                            _ratingEmotions.removeAt(index);
+
+                            _confirm("The $emotion emotion and all associated data has been removed");
+
+                          });
+
+                          Navigator.pop(context);
+                        },
+                      ),
+                      new SimpleDialogOption(
+                        child: const Text("No"),
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                      )
+
+                    ],
+                  )
+                ],
+              )
+
+            ],
+          );
+        }
+    );
+
+  }
+
+  void _confirm(String message) {
+    Utilities.showSnackbarMessage(context, message);
   }
 
 }

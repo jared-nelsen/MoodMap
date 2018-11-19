@@ -22,6 +22,10 @@ class SpecificsItem {
     };
   }
 
+  String getDbKey() {
+    return key;
+  }
+
   String getCategory() {
     return _category;
   }

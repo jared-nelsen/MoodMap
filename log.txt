@@ -380,10 +380,25 @@ Docket
 Major
 -----
 
+- Liscense Agreenment Screen
+
+  - Figure out how to get a liscense agreement
+  - Implement the screen before user creation
+
+- Login and Creation
+
+  - Store email at user login
+
 - Workflow
 
   - Deleting items and data from the emotions workflow
-  - Deleting items from journal Entries Section
+
+             -Not done:
+                  -Bugs
+                        - When navigating to quick rate I get notifications about specifics
+                        - Removing an item from a rating list does not remove it immediately
+                          from the list
+                        - Havent figured out how to remove an emotion from the pallets yet
 
 - Tracking
 

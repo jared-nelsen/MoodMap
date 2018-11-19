@@ -16,6 +16,10 @@ import 'package:mood_map/application/app_navigator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database.dart';
 
+import 'package:after_layout/after_layout.dart';
+
+import 'package:mood_map/emotions/emotion_deletion.dart';
+
 class RateEmotionsView extends StatefulWidget {
 
   EmotionContext _emotionContext;
@@ -27,7 +31,7 @@ class RateEmotionsView extends StatefulWidget {
 
 }
 
-class RateEmotionsViewState extends State<RateEmotionsView> {
+class RateEmotionsViewState extends State<RateEmotionsView> with AfterLayoutMixin<RateEmotionsView> {
 
   DatabaseReference _palletFirebase = Database.emotionsReference();
   DatabaseReference _ratingFirebase = Database.emotionsReference();
@@ -36,18 +40,19 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
   PageController _pageController;
 
+  List<RatableEmotionListItem> _ratingEmotions = new List();
+  List<EmotionListItem> _palletEmotions = new List();
+
+  final GlobalKey<FormState> _addEmotionFormKey = new GlobalKey<FormState>();
+
+  String _emotionToAdd;
+
   RateEmotionsViewState(_emotionContext) {
     this._emotionContext = _emotionContext;
 
     _palletFirebase.onChildAdded.listen(_retrievePalletEmotionsFromDatabase);
     _ratingFirebase.onChildAdded.listen(_retrieveRatingEmotionsFromDatabase);
   }
-
-  List<RatableEmotionListItem> _ratingEmotions = new List();
-  List<EmotionListItem> _palletEmotions = new List();
-
-  final GlobalKey<FormState> _addEmotionFormKey = new GlobalKey<FormState>();
-  String _emotionToAdd = "";
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +79,17 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
   }
 
+  @override
+  void afterFirstLayout(BuildContext context) {
+    Utilities.showPageInfoSnackbarMessage(context, "You can long press emotion rating items to remove them");
+  }
+
   Widget _buildEmotionRatingScreen() {
 
     return new Scaffold(
 
       appBar: new AppBar(
-        title: new Text("My emotions"),
+        title: new Text("Rate My Emotions"),
       ),
 
       body: new ListView(
@@ -421,7 +431,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
     final index = _palletEmotions.length;
     final newList = new List<EmotionListItem>.from(_palletEmotions)
       ..add(new EmotionListItem(
-        dbKey: emotion.getDBKey(),
+        dbKey: emotion.getDbKey(),
         category: emotion.getCategory(),
         specific: emotion.getSpecific(),
         emotion: emotion.getEmotion(),
@@ -460,10 +470,11 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
 
     final newList = new List<RatableEmotionListItem>.from(_ratingEmotions)
       ..add(new RatableEmotionListItem(
-        dbKey: emotion.getDBKey(),
+        dbKey: emotion.getDbKey(),
         category: emotion.getCategory(),
         specific: emotion.getSpecific(),
         emotion: emotion.getEmotion(),
+        deletionCallback: _deleteEmotionRatingItem,
       ));
 
     setState(() {
@@ -490,6 +501,77 @@ class RateEmotionsViewState extends State<RateEmotionsView> {
       _palletEmotions = newList;
     });
 
+  }
+
+  void _deleteEmotionRatingItem(String emotion) async {
+
+    await showDialog(context: context,
+        builder: (BuildContext context) {
+
+          return new SimpleDialog(
+            title: new Text("Are you sure you would like to delete the $emotion emotion under this context?\n\n"
+                "All emotion rating data associated with this emotion under the ${_emotionContext.getCategory()}"
+                " Category and ${_emotionContext.getSpecific()} Specific section will also be deleted."),
+            children: <Widget>[
+
+              new Column(
+                children: <Widget>[
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+
+                      new SimpleDialogOption(
+                        child: const Text("Yes", style: const TextStyle(color: Colors.green),),
+                        onPressed: (){
+
+                          setState(() {
+                            int index = 0;
+                            for(int i = 0; i < _ratingEmotions.length; i++) {
+                              RatableEmotionListItem item = _ratingEmotions.elementAt(i);
+                              if(emotion == item.getEmotion()) {
+                                index = i;
+                                break;
+                              }
+                            }
+
+                            //Remove from the database
+                            EmotionDeletionModule.deleteEmotion(emotion);
+
+                            //Remove from the list
+                            _ratingEmotions.removeAt(index);
+
+                            _confirm("The $emotion emotion and all associated data has been removed");
+
+                          });
+
+                          Navigator.pop(context);
+                        },
+                      ),
+                      new SimpleDialogOption(
+                        child: const Text("No"),
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                      )
+
+                    ],
+                  )
+                ],
+              )
+
+            ],
+          );
+        }
+    );
+
+  }
+
+//  void _deleteEmotionPalletItem() {
+//
+//  }
+
+  void _confirm(String message) {
+    Utilities.showSnackbarMessage(context, message);
   }
 
   @override

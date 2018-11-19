@@ -11,19 +11,27 @@ class NavigableSpecificsItem extends StatefulWidget {
 
   EmotionContext _emotionContext;
 
-  NavigableSpecificsItem(this.dbKey, this._specific, this._emotionContext);
+  Function _deletionCallback;
+
+  NavigableSpecificsItem(this.dbKey, this._specific, this._emotionContext, this._deletionCallback);
 
   @override
-  State<StatefulWidget> createState() => new NavigableSpecificsItemState(this._specific, this._emotionContext);
+  State<StatefulWidget> createState() => new NavigableSpecificsItemState(this._specific, this._emotionContext, this._deletionCallback);
+
+  String getSpecific() {
+    return _specific;
+  }
 
 }
 
 class NavigableSpecificsItemState extends State<NavigableSpecificsItem> {
 
-  String _specific = "";
+  String _specific;
   EmotionContext _emotionContext;
 
-  NavigableSpecificsItemState(this._specific, this._emotionContext);
+  Function _deletionCallback;
+
+  NavigableSpecificsItemState(this._specific, this._emotionContext, this._deletionCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +40,7 @@ class NavigableSpecificsItemState extends State<NavigableSpecificsItem> {
       trailing: new FlatButton(
           onPressed: (){ _emotionContext.setSpecificAndNavigateToEmotions(_specific); },
           child: new Icon(Icons.arrow_forward)),
+      onLongPress: () { _deletionCallback(_specific); },
     );
   }
 

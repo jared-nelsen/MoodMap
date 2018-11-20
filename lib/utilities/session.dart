@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:mood_map/common/user_data.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:mood_map/utilities/database.dart';
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:mood_map/application/app_navigator.dart';
 import 'package:mood_map/utilities/initial_data.dart';
@@ -59,7 +64,7 @@ class Session {
   //Create User
   //-------------------------------------------------------------------------------------------
 
-  static Future createUserAccount(BuildContext context, email, String password) async {
+  static Future createUserAccount(BuildContext context, String email, String password) async {
 
     //Check if the user already exists
     await _checkUserAlreadyExists(email).then((exists) async {
@@ -73,16 +78,34 @@ class Session {
       } else {
 
         await _authenticator.createUserWithEmailAndPassword(email: email, password: password)
-              .then((FirebaseUser user) {
+              .then((FirebaseUser user)  {
+
                 FirstTimeDataUploader.uploadUserCreationData().then((nothing) {
-                  _createUserSuccess();
+
+                  _saveUserCredentials(user.uid, email).then((nothing) {
+
+                    _createUserSuccess();
+
+                  });
+
                 }).catchError((Error e) { _createUserFailure(context); });
+
               })
               .catchError((Error e) { _createUserFailure(context); });
 
       }
 
     });
+
+  }
+
+  static Future<void> _saveUserCredentials(String userUID, String email) async {
+
+    DatabaseReference userReference = Database.userDataPushReference();
+
+    UserData userData = new UserData(userUID, email, DateTime.now());
+
+    userReference.set(userData.toJson());
 
   }
 

@@ -385,10 +385,6 @@ Major
   - Figure out how to get a liscense agreement
   - Implement the screen before user creation
 
-- Login and Creation
-
-  - Store email at user login
-
 - Workflow
 
   - Deleting items and data from the emotions workflow
@@ -467,6 +463,8 @@ Bugs
 ----
 - Firebase Login call not working. Documented issue on github. Noted as being worked on ~11-01-18
            -CreateUserWithPasswordAndEmail
+           - Looks like there is work being done around it:
+              https://github.com/flutter/plugins/pull/775
 - Pressing back button on Emotion quick rate throws exceptions
 
 Polish
@@ -475,6 +473,10 @@ Polish
 - Consider changing where the save and back buttons are in the journaling section.
 - Change color of Quick Rate button
 - Format text of medication in medication management screen
+
+Needs Testing
+-------------
+- Store user data at login
 
 Task List
 --------------

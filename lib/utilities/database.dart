@@ -3,6 +3,14 @@ import 'package:firebase_database/firebase_database.dart';
 
 class Database {
 
+  static DatabaseReference userDataReference() {
+    return FirebaseDatabase.instance.reference().child("user_data");
+  }
+
+  static DatabaseReference userDataPushReference() {
+    return FirebaseDatabase.instance.reference().child("user_data").push();
+  }
+
   static DatabaseReference categoriesReference() {
     return FirebaseDatabase.instance.reference().child("emotion_categories");
   }

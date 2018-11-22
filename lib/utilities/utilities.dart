@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -89,7 +90,24 @@ class Utilities {
   }
 
   static void showPageInfoSnackbarMessage(BuildContext context, String message) {
-    Scaffold.of(context).showSnackBar(SnackBar(content: new Text(message), duration: new Duration(seconds: 1),));
+
+    if(oneInXChance(3)){
+      Scaffold.of(context).showSnackBar(SnackBar(content: new Text(message), duration: new Duration(seconds: 1),));
+    }
+
+  }
+
+  static bool oneInXChance(int x) {
+
+    Random random = new Random();
+
+    int chance = random.nextInt(x);
+
+    if(chance == x - 1) {
+      return true;
+    }
+
+    return false;
   }
 
 }

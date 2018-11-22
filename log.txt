@@ -380,11 +380,6 @@ Docket
 Major
 -----
 
-- Liscense Agreenment Screen
-
-  - Figure out how to get a liscense agreement
-  - Implement the screen before user creation
-
 - Workflow
 
   - Deleting items and data from the emotions workflow
@@ -453,11 +448,13 @@ Major
   - Color scheme selection
   - Fonts
   - Icon Procurement
+  - Login workflow theme rework
 
 
 Minor
 -----
 - Change the component that is used to rate things. The drop downs are not easy to use.
+- Lisence Agreement
 
 Bugs
 ----
@@ -474,9 +471,6 @@ Polish
 - Change color of Quick Rate button
 - Format text of medication in medication management screen
 
-Needs Testing
--------------
-- Store user data at login
 
 Task List
 --------------

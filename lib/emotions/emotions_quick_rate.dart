@@ -67,7 +67,7 @@ class EmotionsQuickRateViewState extends State<EmotionsQuickRateView> {
           child: new Text("Rate and Journal"),
           padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),),
 
-        new FlatButton(onPressed: (){ _emotionContext.navigateBackToSpecifics(); },
+        new FlatButton(onPressed: (){ _emotionContext.navigateBackToCategories(); },
           child: new Text("Back", style: new TextStyle(color: Colors.red),),
           padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),)
 

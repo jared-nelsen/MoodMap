@@ -49,7 +49,7 @@ class RateViewState extends State<RateView> {
   static void _navigateToPage(int page) {
     _pageController.animateToPage(
         page,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.ease
     );
   }

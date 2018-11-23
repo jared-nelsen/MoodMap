@@ -129,7 +129,7 @@ class AppShellViewControllerState extends State<AppShellViewController> with Aft
   static void _navigationTapped(int page) {
     _pageController.animateToPage(
         page,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.ease
     );
   }

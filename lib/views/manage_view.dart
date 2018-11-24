@@ -12,7 +12,6 @@ class ManageView extends StatefulWidget {
 
 class ManageViewState extends State<ManageView> with SingleTickerProviderStateMixin {
 
-  ///The tab controller for the Manage Emotions and Reminders pages
   TabController _tabController;
 
   @override
@@ -24,8 +23,7 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
 
         labelColor: Colors.black,
 
-        controller: _tabController,
-          tabs: [
+        controller: _tabController, tabs: [
             new Tab(text: "Reminders",),
             new Tab(text: "Medications")
           ]),
@@ -38,7 +36,11 @@ class ManageViewState extends State<ManageView> with SingleTickerProviderStateMi
             new ManageRemindersView(),
             new ManageMedicationView()
 
-          ]),
+          ],
+
+        physics: NeverScrollableScrollPhysics(),
+
+      ),
 
     );
 

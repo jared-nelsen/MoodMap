@@ -1,17 +1,17 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/tracking/emotion_tracking/emotion_tracking_view.dart';
-import 'package:mood_map/tracking/health_tracking/health_tracking_view.dart';
+import 'package:mood_map/tracking/health_tracking/views/exercise_views/exercise_proportion_view.dart';
+import 'package:mood_map/tracking/health_tracking/views/exercise_views/exercise_timeline_view.dart';
 
-class TrackView extends StatefulWidget {
+class ExerciseTrackingView extends StatefulWidget {
 
   @override
-  State<StatefulWidget> createState() => new TrackViewState();
+  State<StatefulWidget> createState() => new _ExerciseTrackingViewState();
 
 }
 
-class TrackViewState extends State<TrackView> with SingleTickerProviderStateMixin {
+class _ExerciseTrackingViewState extends State<ExerciseTrackingView> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
 
@@ -26,8 +26,8 @@ class TrackViewState extends State<TrackView> with SingleTickerProviderStateMixi
 
         controller: _tabController,
         tabs: <Widget>[
-          new Tab(text: "Emotions",),
-          new Tab(text: "Health",)
+          new Tab(text: "Proportion",),
+          new Tab(text: "Timeline",)
         ],
 
       ),
@@ -37,8 +37,8 @@ class TrackViewState extends State<TrackView> with SingleTickerProviderStateMixi
 
         children: <Widget>[
 
-          new EmotionTrackingView(),
-          new HealthTrackingView()
+          new ExerciseProportionView(),
+          new ExerciseTimelineView()
 
         ],
 
@@ -61,6 +61,5 @@ class TrackViewState extends State<TrackView> with SingleTickerProviderStateMixi
     super.dispose();
     _tabController.dispose();
   }
-
 
 }

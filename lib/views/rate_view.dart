@@ -16,11 +16,10 @@ class RateView extends StatefulWidget {
 
 class RateViewState extends State<RateView> {
 
-  static EmotionContext _emotionContext = new EmotionContext(navigateToCategories,
-                                                             navigateToSpecifics,
-                                                             navigateToEmotions,
-                                                             navigateToQuickRate);
-
+  static EmotionContext _emotionContext = new EmotionContext(navigateCategories: navigateToCategories,
+                                                             navigateSpecifics: navigateToSpecifics,
+                                                             navigateEmotions: navigateToEmotions,
+                                                             navigateQuickRate: navigateToQuickRate);
   static PageController _pageController;
 
   @override

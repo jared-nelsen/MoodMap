@@ -3,10 +3,12 @@ import 'package:quiver/collection.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:mood_map/utilities/database.dart';
+import 'package:mood_map/utilities/utilities.dart';
 
 import 'package:mood_map/common/category.dart';
 import 'package:mood_map/common/specific.dart';
 import 'package:mood_map/common/emotion.dart';
+import 'package:mood_map/common/emotion_rating.dart';
 import 'package:mood_map/common/reminder_settings.dart';
 
 class FirstTimeDataUploader {
@@ -289,6 +291,30 @@ class FirstTimeDataUploader {
     _contextualizedEmotions.add(new Tuple3("Relationships", "My Friends", "Bullied"));
     _contextualizedEmotions.add(new Tuple3("Relationships", "My Friends", "Frustrated"));
     _contextualizedEmotions.add(new Tuple3("Relationships", "My Friends", "Jealous"));
+
+  }
+
+  static void uploadRandomDevelopmentRatingData() {
+
+    //We want 100 random ratings
+    for(int i = 0; i < 100; i++) {
+
+      var ref = Database.emotionRatingPushReference();
+
+      //Select a category
+      String category = _categories.elementAt(Utilities.randomIntInARange(0, _categories.length - 1));
+      //Select a specific
+      String specifics = _specifics.elementAt(Utilities.randomIntInARange(0, _specifics.length - 1));
+      //Select an emotion
+      String emotion = _emotions.elementAt(Utilities.randomIntInARange(0, _emotions.length - 1));
+      //Select a rating
+      String rating = Utilities.randomIntInARange(0, 10).toString();
+
+      EmotionRating emotionRating = new EmotionRating("dont care about the key", category, specifics, emotion, rating);
+
+      ref.set(emotionRating.toJson());
+
+    }
 
   }
 

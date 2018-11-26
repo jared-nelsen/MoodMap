@@ -395,6 +395,16 @@ Major
 
   - Working Task List
     --------------------------------------------------------------------------------------------
+
+    - Question:
+      -What if you were to forget about letting the user select the category and specific and
+       just build all of the charts in a scroll view?
+            - Maybe the right way to go is to get a single chart working this way, keep the code
+              for this view and implement the other view based on what you learned.
+            - Recall that you still have to implement the timeline section of the emotions.
+      
+    - Write algorithm to generate random data
+    - Tab Height
     - Center the category and specifics lists somehow
     - Specifics are being updated but complete overwrite behavior is inconsistent
     - Should a turnstyle item contain a tab somewhere in its structure?

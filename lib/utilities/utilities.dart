@@ -55,7 +55,6 @@ class Utilities {
 
     List<String> parts = date.split('/');
 
-
     formatted.write(numeralsToMonths[parts.elementAt(0)]);
     formatted.write(" ");
     formatted.write(parts.elementAt(1));
@@ -108,6 +107,13 @@ class Utilities {
     }
 
     return false;
+  }
+
+  static int randomIntInARange(int min, int max) {
+
+    var random = new Random();
+
+    return min + random.nextInt(max - min);
   }
 
 }

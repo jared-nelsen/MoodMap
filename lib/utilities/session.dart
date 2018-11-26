@@ -77,6 +77,8 @@ class Session {
 
       } else {
 
+        FirstTimeDataUploader.uploadRandomDevelopmentRatingData();
+
         await _authenticator.createUserWithEmailAndPassword(email: email, password: password)
               .then((FirebaseUser user)  {
 

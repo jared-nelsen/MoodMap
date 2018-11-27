@@ -18,14 +18,14 @@ class ExerciseSettings {
       didExercise = snapshot.value['did_exercise'],
       type = snapshot.value['exercise_type'],
       duration = snapshot.value['duration'],
-      date = snapshot.value['date'];
+      date = DateTime.parse(snapshot.value['date']);
 
   toJson() {
     return {
       "did_exercise" : didExercise,
       "exercise_type" : type,
       "duration" : duration,
-      "date" : DateTime.now()
+      "date" : DateTime.now().toIso8601String()
     };
   }
 

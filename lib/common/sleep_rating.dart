@@ -20,7 +20,7 @@ class SleepSettings {
       gotToSleep = snapshot.value['got_to_sleep'],
       wokeUp = snapshot.value['woke_up'],
       quality = snapshot.value['quality'],
-      date = snapshot.value['date'];
+      date = DateTime.parse(snapshot.value['date']);
 
   toJson() {
     return {
@@ -28,7 +28,7 @@ class SleepSettings {
       "got_to_sleep": gotToSleep,
       "woke_up" : wokeUp,
       "quality" : quality,
-      "date" : DateTime.now()
+      "date" : DateTime.now().toIso8601String()
     };
   }
 

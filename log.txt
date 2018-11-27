@@ -396,10 +396,10 @@ Major
   - Working Task List
     --------------------------------------------------------------------------------------------
 
-    - Working on the exercise view
-
-
     - Working on the sleep view
+
+
+    - Edit the random ratings to make them random in initial_data.dart
         
     - Question:
       -What if you were to forget about letting the user select the category and specific and
@@ -413,10 +413,12 @@ Major
     - Specifics are being updated but complete overwrite behavior is inconsistent
     - Should a turnstyle item contain a tab somewhere in its structure?
     --------------------------------------------------------------------------------------------
-          - Function to generate random data
-
-          - Build out my idea for this section of the app.
           
+          - Exercise rework
+           ----------------
+           - Doesnt make sense to say didnt exercise and can still descripe.
+           - Good chance to add info about exercise - kind of incomplete          
+
           - Graphs:
             ---------
             

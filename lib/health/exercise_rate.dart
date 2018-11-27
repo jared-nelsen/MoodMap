@@ -75,7 +75,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
         new Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
-            child: new Text("What did your excercise look like today?", style: new TextStyle(fontSize: 18.0),)
+            child: new Text("What did your exercise look like today?", style: new TextStyle(fontSize: 18.0),)
         )
 
       ],
@@ -244,7 +244,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
       var ref = Database.exercisePushReference();
 
-      ExerciseSettings rating = new ExerciseSettings(_exercised, _type, _duration);
+      ExerciseRating rating = new ExerciseRating(_exercised, _type, _duration);
 
       ref.set(rating.toJson());
 

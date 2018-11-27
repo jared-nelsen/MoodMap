@@ -1,7 +1,7 @@
 
 import 'package:firebase_database/firebase_database.dart';
 
-class SleepSettings {
+class SleepRating {
 
   String key;
 
@@ -12,9 +12,9 @@ class SleepSettings {
 
   DateTime date;
 
-  SleepSettings(this.timeToBed, this.gotToSleep, this.wokeUp, this.quality);
+  SleepRating(this.timeToBed, this.gotToSleep, this.wokeUp, this.quality);
 
-  SleepSettings.fromSnapshot(DataSnapshot snapshot) :
+  SleepRating.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,
       timeToBed = snapshot.value['time_to_bed'],
       gotToSleep = snapshot.value['got_to_sleep'],

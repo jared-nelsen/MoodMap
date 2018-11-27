@@ -281,7 +281,7 @@ class SleepViewState extends State<SleepView> {
     {
       var ref = Database.sleepEntriesPushReference();
 
-      SleepSettings settings = new SleepSettings(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
+      SleepRating settings = new SleepRating(_toBedTime, _toSleepTime, _wakeUpTime, _rating);
 
       ref.set(settings.toJson());
 

@@ -1,7 +1,7 @@
 
 import 'package:firebase_database/firebase_database.dart';
 
-class ExerciseSettings {
+class ExerciseRating {
 
   String key;
 
@@ -11,9 +11,9 @@ class ExerciseSettings {
 
   DateTime date;
 
-  ExerciseSettings(this.didExercise, this.type, this.duration);
+  ExerciseRating(this.didExercise, this.type, this.duration);
 
-  ExerciseSettings.fromSnapshot(DataSnapshot snapshot) :
+  ExerciseRating.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,
       didExercise = snapshot.value['did_exercise'],
       type = snapshot.value['exercise_type'],

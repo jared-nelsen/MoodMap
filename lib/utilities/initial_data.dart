@@ -11,6 +11,9 @@ import 'package:mood_map/common/emotion.dart';
 import 'package:mood_map/common/emotion_rating.dart';
 import 'package:mood_map/common/reminder_settings.dart';
 
+import 'package:mood_map/common/sleep_rating.dart';
+import 'package:mood_map/common/exercise_rating.dart';
+
 class FirstTimeDataUploader {
 
   static List<String> _categories = [ "Work", "Home", "School", "Relationships" ];
@@ -296,7 +299,7 @@ class FirstTimeDataUploader {
 
   static void uploadRandomDevelopmentRatingData() {
 
-    //We want 100 random ratings
+    //We want 100 random emotion ratings
     for(int i = 0; i < 100; i++) {
 
       var ref = Database.emotionRatingPushReference();
@@ -313,6 +316,68 @@ class FirstTimeDataUploader {
       EmotionRating emotionRating = new EmotionRating("dont care about the key", category, specifics, emotion, rating);
 
       ref.set(emotionRating.toJson());
+
+    }
+
+    //Sleep
+    List<SleepRating> sleepRatings = new List<SleepRating>();
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:00 PM", "10:00 AM", "1"));
+
+    for(var sleep in sleepRatings) {
+
+      var ref = Database.sleepEntriesPushReference();
+
+      ref.set(sleep.toJson());
+
+    }
+    
+    //Exercise
+    List<ExerciseRating> exerciseRatings = new List<ExerciseRating>();
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
+
+    for(var exercise in exerciseRatings) {
+
+      var ref = Database.exercisePushReference();
+
+      ref.set(exercise.toJson());
 
     }
 

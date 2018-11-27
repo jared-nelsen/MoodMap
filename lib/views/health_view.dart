@@ -39,7 +39,7 @@ class HealthViewState extends State<HealthView> with SingleTickerProviderStateMi
             new ExerciseView()
 
           ],
-          
+
           physics: NeverScrollableScrollPhysics(),
       ),
 

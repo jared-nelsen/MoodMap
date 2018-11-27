@@ -396,6 +396,11 @@ Major
   - Working Task List
     --------------------------------------------------------------------------------------------
 
+    - Working on the exercise view
+
+
+    - Working on the sleep view
+        
     - Question:
       -What if you were to forget about letting the user select the category and specific and
        just build all of the charts in a scroll view?
@@ -403,7 +408,6 @@ Major
               for this view and implement the other view based on what you learned.
             - Recall that you still have to implement the timeline section of the emotions.
       
-    - Write algorithm to generate random data
     - Tab Height
     - Center the category and specifics lists somehow
     - Specifics are being updated but complete overwrite behavior is inconsistent

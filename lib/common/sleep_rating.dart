@@ -25,7 +25,7 @@ class SleepRating {
   toJson() {
     return {
       "time-to-bed" : timeToBed,
-      "got-to-sleep": gotToSleepTime,
+      "got-to-sleep-time": gotToSleepTime,
       "wake-up-time" : wokeUpTime,
       "quality" : quality,
       "date" : DateTime.now().toIso8601String()

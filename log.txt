@@ -397,8 +397,7 @@ Major
     --------------------------------------------------------------------------------------------
 
     - Working on the sleep view
-              - Built _loadData function but not tested
-              - upload random ratings to test
+              - Strings not updating
 
 
     - Edit the random ratings to make them random in initial_data.dart

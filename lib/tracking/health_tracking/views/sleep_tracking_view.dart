@@ -16,28 +16,15 @@ class SleepTrackingView extends StatefulWidget {
 
 class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTickerProviderStateMixin {
 
-  List<SwitchListTile> _dataCards = new List<SwitchListTile>();
 
-  bool _averageTimeToBedSelected = false;
   String _averageTimeToBed = "";
-  bool _averageTimeToSleepSelected = false;
   String _averageTimeToSleep = "";
-  bool _averageTimeLyingAwakeSelected = false;
   String _averageTimeLyingAwake = "";
-  bool _averageWakeUpTimeSelected = false;
   String _averageWakeUpTime = "";
-  bool _averageSleepPerNightSelected = false;
   String _averageSleepPerNight = "";
-  bool _averageQualitySelected = false;
   String _averageSleepQuality = "";
 
   _SleepTrackingViewState() {
-    _dataCards.add(_timeToBed());
-    _dataCards.add(_timeToSleep());
-    _dataCards.add(_timeLyingAwake());
-    _dataCards.add(_wakeUpTime());
-    _dataCards.add(_sleepPerNight());
-    _dataCards.add(_sleepQuality());
 
     _loadData();
   }
@@ -47,75 +34,117 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
     return new Scaffold(
 
-      body: new ListView(
-        children: _dataCards,
-      )
+      body: new SingleChildScrollView(
+        child: _statisticsCard(),
+      ),
 
+        persistentFooterButtons: <Widget>[
+          new FlatButton(onPressed: () {_loadData();}, child: new Text("Toot"))
+        ],
       );
 
   }
 
-//  Widget _statisticsCard() {
-//
-//    return new Padding(
-//
-//      padding: EdgeInsets.all(5.0),
-//
-//      child: new Scaffold(
-//        body: new ListView(
-//          children: _dataCards,
-//        ),
-//      )
-//
-//    );
-//
-//  }
 
-  SwitchListTile _timeToBed() {
-    return new SwitchListTile(
-        title: new Text("Average time to bed: $_averageTimeToBed", style: _style(),),
-        value: _averageTimeToBedSelected,
-        onChanged: (bool value) { setState(() { _averageTimeToBedSelected = value;});}
+  Row _chartAndStatistics() {
+    //Combine Chard and statistics somehow to fit in SingleChildscroll view
+  }
+
+  Column _statisticsCard() {
+    return new Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        _timeToBed(),
+        _timeToSleep(),
+        _timeLyingAwake(),
+        _wakeUpTime(),
+        _sleepPerNight(),
+        _sleepQuality()
+      ],
     );
   }
 
-  SwitchListTile _timeToSleep() {
-    return new SwitchListTile(
-        title: new Text("Average time to sleep: $_averageTimeToSleep", style: _style(),),
-        value: _averageTimeToSleepSelected,
-        onChanged: (bool value) { setState(() { _averageTimeToSleepSelected = value;});}
+  Card _timeToBed() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Time to Bed", style: _style(),),
+            subtitle: new Text("$_averageTimeToBed", style: _style(),),
+          )
+        ],
+      ),
     );
   }
 
-  SwitchListTile _timeLyingAwake() {
-    return new SwitchListTile(
-        title: new Text("Average time lying awake: $_averageTimeLyingAwake", style: _style(),),
-        value: _averageTimeLyingAwakeSelected,
-        onChanged: (bool value) { setState(() { _averageTimeLyingAwakeSelected = value;});}
+  Card _timeToSleep() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Time to sleep", style: _style(),),
+            subtitle: new Text("$_averageTimeToSleep", style: _style(),),
+          )
+        ],
+      ),
     );
   }
 
-  SwitchListTile _wakeUpTime() {
-    return new SwitchListTile(
-        title: new Text("Average wake up time: $_averageWakeUpTime", style: _style(),),
-        value: _averageWakeUpTimeSelected,
-        onChanged: (bool value) { setState(() { _averageWakeUpTimeSelected = value;});}
+  Card _timeLyingAwake() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Time Lying Awake", style: _style(),),
+            subtitle: new Text("$_averageTimeLyingAwake", style: _style(),),
+          )
+        ],
+      ),
     );
   }
 
-  SwitchListTile _sleepPerNight() {
-    return new SwitchListTile(
-        title: new Text("Average sleep per night: $_averageSleepPerNight", style: _style(),),
-        value: _averageSleepPerNightSelected,
-        onChanged: (bool value) { setState(() { _averageSleepPerNightSelected = value;});}
+  Card _wakeUpTime() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Wake Up Time", style: _style(),),
+            subtitle: new Text("$_averageWakeUpTime", style: _style(),),
+          )
+        ],
+      ),
     );
   }
 
-  SwitchListTile _sleepQuality() {
-    return new SwitchListTile(
-        title: new Text("Average sleep quality: $_averageSleepQuality", style: _style(),),
-        value: _averageQualitySelected,
-        onChanged: (bool value) { setState(() { _averageQualitySelected = value;});}
+  Card _sleepPerNight() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Sleep Per Night", style: _style(),),
+            subtitle: new Text("$_averageSleepPerNight", style: _style(),),
+          )
+        ],
+      ),
+    );
+  }
+
+  Card _sleepQuality() {
+    return new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            title: new Text("Average Sleep Quality", style: _style(),),
+            subtitle: new Text("$_averageSleepQuality", style: _style(),),
+          )
+        ],
+      ),
     );
   }
 
@@ -135,63 +164,67 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
     var ref = Database.sleepEntriesReference();
 
-    List<SleepRating> ratings = new List<SleepRating>();
+    ref.once().then((DataSnapshot snapshot) {
 
-    ref.onChildAdded.listen((Event event) {
-      ratings.add(SleepRating.fromSnapshot(event.snapshot));
-    });
+      List<SleepRating> ratings = SleepRating.setOfFromSnapshot(snapshot);
 
-    if(ratings.length == 0) {
-      return;
-    }
+      //Here I can filter on date range selected
 
-    //Put in after first layout
-//    if(ratings.length == 0) {
-//      Utilities.showSnackbarMessage(context, "You've not rated your sleep enough to see any statistics!");
-//      return;
-//    }
 
-    //Here I can filter on date range selected
+      if(ratings.length == 0) {
+        //put in after first layout
+        //Utilities.showSnackbarMessage(context, "You've not rated your sleep enough to see any statistics!");
+        return;
+      }
 
-    //Calculate average time to bed
-    int sumOfTimesToBed = 0;
-    for(var rating in ratings) {
-      sumOfTimesToBed += Utilities.calculateMinutesFromTimeString(rating.getTimeToBed());
-    }
-    _averageTimeToBed = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(sumOfTimesToBed));
+      setState(() {
 
-    //Calculate average time to sleep
-    int sumOfTimesToSleep = 0;
-    for(var rating in ratings) {
-      sumOfTimesToSleep += Utilities.calculateMinutesFromTimeString(rating.getGotToSleepTime());
-    }
-    _averageTimeToSleep = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(sumOfTimesToSleep));
+        //Calculate average time to bed
+        int sumOfTimesToBed = 0;
+        for(var rating in ratings) {
+          sumOfTimesToBed += Utilities.calculateMinutesFromTimeString(rating.getTimeToBed());
+        }
+        int averageTimesToBed = (sumOfTimesToBed / ratings.length).toInt();
+        _averageTimeToBed = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToBed));
 
-    //Calculate average time lying awake
-    int differenceToBedAndToSleep = sumOfTimesToSleep - sumOfTimesToBed;
-    _averageTimeLyingAwake = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(differenceToBedAndToSleep));
+        //Calculate average time to sleep
+        int sumOfTimesToSleep = 0;
+        for(var rating in ratings) {
+          sumOfTimesToSleep += Utilities.calculateMinutesFromTimeString(rating.getGotToSleepTime());
+        }
+        int averageTimesToSleep = (sumOfTimesToSleep / ratings.length).toInt();
+        _averageTimeToSleep = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToSleep));
 
-    //Calculate average wake up time
-    int sumOfWakeUpTimes = 0;
-    for(var rating in ratings) {
-      sumOfWakeUpTimes += Utilities.calculateMinutesFromTimeString(rating.getWokeUpTime());
-    }
-    _averageWakeUpTime = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(sumOfWakeUpTimes));
+        //Calculate average time lying awake
+        int differenceToBedAndToSleep = sumOfTimesToSleep - sumOfTimesToBed;
+        differenceToBedAndToSleep = differenceToBedAndToSleep.abs();
+        int averageTimeLyingAwake = (differenceToBedAndToSleep / ratings.length).toInt()
+        _averageTimeLyingAwake = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimeLyingAwake));
 
-    //Calculate average time asleep every night
-    int differenceWakeUpToGoToSleep = sumOfWakeUpTimes - sumOfTimesToSleep;
-    _averageSleepPerNight = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(differenceWakeUpToGoToSleep));
+        //Calculate average wake up time
+        int sumOfWakeUpTimes = 0;
+        for(var rating in ratings) {
+          sumOfWakeUpTimes += Utilities.calculateMinutesFromTimeString(rating.getWokeUpTime());
+        }
+        int averageWakeUpTime = (sumOfWakeUpTimes / ratings.length).toInt();
+        _averageWakeUpTime = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageWakeUpTime));
 
-    //Calculate average quality from ratings
-    int totalQuality = 0;
-    for(var rating in ratings) {
-      totalQuality += int.tryParse(rating.getQuality());
-    }
-    int quality = (totalQuality / ratings.length).toInt();
-    _averageSleepQuality = quality.toString();
+        //Calculate average time asleep every night
+        int differenceWakeUpToGoToSleep = sumOfWakeUpTimes - sumOfTimesToSleep;
+        differenceWakeUpToGoToSleep = differenceWakeUpToGoToSleep.abs();
+        int averageSleepPerNight = (differenceWakeUpToGoToSleep / ratings.length).toInt();
+        _averageSleepPerNight = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageSleepPerNight));
 
-    setState(() {
-      //Setting state for all above strings
+        //Calculate average quality from ratings
+        int totalQuality = 0;
+        for(var rating in ratings) {
+          totalQuality += int.tryParse(rating.getQuality());
+        }
+        int quality = (totalQuality / ratings.length).toInt();
+        _averageSleepQuality = quality.toString();
+
+      });
+
     });
 
   }

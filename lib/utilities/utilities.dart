@@ -87,7 +87,7 @@ class Utilities {
   //Time strings come in the form: "10:00 AM"
   static int calculateMinutesFromTimeString(String input) {
 
-    String ampmString = input.substring(input.length - 2, input.length - 1);
+    String ampmString = input.substring(input.length - 2, input.length);
 
     String timeString = "";
     int minutes, hours;
@@ -96,20 +96,23 @@ class Utilities {
     //i.e 10:00 AM
     if(input.length == 8) {
       //10:00 - first five characters
-      timeString = input.substring(0, 4);
-      hours = int.tryParse(timeString.substring(0, 1));
-      minutesString = timeString.substring(3, 4);
+      timeString = input.substring(0, 5);
+      hours = int.tryParse(timeString.substring(0, 2));
+      minutesString = timeString.substring(3, 5);
     }
     //i.e 9:00 AM
     else {
       //9:00 - first four characters
-      timeString = input.substring(0, 3);
-      hours = int.tryParse(timeString.substring(0, 0));
-      minutesString = timeString.substring(2, 3);
+      timeString = input.substring(0, 4);
+      hours = int.tryParse(timeString.substring(0, 1));
+      minutesString = timeString.substring(2, 4);
     }
 
     if(ampmString == "PM"){
       hours += 12;
+    } else if(ampmString == "AM" && hours == 12) {
+      //Midnight
+      hours -= 12;
     }
 
     if(minutesString.substring(0, 1) == "0") {
@@ -131,6 +134,10 @@ class Utilities {
   static String formTimeStringFromMinutesInADay(int minutes) {
 
     int hours = (minutes / 60).toInt();
+
+    if(hours > 12) {
+      hours -= 12;
+    }
 
     int remainingMinutes = minutes % 60;
 
@@ -173,7 +180,14 @@ class Utilities {
     }
 
     buffer.write(hours);
-    buffer.write(" hours and ");
+
+    if(hours == 1) {
+      buffer.write(" hour ");
+    } else {
+      buffer.write(" hours ");
+    }
+
+    buffer.write("and ");
     buffer.write(remainingMinutes);
     buffer.write(" minutes");
 

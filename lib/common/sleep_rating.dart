@@ -22,6 +22,13 @@ class SleepRating {
       quality = snapshot.value['quality'],
       date = DateTime.parse(snapshot.value['date']);
 
+  SleepRating.fromMap(dynamic map) :
+    timeToBed = map['time-to-bed'],
+    gotToSleepTime = map['got-to-sleep-time'],
+    wokeUpTime = map['wake-up-time'],
+    quality = map['quality'],
+    date = DateTime.parse(map['date']);
+
   toJson() {
     return {
       "time-to-bed" : timeToBed,
@@ -30,6 +37,19 @@ class SleepRating {
       "quality" : quality,
       "date" : DateTime.now().toIso8601String()
     };
+  }
+
+  static List<SleepRating> setOfFromSnapshot(DataSnapshot snapshot) {
+
+    List<SleepRating> ratings = new List<SleepRating>();
+
+    Map<dynamic, dynamic> values = snapshot.value;
+
+    values.forEach((key, values) {
+      ratings.add(SleepRating.fromMap(values));
+    });
+
+    return ratings;
   }
 
   String getTimeToBed() {

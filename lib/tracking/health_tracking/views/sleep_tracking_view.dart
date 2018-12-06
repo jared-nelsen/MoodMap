@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:after_layout/after_layout.dart';
+
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database.dart';
@@ -14,7 +16,7 @@ class SleepTrackingView extends StatefulWidget {
 
 }
 
-class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTickerProviderStateMixin {
+class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTickerProviderStateMixin, AfterLayoutMixin<SleepTrackingView> {
 
 
   String _averageTimeToBed = "";
@@ -23,11 +25,6 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
   String _averageWakeUpTime = "";
   String _averageSleepPerNight = "";
   String _averageSleepQuality = "";
-
-  _SleepTrackingViewState() {
-
-    _loadData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +42,10 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   }
 
+  @override
+  void afterFirstLayout(BuildContext context) {
+    _loadData();
+  }
 
   Row _chartAndStatistics() {
     //Combine Chard and statistics somehow to fit in SingleChildscroll view
@@ -152,14 +153,6 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
     return new TextStyle(fontSize: 18.0);
   }
 
-  Widget _divider() {
-    return new Divider(
-      color: Colors.black,
-      height: 18.0,
-      indent: 0.0,
-    );
-  }
-
   void _loadData() {
 
     var ref = Database.sleepEntriesReference();
@@ -172,8 +165,18 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
 
       if(ratings.length == 0) {
-        //put in after first layout
-        //Utilities.showSnackbarMessage(context, "You've not rated your sleep enough to see any statistics!");
+
+        Utilities.showSnackbarMessage(context, "You've not rated your sleep enough to see any statistics!");
+
+        setState(() {
+          _averageTimeToBed = "Unknown";
+          _averageTimeToSleep = "Unknown";
+          _averageTimeLyingAwake = "Unknown";
+          _averageWakeUpTime = "Unknown";
+          _averageSleepPerNight = "Unknown";
+          _averageSleepQuality = "Unknown";
+        });
+
         return;
       }
 
@@ -198,7 +201,7 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
         //Calculate average time lying awake
         int differenceToBedAndToSleep = sumOfTimesToSleep - sumOfTimesToBed;
         differenceToBedAndToSleep = differenceToBedAndToSleep.abs();
-        int averageTimeLyingAwake = (differenceToBedAndToSleep / ratings.length).toInt()
+        int averageTimeLyingAwake = (differenceToBedAndToSleep / ratings.length).toInt();
         _averageTimeLyingAwake = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimeLyingAwake));
 
         //Calculate average wake up time

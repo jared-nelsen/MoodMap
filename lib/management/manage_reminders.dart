@@ -76,7 +76,8 @@ class ManageRemindersViewState extends State<ManageRemindersView> {
             new Expanded(
                 child: new Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: new Text("Set up reminders for you to rate your health here"),
+                  child: new Text("Set up reminders for you to rate your health here",
+                                  style: new TextStyle(fontSize: 18.0),),
                 )
             )
           ],

@@ -57,7 +57,7 @@ class ManageMedicationViewState extends State<ManageMedicationView> with AfterLa
 
   @override
   void afterFirstLayout(BuildContext context) {
-    Utilities.showPageInfoSnackbarMessage(context, "You can long press to remove medications");
+    Utilities.showSnackbarMessage(context, "You can long press to remove medications");
   }
 
   Future<Null> _addMedication() async {

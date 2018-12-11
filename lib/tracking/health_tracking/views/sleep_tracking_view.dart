@@ -1,12 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:after_layout/after_layout.dart';
+import 'package:after_layout/after_layo'
+    'ut.dart';
 
 import 'package:mood_map/utilities/utilities.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database.dart';
 
+import 'package:mood_map/tracking/health_tracking/components/sleep_chart.dart';
 import 'package:mood_map/common/sleep_rating.dart';
 
 class SleepTrackingView extends StatefulWidget {
@@ -18,6 +20,9 @@ class SleepTrackingView extends StatefulWidget {
 
 class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTickerProviderStateMixin, AfterLayoutMixin<SleepTrackingView> {
 
+  String _chartCaption = "";
+
+  SleepTimeSeriesChart _sleepChart = SleepTimeSeriesChart.blank();
 
   String _averageTimeToBed = "";
   String _averageTimeToSleep = "";
@@ -32,23 +37,35 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
     return new Scaffold(
 
       body: new SingleChildScrollView(
-        child: _statisticsCard(),
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _titleBar(),
+            _divider(),
+            _chart(context),
+            _indicatorBar(),
+            _statisticsCard()
+          ],
+        ),
       ),
 
-        persistentFooterButtons: <Widget>[
-          new FlatButton(onPressed: () {_loadData();}, child: new Text("Toot"))
-        ],
-      );
+    );
 
   }
 
   @override
   void afterFirstLayout(BuildContext context) {
-    _loadData();
+    _loadData(SleepDimension.TIME_TO_BED);
+    Utilities.showPageInfoSnackbarMessage(context, "You can tap on a statistics tile to see it's data in the graph.");
   }
-
-  Row _chartAndStatistics() {
-    //Combine Chard and statistics somehow to fit in SingleChildscroll view
+  
+  SizedBox _chart(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return new SizedBox(
+      width: width,
+      height: 200.0,
+      child: _sleepChart,
+    );
   }
 
   Column _statisticsCard() {
@@ -65,14 +82,48 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
     );
   }
 
+  Widget _titleBar() {
+
+    return new Column(
+      children: <Widget>[
+        new Container(
+          padding: new EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 5.0),
+          child: new Text("Here are some useful stats about your sleep", style: new TextStyle(fontSize: 18.0),),
+        )
+      ],
+    );
+  }
+
+  Widget _indicatorBar() {
+
+    return new Column(
+      children: <Widget>[
+        new Container(
+          padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+          child: new Text("Showing $_chartCaption", style: new TextStyle(fontSize: 18.0),),
+        )
+      ],
+    );
+  }
+
+  Widget _divider() {
+    return new Divider(
+      color: Colors.black,
+      height: 8.0,
+      indent: 0.0,
+    );
+  }
+
   Card _timeToBed() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Time to Bed", style: _style(),),
             subtitle: new Text("$_averageTimeToBed", style: _style(),),
+            onTap: (){ _loadData(SleepDimension.TIME_TO_BED); },
           )
         ],
       ),
@@ -81,12 +132,14 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   Card _timeToSleep() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Time to sleep", style: _style(),),
             subtitle: new Text("$_averageTimeToSleep", style: _style(),),
+            onTap: (){ _loadData(SleepDimension.GOT_TO_SLEEP); },
           )
         ],
       ),
@@ -95,12 +148,14 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   Card _timeLyingAwake() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Time Lying Awake", style: _style(),),
             subtitle: new Text("$_averageTimeLyingAwake", style: _style(),),
+            onTap: (){ _loadData(SleepDimension.TIME_LYING_AWAKE); },
           )
         ],
       ),
@@ -109,12 +164,14 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   Card _wakeUpTime() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Wake Up Time", style: _style(),),
             subtitle: new Text("$_averageWakeUpTime", style: _style(),),
+            onTap: () { _loadData(SleepDimension.WAKE_UP_TIME); },
           )
         ],
       ),
@@ -123,12 +180,14 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   Card _sleepPerNight() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Sleep Per Night", style: _style(),),
             subtitle: new Text("$_averageSleepPerNight", style: _style(),),
+            onTap: (){ _loadData(SleepDimension.SLEEP_PER_NIGHT); },
           )
         ],
       ),
@@ -137,12 +196,14 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
   Card _sleepQuality() {
     return new Card(
+      elevation: 5.0,
       child: new Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new ListTile(
             title: new Text("Average Sleep Quality", style: _style(),),
             subtitle: new Text("$_averageSleepQuality", style: _style(),),
+            onTap: () { _loadData(SleepDimension.QUALITY); },
           )
         ],
       ),
@@ -153,7 +214,30 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
     return new TextStyle(fontSize: 18.0);
   }
 
-  void _loadData() {
+  void _loadData(SleepDimension dimension) {
+
+    setState(() {
+      switch(dimension){
+        case SleepDimension.TIME_TO_BED:
+            _chartCaption = "what time you go to bed";
+          break;
+        case SleepDimension.GOT_TO_SLEEP:
+            _chartCaption = "when you actually fall asleep";
+          break;
+        case SleepDimension.TIME_LYING_AWAKE:
+            _chartCaption = "how long you spend lying awake";
+          break;
+        case SleepDimension.WAKE_UP_TIME:
+            _chartCaption = "what time you wake up";
+          break;
+        case SleepDimension.SLEEP_PER_NIGHT:
+            _chartCaption = "how much sleep you get per night";
+          break;
+        case SleepDimension.QUALITY:
+            _chartCaption = "how you've rated your sleep";
+          break;
+      }
+    });
 
     var ref = Database.sleepEntriesReference();
 
@@ -162,7 +246,6 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
       List<SleepRating> ratings = SleepRating.setOfFromSnapshot(snapshot);
 
       //Here I can filter on date range selected
-
 
       if(ratings.length == 0) {
 
@@ -180,57 +263,106 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
         return;
       }
 
+      //Calculate statistics
+      int sumOfTimesToBed =   calculateAverageTimeToBed(ratings);
+      int sumOfTimesToSleep = calculateAverageTimeToSleep(ratings);
+                              calculateAverageTimeLyingAwake(ratings, sumOfTimesToSleep, sumOfTimesToBed);
+      int sumOfWakeUpTimes =  calculateAverageWakeUpTimes(ratings);
+                              calculateAverageTimeAsleep(ratings, sumOfWakeUpTimes, sumOfTimesToSleep);
+                              calculateAverageSleepQuality(ratings);
+
+      //Load the chart with the averageTimeToBed
       setState(() {
-
-        //Calculate average time to bed
-        int sumOfTimesToBed = 0;
-        for(var rating in ratings) {
-          sumOfTimesToBed += Utilities.calculateMinutesFromTimeString(rating.getTimeToBed());
-        }
-        int averageTimesToBed = (sumOfTimesToBed / ratings.length).toInt();
-        _averageTimeToBed = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToBed));
-
-        //Calculate average time to sleep
-        int sumOfTimesToSleep = 0;
-        for(var rating in ratings) {
-          sumOfTimesToSleep += Utilities.calculateMinutesFromTimeString(rating.getGotToSleepTime());
-        }
-        int averageTimesToSleep = (sumOfTimesToSleep / ratings.length).toInt();
-        _averageTimeToSleep = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToSleep));
-
-        //Calculate average time lying awake
-        int differenceToBedAndToSleep = sumOfTimesToSleep - sumOfTimesToBed;
-        differenceToBedAndToSleep = differenceToBedAndToSleep.abs();
-        int averageTimeLyingAwake = (differenceToBedAndToSleep / ratings.length).toInt();
-        _averageTimeLyingAwake = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimeLyingAwake));
-
-        //Calculate average wake up time
-        int sumOfWakeUpTimes = 0;
-        for(var rating in ratings) {
-          sumOfWakeUpTimes += Utilities.calculateMinutesFromTimeString(rating.getWokeUpTime());
-        }
-        int averageWakeUpTime = (sumOfWakeUpTimes / ratings.length).toInt();
-        _averageWakeUpTime = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageWakeUpTime));
-
-        //Calculate average time asleep every night
-        int differenceWakeUpToGoToSleep = sumOfWakeUpTimes - sumOfTimesToSleep;
-        differenceWakeUpToGoToSleep = differenceWakeUpToGoToSleep.abs();
-        int averageSleepPerNight = (differenceWakeUpToGoToSleep / ratings.length).toInt();
-        _averageSleepPerNight = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageSleepPerNight));
-
-        //Calculate average quality from ratings
-        int totalQuality = 0;
-        for(var rating in ratings) {
-          totalQuality += int.tryParse(rating.getQuality());
-        }
-        int quality = (totalQuality / ratings.length).toInt();
-        _averageSleepQuality = quality.toString();
-
+        _sleepChart = SleepTimeSeriesChart.fromDataAcrossDimension(ratings, dimension);
       });
 
     });
 
   }
+
+  int calculateAverageTimeToBed(List<SleepRating> ratings) {
+
+    int sumOfTimesToBed = 0;
+    for(var rating in ratings) {
+      sumOfTimesToBed += Utilities.calculateMinutesFromTimeString(rating.getTimeToBed());
+    }
+    int averageTimesToBed = (sumOfTimesToBed / ratings.length).toInt();
+
+    setState(() {
+      _averageTimeToBed = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToBed));
+    });
+
+    return sumOfTimesToBed;
+  }
+
+  int calculateAverageTimeToSleep(List<SleepRating> ratings) {
+
+    int sumOfTimesToSleep = 0;
+    for(var rating in ratings) {
+      sumOfTimesToSleep += Utilities.calculateMinutesFromTimeString(rating.getGotToSleepTime());
+    }
+    int averageTimesToSleep = (sumOfTimesToSleep / ratings.length).toInt();
+
+    setState(() {
+      _averageTimeToSleep = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimesToSleep));
+    });
+
+    return sumOfTimesToSleep;
+  }
+
+  void calculateAverageTimeLyingAwake(List<SleepRating> ratings, int sumOfTimesToSleep, int sumOfTimesToBed) {
+
+    int differenceToBedAndToSleep = sumOfTimesToSleep - sumOfTimesToBed;
+    differenceToBedAndToSleep = differenceToBedAndToSleep.abs();
+    int averageTimeLyingAwake = (differenceToBedAndToSleep / ratings.length).toInt();
+
+    setState(() {
+      _averageTimeLyingAwake = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageTimeLyingAwake));
+    });
+
+  }
+
+  int calculateAverageWakeUpTimes(List<SleepRating> ratings) {
+
+    int sumOfWakeUpTimes = 0;
+    for(var rating in ratings) {
+      sumOfWakeUpTimes += Utilities.calculateMinutesFromTimeString(rating.getWokeUpTime());
+    }
+    int averageWakeUpTime = (sumOfWakeUpTimes / ratings.length).toInt();
+
+    setState(() {
+      _averageWakeUpTime = Utilities.formTimeStringFromMinutesInADay(Utilities.minuteInADayOutOfNDaysInMinutes(averageWakeUpTime));
+    });
+
+    return sumOfWakeUpTimes;
+  }
+
+  void calculateAverageTimeAsleep(List<SleepRating> ratings, int sumOfWakeUpTimes, int sumOfTimesToSleep) {
+
+    int differenceWakeUpToGoToSleep = sumOfWakeUpTimes - sumOfTimesToSleep;
+    differenceWakeUpToGoToSleep = differenceWakeUpToGoToSleep.abs();
+    int averageSleepPerNight = (differenceWakeUpToGoToSleep / ratings.length).toInt();
+
+    setState(() {
+      _averageSleepPerNight = Utilities.formHoursAndMinutesStringFromMinutes(Utilities.minuteInADayOutOfNDaysInMinutes(averageSleepPerNight));
+    });
+
+  }
+
+  void calculateAverageSleepQuality(List<SleepRating> ratings) {
+
+    int totalQuality = 0;
+    for(var rating in ratings) {
+      totalQuality += int.tryParse(rating.getQuality());
+    }
+    int quality = (totalQuality / ratings.length).toInt();
+
+    setState(() {
+      _averageSleepQuality = quality.toString();
+    });
+
+  }
+
 
   @override
   void initState() {

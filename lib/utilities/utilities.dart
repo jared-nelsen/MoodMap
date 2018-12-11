@@ -194,6 +194,45 @@ class Utilities {
     return buffer.toString();
   }
 
+  static double convertStringTimeToDouble(String time) {
+
+    //Strip the AM/PM
+    time = time.substring(0, time.length - 3);
+
+    double result = 0;
+
+    String hour, minutes;
+
+    //i.e 10:00 AM
+    if(time.length == 5) {
+
+      hour = time.substring(0, 2);
+      minutes = time.substring(3, 5);
+
+    }
+    //i.e 8:00 AM
+    else {
+
+      hour = time.substring(0, 1);
+      minutes = time.substring(2, 4);
+
+    }
+
+    //Add the hour
+    int hourNumber = int.tryParse(hour);
+    result += hourNumber;
+
+    //Add the minute in the 10s magnitude
+    String tensMinute = minutes.substring(0, 1);
+    int tensMinuteInteger = int.tryParse(tensMinute);
+
+    double tensMinuteDouble = tensMinuteInteger * .1;
+
+    result += tensMinuteDouble;
+
+    return result;
+  }
+
   static void showSnackbarMessage(BuildContext context, String confirmation) {
     Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 2),));
   }

@@ -52,6 +52,14 @@ class SleepRating {
     return ratings;
   }
 
+  DateTime getDate() {
+    return date;
+  }
+
+  void setDate(DateTime time) {
+    this.date = time;
+  }
+
   String getTimeToBed() {
     return timeToBed;
   }
@@ -69,3 +77,10 @@ class SleepRating {
   }
 
 }
+
+enum SleepDimension { TIME_TO_BED,
+                      GOT_TO_SLEEP,
+                      TIME_LYING_AWAKE,
+                      WAKE_UP_TIME,
+                      SLEEP_PER_NIGHT,
+                      QUALITY }

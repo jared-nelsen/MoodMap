@@ -397,7 +397,8 @@ Major
     --------------------------------------------------------------------------------------------
 
     - Working on the sleep view
-              - Strings not updating
+      -Every measurement you made is on the same day so the chart wont look right.
+      -TimeLying awake section in sleep chart ist kaputt
 
 
     - Edit the random ratings to make them random in initial_data.dart

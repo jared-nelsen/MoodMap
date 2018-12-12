@@ -13,39 +13,14 @@ class ExerciseTrackingView extends StatefulWidget {
 
 class _ExerciseTrackingViewState extends State<ExerciseTrackingView> with SingleTickerProviderStateMixin {
 
-  TabController _tabController;
 
   @override
   Widget build(BuildContext context) {
 
     return new Scaffold(
 
-      appBar: new TabBar(
-
-        labelColor: Colors.black,
-
-        controller: _tabController,
-        tabs: <Widget>[
-          new Container(height: 40.0, child: new Tab(text: "Proportion",),),
-          new Container(height: 40.0, child: new Tab(text: "Timeline",))
-        ],
-
-      ),
-
-      body: new TabBarView(
-        controller: _tabController,
-
-        children: <Widget>[
-
-          new ExerciseProportionView(),
-          new ExerciseTimelineView()
-
-        ],
-
-        physics: NeverScrollableScrollPhysics(),
-
-      ),
-
+      body: new Container()
+          
     );
 
   }
@@ -53,13 +28,11 @@ class _ExerciseTrackingViewState extends State<ExerciseTrackingView> with Single
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 2, vsync: this);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
   }
 
 }

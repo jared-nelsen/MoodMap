@@ -43,6 +43,7 @@ class HealthViewState extends State<HealthView> with SingleTickerProviderStateMi
           physics: NeverScrollableScrollPhysics(),
       ),
 
+      resizeToAvoidBottomPadding: false,
 
     );
 

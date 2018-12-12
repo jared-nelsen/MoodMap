@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'dart:async';
 
@@ -17,14 +18,13 @@ class ExerciseView extends StatefulWidget {
 
 class ExerciseViewState extends State<ExerciseView> {
 
-  String _exercised = 'Yes';
-  var _exercising = ['Yes', 'No'];
+  String _rating = '1';
+  var _ratings = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  String _type = 'Cardio';
-  var _types = ['Cardio', 'Weightlifting', 'Yoga'];
+  String _type = 'Running';
+  var _types = ['Walking', 'Running', 'Hiking', 'Weightlifting', 'Yoga', 'Cycling', 'Swimming', 'Fitness Class', 'Sports'];
 
-  String _duration = '30 minutes';
-  var _durations = ['10 minutes','20 minutes','30 minutes','45 minutes','An hour','More than an hour',];
+  String _duration = '30';
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
       child: new Scaffold(
 
-        body: new Container (
+        body: new SingleChildScrollView (
 
           child: new Column(
 
@@ -41,7 +41,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
               _title(),
               _divider(),
-              _didExercise(),
+              _rateExercise(),
               _whiteSpace(),
               _whatType(),
               _whiteSpace(),
@@ -59,6 +59,8 @@ class ExerciseViewState extends State<ExerciseView> {
             color: Colors.green,
             textColor: Colors.white,)
         ],
+
+        resizeToAvoidBottomPadding: false,
         ),
 
       );
@@ -83,7 +85,7 @@ class ExerciseViewState extends State<ExerciseView> {
     );
   }
 
-  Widget _didExercise() {
+  Widget _rateExercise() {
 
     return new Row(
 
@@ -92,7 +94,7 @@ class ExerciseViewState extends State<ExerciseView> {
         new Expanded(
           child: new Padding(
             padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
-            child: new Text("Did you exercise today?", style: new TextStyle(fontSize: 18.0),),),
+            child: new Text("One to ten, how did your exercise go?", style: new TextStyle(fontSize: 18.0),),),
         ),
 
         new Column (
@@ -102,14 +104,14 @@ class ExerciseViewState extends State<ExerciseView> {
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
                 child: new DropdownButton<String>(
 
-                  items: _exercising.map((String rating) {
+                  items: _ratings.map((String rating) {
                     return new DropdownMenuItem<String>(value: rating, child: new Text(rating));}).toList(),
 
-                  value: _exercised,
+                  value: _rating,
 
                   onChanged: (String value) {
                     setState(() {
-                      _exercised = value;
+                      _rating = value;
                     });
                   },
 
@@ -174,31 +176,30 @@ class ExerciseViewState extends State<ExerciseView> {
         new Expanded(
           child: new Padding(
             padding: const EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
-            child: new Text("How long did you exercise?", style: new TextStyle(fontSize: 18.0),),),
+            child: new Text("How many minutes did you exercise?", style: new TextStyle(fontSize: 18.0),),),
         ),
 
-        new Column (
-          children: <Widget>[
+        new Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+            child: new SizedBox (
+              width: 30.0,
+              child: new TextField(
 
-            new Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
-                child: new DropdownButton<String>(
+                decoration: new InputDecoration(
+                  hintText: "30"
+                ),
 
-                  items: _durations.map((String rating) {
-                    return new DropdownMenuItem<String>(value: rating, child: new Text(rating));}).toList(),
+                inputFormatters: [ new WhitelistingTextInputFormatter(new RegExp("^[0-9]*\$"))],
 
-                  value: _duration,
+                onChanged: (value) { setState(() { _duration = value; }); },
+              ),
 
-                  onChanged: (String value) {
-                    setState(() {
-                      _duration = value;
-                    });
-                  },
-
-                )
             ),
+        ),
 
-          ],
+        new Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 0.0, 30.0, 0.0),
+          child: new Text("minutes", style: new TextStyle(fontSize: 16.0),),
         )
 
       ],
@@ -207,6 +208,11 @@ class ExerciseViewState extends State<ExerciseView> {
   }
 
   Future<Null> _saveEntry() async {
+
+    if(_duration.isEmpty) {
+      Utilities.showSnackbarMessage(context, "How long did you exercise?");
+      return;
+    }
 
     if(await showDialog<bool>(
         context: context,
@@ -244,7 +250,7 @@ class ExerciseViewState extends State<ExerciseView> {
 
       var ref = Database.exercisePushReference();
 
-      ExerciseRating rating = new ExerciseRating(_exercised, _type, _duration);
+      ExerciseRating rating = new ExerciseRating(_rating, _type, _duration);
 
       ref.set(rating.toJson());
 
@@ -267,10 +273,6 @@ class ExerciseViewState extends State<ExerciseView> {
       color: Colors.white,
       height: 15.0,
     );
-  }
-
-  void _confirm(String confirmation) {
-    Utilities.showSnackbarMessage(context, confirmation);
   }
 
   @override

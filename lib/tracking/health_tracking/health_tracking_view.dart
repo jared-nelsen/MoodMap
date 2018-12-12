@@ -26,8 +26,8 @@ class _HealthTrackingViewState extends State<HealthTrackingView> with SingleTick
         controller: _tabController,
 
         tabs: <Widget>[
-          new Tab(text: "Sleep",),
-          new Tab(text: "Exercise",)
+          new Container(height: 40.0, child: new Tab(text: "Sleep",),),
+          new Container(height: 40.0, child: new Tab(text: "Exercise",))
         ],
 
       ),

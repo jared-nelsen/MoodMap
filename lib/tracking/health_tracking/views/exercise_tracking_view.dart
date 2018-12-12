@@ -26,8 +26,8 @@ class _ExerciseTrackingViewState extends State<ExerciseTrackingView> with Single
 
         controller: _tabController,
         tabs: <Widget>[
-          new Tab(text: "Proportion",),
-          new Tab(text: "Timeline",)
+          new Container(height: 40.0, child: new Tab(text: "Proportion",),),
+          new Container(height: 40.0, child: new Tab(text: "Timeline",))
         ],
 
       ),

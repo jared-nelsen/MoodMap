@@ -8,7 +8,7 @@ import 'package:mood_map/utilities/utilities.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mood_map/utilities/database.dart';
 
-import 'package:mood_map/tracking/health_tracking/components/sleep_chart.dart';
+import 'package:mood_map/tracking/health_tracking/components/sleep_time_series_chart.dart';
 import 'package:mood_map/common/sleep_rating.dart';
 
 class SleepTrackingView extends StatefulWidget {

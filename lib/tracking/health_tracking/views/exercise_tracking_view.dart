@@ -1,9 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:mood_map/tracking/health_tracking/views/exercise_views/exercise_proportion_view.dart';
-import 'package:mood_map/tracking/health_tracking/views/exercise_views/exercise_timeline_view.dart';
-
 class ExerciseTrackingView extends StatefulWidget {
 
   @override
@@ -19,7 +16,13 @@ class _ExerciseTrackingViewState extends State<ExerciseTrackingView> with Single
 
     return new Scaffold(
 
-      body: new Container()
+      body: new SingleChildScrollView(
+        child: new Column(
+          children: <Widget>[
+
+          ],
+        )
+      )
           
     );
 

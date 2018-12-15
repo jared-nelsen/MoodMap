@@ -56,7 +56,7 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
   @override
   void afterFirstLayout(BuildContext context) {
     _loadData(SleepDimension.TIME_TO_BED);
-    Utilities.showPageInfoSnackbarMessage(context, "You can tap on a statistics tile to see it's data in the graph.");
+    Utilities.showLongSnackbarMessage(context, "You can tap on a statistics tile to see it's data in the graph.");
   }
   
   SizedBox _chart(BuildContext context) {

@@ -237,6 +237,10 @@ class Utilities {
     Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 2),));
   }
 
+  static void showLongSnackbarMessage(BuildContext context, String confirmation) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: new Text(confirmation), duration: new Duration(seconds: 4),));
+  }
+
   static void showPageInfoSnackbarMessage(BuildContext context, String message) {
 
     if(oneInXChance(3)){

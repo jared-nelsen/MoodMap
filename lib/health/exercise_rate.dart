@@ -248,7 +248,7 @@ class ExerciseViewState extends State<ExerciseView> {
     ))
     {
 
-      var ref = Database.exercisePushReference();
+      var ref = Database.exerciseEntriesPushReference();
 
       ExerciseRating rating = new ExerciseRating(_rating, _type, _duration);
 

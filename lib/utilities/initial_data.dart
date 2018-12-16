@@ -375,7 +375,7 @@ class FirstTimeDataUploader {
 
     for(var exercise in exerciseRatings) {
 
-      var ref = Database.exercisePushReference();
+      var ref = Database.exerciseEntriesPushReference();
 
       ref.set(exercise.toJson());
 

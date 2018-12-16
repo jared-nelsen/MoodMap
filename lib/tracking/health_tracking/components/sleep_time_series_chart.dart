@@ -1,7 +1,4 @@
 
-
-//The Sleep Chart takes the form of the Range Annotation Time Series Chart in the examples
-
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
@@ -46,9 +43,9 @@ class SleepTimeSeriesChart extends StatelessWidget {
 
   }
 
-  static List<charts.Series<SleepDatum, DateTime>> _formData(List<SleepRating> ratings, SleepDimension dimension) {
+  static List<charts.Series<_SleepDatum, DateTime>> _formData(List<SleepRating> ratings, SleepDimension dimension) {
 
-    List<SleepDatum> measurements = new List<SleepDatum>();
+    List<_SleepDatum> measurements = new List<_SleepDatum>();
 
     for(var rating in ratings) {
 
@@ -63,10 +60,10 @@ class SleepTimeSeriesChart extends StatelessWidget {
       switch(dimension) {
 
         case SleepDimension.TIME_TO_BED:
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getTimeToBed())));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getTimeToBed())));
           break;
         case SleepDimension.GOT_TO_SLEEP:
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getGotToSleepTime())));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getGotToSleepTime())));
           break;
         case SleepDimension.TIME_LYING_AWAKE:
 
@@ -82,11 +79,11 @@ class SleepTimeSeriesChart extends StatelessWidget {
 
           String lyingAwakeString = Utilities.formTimeStringFromMinutesInADay(differential);
 
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(lyingAwakeString)));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(lyingAwakeString)));
 
           break;
         case SleepDimension.WAKE_UP_TIME:
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getWokeUpTime())));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getWokeUpTime())));
           break;
         case SleepDimension.SLEEP_PER_NIGHT:
 
@@ -98,21 +95,21 @@ class SleepTimeSeriesChart extends StatelessWidget {
           int asleepMinutes = wakeUpSleepMinutes + (1440 - toSleepMinutes);
           String asleepString = Utilities.formTimeStringFromMinutesInADay(asleepMinutes);
 
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(asleepString)));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(asleepString)));
 
           break;
         case SleepDimension.QUALITY:
-          measurements.add(new SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getQuality())));
+          measurements.add(new _SleepDatum(rating.getDate(), Utilities.convertStringTimeToDouble(rating.getQuality())));
           break;
       }
 
     }
 
     return [
-      new charts.Series<SleepDatum, DateTime>(
+      new charts.Series<_SleepDatum, DateTime>(
         id: 'Sleep Averages',
-        domainFn: (SleepDatum datum, _) => datum.date,
-        measureFn: (SleepDatum datum, _) => datum.measurement,
+        domainFn: (_SleepDatum datum, _) => datum.date,
+        measureFn: (_SleepDatum datum, _) => datum.measurement,
         data: measurements,
       )
     ];
@@ -120,10 +117,10 @@ class SleepTimeSeriesChart extends StatelessWidget {
 }
 
 
-class SleepDatum {
+class _SleepDatum {
 
   final DateTime date;
   final double measurement;
 
-  SleepDatum(this.date, this.measurement);
+  _SleepDatum(this.date, this.measurement);
 }

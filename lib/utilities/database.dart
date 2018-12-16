@@ -43,11 +43,11 @@ class Database {
     return FirebaseDatabase.instance.reference().child("emotions").push();
   }
 
-  static DatabaseReference exerciseReference() {
+  static DatabaseReference exerciseEntriesReference() {
     return FirebaseDatabase.instance.reference().child("exercise_entries");
   }
 
-  static DatabaseReference exercisePushReference() {
+  static DatabaseReference exerciseEntriesPushReference() {
     return FirebaseDatabase.instance.reference().child("exercise_entries").push();
   }
 

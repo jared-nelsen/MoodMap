@@ -245,8 +245,6 @@ class _SleepTrackingViewState extends State<SleepTrackingView> with SingleTicker
 
       List<SleepRating> ratings = SleepRating.setOfFromSnapshot(snapshot);
 
-      //Here I can filter on date range selected
-
       if(ratings.length == 0) {
 
         Utilities.showSnackbarMessage(context, "You've not rated your sleep enough to see any statistics!");

@@ -20,6 +20,12 @@ class ExerciseRating {
       duration = snapshot.value['duration'],
       date = DateTime.parse(snapshot.value['date']);
 
+  ExerciseRating.fromMap(dynamic map) :
+      rating = map['rating'],
+      type = map['exercise_type'],
+      duration = map['duration'],
+      date = DateTime.parse(map['date']);
+
   toJson() {
     return {
       "rating" : rating,
@@ -27,6 +33,35 @@ class ExerciseRating {
       "duration" : duration,
       "date" : DateTime.now().toIso8601String()
     };
+  }
+
+  static List<ExerciseRating> setOfFromSnapshot(DataSnapshot snapshot) {
+
+    List<ExerciseRating> ratings = new List<ExerciseRating>();
+
+    Map<dynamic, dynamic> values = snapshot.value;
+
+    values.forEach((key, values) {
+      ratings.add(ExerciseRating.fromMap(values));
+    });
+
+    return ratings;
+  }
+
+  String getRating() {
+    return rating;
+  }
+
+  String getType() {
+    return type;
+  }
+
+  String getDuration() {
+    return duration;
+  }
+
+  DateTime getDate() {
+    return date;
   }
 
 }

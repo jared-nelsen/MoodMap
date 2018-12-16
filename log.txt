@@ -396,6 +396,9 @@ Major
   - Working Task List
     --------------------------------------------------------------------------------------------
 
+    - Working on Exercise view
+      -Data is bad too. Before proceeding you need to upload new and better data for sleep and exercise
+
     - Working on the sleep view
       -Every measurement you made is on the same day so the chart wont look right.
       -TimeLying awake section in sleep chart ist kaputt

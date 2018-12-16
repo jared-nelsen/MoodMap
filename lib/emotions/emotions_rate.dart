@@ -137,7 +137,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> with AfterLayoutMixi
 
         new FlatButton(
             onPressed: _addAllButton,
-            child: new Text("Add all"),
+            child: new Text("Add Selected"),
             padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
         ),
 
@@ -435,7 +435,7 @@ class RateEmotionsViewState extends State<RateEmotionsView> with AfterLayoutMixi
         category: emotion.getCategory(),
         specific: emotion.getSpecific(),
         emotion: emotion.getEmotion(),
-        selected: true,
+        selected: false,
         onChange: (checked) => _palletListItemChange(index, checked),));
 
     setState(() {

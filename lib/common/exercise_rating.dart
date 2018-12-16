@@ -11,7 +11,7 @@ class ExerciseRating {
 
   DateTime date;
 
-  ExerciseRating(this.rating, this.type, this.duration);
+  ExerciseRating(this.rating, this.type, this.duration, {this.date});
 
   ExerciseRating.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,

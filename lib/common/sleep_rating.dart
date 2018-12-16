@@ -12,7 +12,7 @@ class SleepRating {
 
   DateTime date;
 
-  SleepRating(this.timeToBed, this.gotToSleepTime, this.wokeUpTime, this.quality);
+  SleepRating(this.timeToBed, this.gotToSleepTime, this.wokeUpTime, this.quality, {this.date});
 
   SleepRating.fromSnapshot(DataSnapshot snapshot) :
       key = snapshot.key,

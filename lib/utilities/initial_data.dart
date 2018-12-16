@@ -299,6 +299,14 @@ class FirstTimeDataUploader {
 
   static void uploadRandomDevelopmentRatingData() {
 
+    //Come up with 100 days in a row
+    DateTime emotionDate = DateTime.now().subtract(new Duration(days: 100));
+    List<DateTime> emotionDays = new List<DateTime>();
+    for(int i = 0; i < 100; i++) {
+      emotionDays.add(emotionDate);
+      emotionDate = emotionDate.subtract(new Duration(days: 1));
+    }
+
     //We want 100 random emotion ratings
     for(int i = 0; i < 100; i++) {
 
@@ -313,42 +321,46 @@ class FirstTimeDataUploader {
       //Select a rating
       String rating = Utilities.randomIntInARange(0, 10).toString();
 
-      EmotionRating emotionRating = new EmotionRating("dont care about the key", category, specifics, emotion, rating);
+      EmotionRating emotionRating = new EmotionRating("dont care about the key", category, specifics, emotion, rating, dateTime: emotionDays.elementAt(i));
 
       ref.set(emotionRating.toJson());
 
     }
 
+    DateTime sleepTime = DateTime.now().subtract(new Duration(days: 30));
+
+    int day = 0;
+
     //Sleep
     List<SleepRating> sleepRatings = new List<SleepRating>();
-    sleepRatings.add(new SleepRating("10:00 PM", "10:30 PM", "10:00 AM", "10"));
-    sleepRatings.add(new SleepRating("11:00 PM", "11:20 PM", "10:20 AM", "3"));
-    sleepRatings.add(new SleepRating("12:00 AM", "1:30 AM", "9:00 AM", "2"));
-    sleepRatings.add(new SleepRating("9:00 PM", "10:45 PM", "11:00 AM", "5"));
-    sleepRatings.add(new SleepRating("8:00 PM", "10:00 PM", "8:20 AM", "6"));
-    sleepRatings.add(new SleepRating("7:00 PM", "8:30 PM", "9:30 AM", "7"));
-    sleepRatings.add(new SleepRating("8:01 PM", "9:00 PM", "11:20 AM", "2"));
-    sleepRatings.add(new SleepRating("8:40 PM", "10:20 PM", "7:00 AM", "8"));
-    sleepRatings.add(new SleepRating("11:30 PM", "11:40 PM", "7:40 AM", "8"));
-    sleepRatings.add(new SleepRating("10:20 PM", "10:50 PM", "8:00 AM", "3"));
-    sleepRatings.add(new SleepRating("7:45 PM", "9:00 PM", "8:30 AM", "7"));
-    sleepRatings.add(new SleepRating("10:30 PM", "11:00 PM", "9:04 AM", "5"));
-    sleepRatings.add(new SleepRating("10:00 PM", "11:30 PM", "10:20 AM", "9"));
-    sleepRatings.add(new SleepRating("9:00 PM", "11:20 PM", "7:30 AM", "8"));
-    sleepRatings.add(new SleepRating("9:04 PM", "10:34 PM", "8:30 AM", "3"));
-    sleepRatings.add(new SleepRating("8:30 PM", "10:00 PM", "8:00 AM", "2"));
-    sleepRatings.add(new SleepRating("11:00 PM", "12:00 AM", "8:05 AM", "1"));
-    sleepRatings.add(new SleepRating("11:40 PM", "12:00 AM", "10:50 AM", "8"));
-    sleepRatings.add(new SleepRating("10:40 PM", "11:40 PM", "11:20 AM", "6"));
-    sleepRatings.add(new SleepRating("8:30 PM", "10:20 PM", "6:00 AM", "6"));
-    sleepRatings.add(new SleepRating("9:05 PM", "10:00 PM", "6:30 AM", "7"));
-    sleepRatings.add(new SleepRating("10:20 PM", "11:00 PM", "7:30 AM", "8"));
-    sleepRatings.add(new SleepRating("7:00 PM", "8:00 PM", "6:00 AM", "4"));
-    sleepRatings.add(new SleepRating("9:27 PM", "10:00 PM", "8:30 AM", "3"));
-    sleepRatings.add(new SleepRating("11:45 PM", "11:50 PM", "10:30 AM", "10"));
-    sleepRatings.add(new SleepRating("11:00 PM", "12:00 AM", "11:00 AM", "7"));
-    sleepRatings.add(new SleepRating("12:00 AM", "2:00 aM", "7:00 AM", "8"));
-    sleepRatings.add(new SleepRating("1:00 AM", "2:30 AM", "8:00 AM", "4"));
+    sleepRatings.add(new SleepRating("10:00 PM", "10:30 PM", "10:00 AM", "10", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:00 PM", "11:20 PM", "10:20 AM", "3", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("12:00 AM", "1:30 AM", "9:00 AM", "2", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("9:00 PM", "10:45 PM", "11:00 AM", "5", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("8:00 PM", "10:00 PM", "8:20 AM", "6", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("7:00 PM", "8:30 PM", "9:30 AM", "7", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("8:01 PM", "9:00 PM", "11:20 AM", "2", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("8:40 PM", "10:20 PM", "7:00 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:30 PM", "11:40 PM", "7:40 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("10:20 PM", "10:50 PM", "8:00 AM", "3", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("7:45 PM", "9:00 PM", "8:30 AM", "7", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("10:30 PM", "11:00 PM", "9:04 AM", "5", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("10:00 PM", "11:30 PM", "10:20 AM", "9", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("9:00 PM", "11:20 PM", "7:30 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("9:04 PM", "10:34 PM", "8:30 AM", "3", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("8:30 PM", "10:00 PM", "8:00 AM", "2", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:00 PM", "12:00 AM", "8:05 AM", "1", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:40 PM", "12:00 AM", "10:50 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("10:40 PM", "11:40 PM", "11:20 AM", "6", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("8:30 PM", "10:20 PM", "6:00 AM", "6", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("9:05 PM", "10:00 PM", "6:30 AM", "7", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("10:20 PM", "11:00 PM", "7:30 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("7:00 PM", "8:00 PM", "6:00 AM", "4", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("9:27 PM", "10:00 PM", "8:30 AM", "3", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:45 PM", "11:50 PM", "10:30 AM", "10", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("11:00 PM", "12:00 AM", "11:00 AM", "7", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("12:00 AM", "2:00 aM", "7:00 AM", "8", date: sleepTime.add(new Duration(days: day++))));
+    sleepRatings.add(new SleepRating("1:00 AM", "2:30 AM", "8:00 AM", "4", date: sleepTime.add(new Duration(days: day++))));
 
     for(var sleep in sleepRatings) {
 
@@ -357,21 +369,25 @@ class FirstTimeDataUploader {
       ref.set(sleep.toJson());
 
     }
+
+    DateTime exercistTime = DateTime.now().subtract(new Duration(days: 13));
+
+    day = 0;
     
     //Exercise
     List<ExerciseRating> exerciseRatings = new List<ExerciseRating>();
-    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("No", "Cardio", "10 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Yoga", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Yoga", "45 minutes"));
-    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "An hour"));
-    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "20 minutes"));
-    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30 minutes"));
-    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "More than an hour"));
+    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("No", "Cardio", "10", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Yoga", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Yoga", "45", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "60", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Cardio", "20", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("No", "Cardio", "30s", date: sleepTime.add(new Duration(days: day++))));
+    exerciseRatings.add(new ExerciseRating("Yes", "Weightlifting", "65", date: sleepTime.add(new Duration(days: day++))));
 
     for(var exercise in exerciseRatings) {
 
